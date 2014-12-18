@@ -1,0 +1,11 @@
+<p>Hi <%= user.name %>!</p>
+<p><b><%= client.name %></b> 要访问你的账号.</p>
+<p>是否同意?</p>
+
+<form action="/dialog/authorize/decision" method="post">
+  <input name="transaction_id" type="hidden" value="<%= transactionID %>">
+  <div>
+  <input type="submit" value="允许" id="allow">
+  <input type="submit" value="拒绝" name="cancel" id="deny">
+  </div>
+</form>
