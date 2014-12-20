@@ -1,0 +1,10 @@
+<ion-view view-title="<%= objectsTitle %>">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-thumbnail-left" ng-repeat="<%= objectName %> in <%= objectsName %>" type="item-text-wrap" href="#/app/<%= objectStateUrl %>/{{<%= objectName %>.id}}">
+      <img src="{{<%= objectName %>.icon}}">
+        {{<%= objectName %>.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

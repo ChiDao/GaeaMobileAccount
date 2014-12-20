@@ -1,0 +1,32 @@
+[
+	{
+		"objectName": "newHierachyL1",
+		"objectsTitle": "=default",
+		"objectsTemplate": "=default",
+		"objectsNeedCss": "=default",
+		"objectsStateUrl": "=default",
+		"objectInHierachy": false
+	},
+	{
+		"objectName": "newHierachyL2",
+		"objectsTitle": "Hierachy L2",
+		"objectsTemplate": "只有名称",
+		"objectsNeedCss": false,
+		"objectsStateUrl": "hierachy_l2",
+
+		"objectInHierachy": true,
+		"objectStateUrl": "=default",
+		"objectNeedCss": "=default"
+	},
+	{
+		"objectName": "newHierachyL3",
+		"objectsTitle": "New Hierachy L3",
+		"objectsTemplate": "图标＋名称",
+		"objectsNeedCss": true,
+		"objectsStateUrl": "new_hierachy_l3",
+
+		"objectInHierachy": true,
+		"objectStateUrl": "l3_url",
+		"objectNeedCss": false
+	}
+]
