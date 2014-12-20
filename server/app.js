@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./user')
   , client = require('./client')
   , util = require('util')
+  , api = require('./api')
   
   
 // Express configuration
@@ -49,5 +50,8 @@ app.post('/oauth/token', oauth2.token);
 
 app.get('/api/userinfo', user.info);
 app.get('/api/clientinfo', client.info);
+
+app.get('/api/testGet', api.testGet);
+app.post('/api/1.0.0/sessions', api.login);
 
 app.listen(3000);

@@ -86,6 +86,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 function handleOpenURL(url) {
     var body = document.getElementsByTagName("body")[0];
+    // setTimeout(function(){
+    //   alert(1)
+    // });
     var mainController = angular.element(body).scope();
     mainController.requestAuth(url);
 };
