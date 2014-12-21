@@ -120,6 +120,9 @@ module.exports = yeoman.Base.extend({
         "          templateUrl: 'templates/" + this.pageNameDasherize  + ".html',\n" +
         "          controller: '" + this.controllerName + "'\n" +
         "        }\n" +
+        "      },\n" +
+        "      data: {\n" +
+        "        access: access.public\n" +
         "      }\n" +
         "    })\n",
         this.controllerName

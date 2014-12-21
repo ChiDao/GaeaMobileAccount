@@ -237,7 +237,10 @@ module.exports = yeoman.Base.extend({
 	      "          templateUrl: 'templates/" + this.objectNameDasherize  + ".html',\n" +
 	      "          controller: '" + this.objectControllerName + "'\n" +
 	      "        }\n" +
-	      "      }\n" +
+        "      },\n" +
+        "      data: {\n" +
+        "        access: access.public\n" +
+        "      }\n" +
 	      "    })\n",
 	      this.objectControllerName
 	    );
@@ -252,7 +255,10 @@ module.exports = yeoman.Base.extend({
 	      "          templateUrl: 'templates/" + this.objectsNameDasherize  + ".html',\n" +
 	      "          controller: '" + this.objectsControllerName + "'\n" +
 	      "        }\n" +
-	      "      }\n" +
+        "      },\n" +
+        "      data: {\n" +
+        "        access: access.public\n" +
+        "      }\n" +
 	      "    })\n",
 	      this.objectsControllerName
 	    );

@@ -1,7 +1,10 @@
-'use strict';
 
-angular.module('<%= angularApp %>')
-  .factory('<%= factoryName %>', function () {
+angular.module('services.<%= factoryName %>', [])
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('<%= factoryName %>', function() {
     // Service logic
     // ...
 

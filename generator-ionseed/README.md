@@ -10,6 +10,10 @@ npm install yo -g
 ##安装
 
 ```bash
+npm install
+```
+
+```bash
 npm link
 ```
 
@@ -17,6 +21,18 @@ npm link
 
 ```bash
 cd ../client
+```
+
+####建立Provider
+
+```bash
+yo ionseed:provider
+```
+
+####建立Service
+
+```bash
+yo ionseed:service
 ```
 
 ####建立单独页面
