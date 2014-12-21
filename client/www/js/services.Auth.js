@@ -14,44 +14,55 @@ angular.module('services.Auth', ['restangular'])
     var currentUser = { userName: '', role: routingConfig.userRoles.public };
 
     //定义登陆对话框
-    var modelScope = $rootScope.$new();
-    modelScope.loginData = {};
-    modelScope.doLogin = function(){
-      console.log('Doing login:' + JSON.stringify(modelScope.loginData));
+    var modalScope = $rootScope.$new();
+    modalScope.loginData = {};
+    modalScope.doLogin = function(){
+      console.log('Doing login:' + JSON.stringify(modalScope.loginData));
       //校验用户名、密码
       //Todo: 访问服务器进行登陆
-      // Restangular.allUrl("login", "http://192.168.1.144:3000/api/1.0.0/sessions").post(modelScope.loginData).then(function(data){
+      // Restangular.allUrl("login", "http://192.168.1.144:3000/api/1.0.0/sessions").post(modalScope.loginData).then(function(data){
       //   console.log('get data:' + JSON.stringify(data));
 
       // })
-      var user = _.find(users, {username: modelScope.loginData.userName});
+      var user = _.find(users, {username: modalScope.loginData.userName});
       //登陆失败
-      if (_.isUndefined(user) || user.password != modelScope.loginData.password){
+      if (_.isUndefined(user) || user.password != modalScope.loginData.password){
         console.log('login fail')
-        _.isFunction(modelScope.onError) && modelScope.onError();
+        _.isFunction(modalScope.onError) && modalScope.onError();
       }
       //成功登陆
       else{
-        currentUser.userName = modelScope.loginData.userName,
+        currentUser.userName = modalScope.loginData.userName,
         currentUser.role = userRoles.user;
 
-        _.isFunction(modelScope.onSuccess) && modelScope.onSuccess();
+        _.isFunction(modalScope.onSuccess) && modalScope.onSuccess();
 
         //Todo: 保存到缓存
         console.log('login success.');
         $timeout(function() {
-          modelScope.closeModal();
+          modalScope.closeModal();
         }, 1000);
       }
       
     };
     var loginModal = function(){
       Modal
-        .init('templates/login.html', modelScope)
+        .init('templates/login.html', modalScope)
         .then(function(modal){
           modal.show()
         });
     }
+
+    //定义SSO单点登录对话框
+    var ssoModalScope = $rootScope.$new();
+    var ssoAuthModal = function(){
+      Modal
+        .init('templates/sso-auth.html', ssoModalScope)
+        .then(function(modal){
+          modal.show()
+        });
+    }
+
 
     //Todo: 实现从服务器验证后，从该处移除
     var users = [
@@ -64,6 +75,14 @@ angular.module('services.Auth', ['restangular'])
         password: '123'
       }
     ];
+    //Todo: 实现从服务器验证后，从该处移除
+    var gameClients = [
+        {
+          gameId: 11111,
+          platform: 'ios',
+          callbackHandle: ''
+        }
+      ]
 
     // Public API here
     return {
@@ -77,9 +96,10 @@ angular.module('services.Auth', ['restangular'])
         //Todo
       },
       login: function(success, error, close){
-        modelScope.onSuccess = success;
-        modelScope.onError = error;
-        modelScope.onClose = close;
+        modalScope.mustChoise = false;
+        modalScope.onSuccess = success;
+        modalScope.onError = error;
+        modalScope.onClose = close;
         loginModal();
       },
       isLoggedIn: function(){
@@ -97,8 +117,39 @@ angular.module('services.Auth', ['restangular'])
         success();
       },
 
-      verifyApp: function(){
+      ssoAuth: function(){
+        //Todo: 返回授权结果给第三方应用
+        var ssoCallBack = function(info){
+          alert("callback, info:" + info);
+        }
+        var confirmSso = function(){
+          ssoAuthModal();
+        }
 
+        //请求授权确认按钮
+        ssoModalScope.ok = function(){
+          ssoCallBack('sso ok')
+          ssoModalScope.modal.hide();
+        };
+        //请求授权取消按钮
+        ssoModalScope.cancel = function(){
+          ssoCallBack('sso cancel')
+          ssoModalScope.modal.hide();
+        };
+        
+        if (!this.isLoggedIn()){
+          modalScope.mustChoise = true;
+          modalScope.onSuccess = confirmSso;
+          modalScope.onError = function(){
+            ssoCallBack('logined error');
+          };
+          modalScope.onCancel = function(){
+            ssoCallBack('logined cancel');
+          };
+          loginModal();
+        }else{
+          confirmSso()
+        }
       },
 
       accessLevels: accessLevels,
