@@ -6,7 +6,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
+  
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -17,10 +18,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
   });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
+    //角色配置
+    (function(exports){
+      var userRoles = {
+          public: 1, // 001
+          user:   2 // 010
+      };
+      exports.userRoles = userRoles;
+      exports.accessLevels = {
+          public: userRoles.public | // 11
+                  userRoles.user,
+          user:   userRoles.user     // 10
+      };
+  })(typeof exports === 'undefined'? this['routingConfig']={}: exports);
+
+  var access = routingConfig.accessLevels;
+
+  //路由配置
   $stateProvider
 
   .state('app', {
@@ -33,12 +52,29 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   //Should not delete the placeHolder
   //stateProviderPlaceHolder
 
+      .state('app.user-info', {
+      url: '/user_info',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/user-info.html',
+          controller: 'UserInfoCtrl'
+        }
+      },
+      data: {
+        access: access.user
+      }
+    })
+
+
   .state('app.search', {
     url: "/search",
     views: {
       'menuContent': {
         templateUrl: "templates/search.html"
       }
+    },
+    data: {
+      access: access.public
     }
   })
 
@@ -48,17 +84,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       'menuContent': {
         templateUrl: "templates/browse.html"
       }
+    },
+    data: {
+      access: access.user
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
+
+  .state('app.playlists', {
+    url: "/playlists",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/playlists.html",
+        controller: 'PlaylistsCtrl'
       }
-    })
+    },
+    data: {
+      access: access.public
+    }
+  })
 
   .state('app.single', {
     url: "/playlists/:playlistId",
@@ -67,6 +110,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         templateUrl: "templates/playlist.html",
         controller: 'PlaylistCtrl'
       }
+    },
+    data: {
+      access: access.public
     }
   });
   // if none of the above states are matched, use this as the fallback

@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['controllers.AppCtrl','controllers.PlaylistCtrl','controllers.PlaylistsCtrl']);
+angular.module('starter.controllers', ['controllers.UserInfoCtrl', 'controllers.AppCtrl','controllers.PlaylistCtrl','controllers.PlaylistsCtrl']);
 
 
 
