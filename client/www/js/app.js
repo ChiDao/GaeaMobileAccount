@@ -120,18 +120,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 
-.controller("MainCtrl", [ '$rootScope', '$location', '$scope', function($rootScope, $location, $scope) {
+.controller("MainCtrl", function($rootScope, $location, $scope, Auth) {
     $scope.requestAuth = function(url) {
       var parsedUrl = purl(url);  
-      var callbackHandle = parsedUrl.param('callbackHandle');
-      if(ionic.Platform.isIOS()){
-        window.open('gaea00002://?loginData=111111111111', '_system');
-      }
-      if (ionic.Platform.isAndroid()){
-        window.OpenApplication(callbackHandle);
-      }
+      console.log(JSON.stringify(parsedUrl.param()));
+      Auth.ssoAuth(parsedUrl.param());
+      // if(ionic.Platform.isIOS()){
+      //   window.open('gaea00002://?loginData=111111111111', '_system');
+      // }
+      // if (ionic.Platform.isAndroid()){
+      //   window.OpenApplication(callbackHandle);
+      // }
     }
-}]);
+});
 
 function handleOpenURL(url) {
     var body = document.getElementsByTagName("body")[0];

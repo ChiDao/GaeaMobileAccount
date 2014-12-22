@@ -78,9 +78,16 @@ angular.module('services.Auth', ['restangular'])
     //Todo: 实现从服务器验证后，从该处移除
     var gameClients = [
         {
-          gameId: 11111,
+          appId: '1',
+          gameId: '11111',
           platform: 'ios',
-          callbackHandle: ''
+          callbackHandle: 'gaea00002'
+        },
+        {
+          appId: '2',
+          gameId: '11111',
+          platform: 'android',
+          callbackHandle: 'com.gaeamobile.game'
         }
       ]
 
@@ -117,10 +124,17 @@ angular.module('services.Auth', ['restangular'])
         success();
       },
 
-      ssoAuth: function(){
+      ssoAuth: function(ssoData){
         //Todo: 返回授权结果给第三方应用
         var ssoCallBack = function(info){
-          alert("callback, info:" + info);
+          if(ionic.Platform.isIOS()){
+            console.log("ios loginByClient");
+            window.open('gaea00002://?ssoInfo=' + encodeURIComponent(info), '_system');
+          }
+          if (ionic.Platform.isAndroid()){
+            console.log("android loginByClient");
+            window.open('gaea00002://?ssoInfo=' + encodeURIComponent(info), '_system');
+          }
         }
         var confirmSso = function(){
           ssoAuthModal();
@@ -137,11 +151,20 @@ angular.module('services.Auth', ['restangular'])
           ssoModalScope.modal.hide();
         };
         
+        //检验参数是否正确
+        if (!_.isObject(ssoData) || _.keys(_.pick(ssoData, ['appId', 'gameId','callbackHandle'])).length != 3){
+          ssoCallBack("params error");
+          return;
+        }
+        if (_.find(gameClients, {appId: ssoData.appId, gameId: ssoData.gameId, callbackHandle:ssoData.callbackHandle}) === undefined){
+          ssoCallBack("unregistered app client");
+          return;
+        }
         if (!this.isLoggedIn()){
           modalScope.mustChoise = true;
           modalScope.onSuccess = confirmSso;
           modalScope.onError = function(){
-            ssoCallBack('logined error');
+            //登录错误不做任何处理
           };
           modalScope.onCancel = function(){
             ssoCallBack('logined cancel');
