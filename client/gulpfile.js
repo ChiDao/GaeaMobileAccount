@@ -8,6 +8,8 @@ var gutil = require('gulp-util');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 
+var jade = require('gulp-jade');
+
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 
@@ -16,16 +18,33 @@ var jshint = require('gulp-jshint');
 var paths = {
   sass: ['./scss/**/*.scss'],
   scripts: ['www/js/**/*.js'],
+  jade: ['www_pre/jade/**/*.jade'],
 };
 
 gulp.task('default', ['sass']);
 
+//----------
+// .js文件
+//----------
 gulp.task('hint', function() {
   return gulp.src(paths.scripts)
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
+//----------
+// .jade文件
+//----------
+gulp.task('jade', function (done) {
+    return gulp.src(paths.jade)
+      .pipe(jade())
+      .pipe(gulp.dest('./www/templates/'))
+      .on('end', done);
+});
+
+//----------
+// .scss文件
+//----------
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
@@ -38,8 +57,14 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
+
+
+//==========
+// .scss文件
+//==========
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.jade, ['jade']);
 });
 
 gulp.task('install', ['git-check'], function() {
