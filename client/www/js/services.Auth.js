@@ -6,9 +6,9 @@ angular.module('services.Auth', ['restangular'])
  */
 .factory('Auth', function($rootScope, $timeout, $ionicModal, Restangular, Modal) {
     //Todo: 把定义从app.config移到这里
-    var accessLevels = routingConfig.accessLevels
-        , userRoles = routingConfig.userRoles
-        , modalData = {};
+    var accessLevels = routingConfig.accessLevels,
+        userRoles = routingConfig.userRoles,
+        modalData = {};
 
     //Todo: 从缓存读取用户信息
     var currentUser = { userName: '', role: routingConfig.userRoles.public };
@@ -27,15 +27,15 @@ angular.module('services.Auth', ['restangular'])
       var user = _.find(users, {username: modalScope.loginData.userName});
       //登陆失败
       if (_.isUndefined(user) || user.password != modalScope.loginData.password){
-        console.log('login fail')
-        _.isFunction(modalScope.onError) && modalScope.onError();
+        console.log('login fail');
+        if (_.isFunction(modalScope.onError)) modalScope.onError();
       }
       //成功登陆
       else{
-        currentUser.userName = modalScope.loginData.userName,
+        currentUser.userName = modalScope.loginData.userName;
         currentUser.role = userRoles.user;
 
-        _.isFunction(modalScope.onSuccess) && modalScope.onSuccess();
+        if (_.isFunction(modalScope.onSuccess)) modalScope.onSuccess();
 
         //Todo: 保存到缓存
         console.log('login success.');
@@ -49,9 +49,9 @@ angular.module('services.Auth', ['restangular'])
       Modal
         .init('templates/login.html', modalScope)
         .then(function(modal){
-          modal.show()
+          modal.show();
         });
-    }
+    };
 
     //定义SSO单点登录对话框
     var ssoModalScope = $rootScope.$new();
@@ -59,9 +59,9 @@ angular.module('services.Auth', ['restangular'])
       Modal
         .init('templates/sso-auth.html', ssoModalScope)
         .then(function(modal){
-          modal.show()
+          modal.show();
         });
-    }
+    };
 
 
     //Todo: 实现从服务器验证后，从该处移除
@@ -89,7 +89,7 @@ angular.module('services.Auth', ['restangular'])
           platform: 'android',
           callbackHandle: 'com.gaeamobile.game'
         }
-      ]
+      ];
 
     // Public API here
     return {
@@ -110,7 +110,7 @@ angular.module('services.Auth', ['restangular'])
         loginModal();
       },
       isLoggedIn: function(){
-        return currentUser.role == userRoles.user
+        return currentUser.role == userRoles.user;
       },
       currentUser: function(){
         return currentUser;
@@ -120,7 +120,7 @@ angular.module('services.Auth', ['restangular'])
       },
       logout:function(success){
         currentUser.userName = '';
-        currentUser.role = userRoles.public
+        currentUser.role = userRoles.public;
         success();
       },
 
@@ -135,20 +135,20 @@ angular.module('services.Auth', ['restangular'])
             console.log("android loginByClient");
             window.open('gaea00002://?ssoInfo=' + encodeURIComponent(info), '_system');
           }
-        }
+        };
         var confirmSso = function(){
           //Todo: 如果曾经授权，不需再授权
           ssoAuthModal();
-        }
+        };
 
         //请求授权确认按钮
         ssoModalScope.ok = function(){
-          ssoCallBack('sso ok')
+          ssoCallBack('sso ok');
           ssoModalScope.modal.hide();
         };
         //请求授权取消按钮
         ssoModalScope.cancel = function(){
-          ssoCallBack('sso cancel')
+          ssoCallBack('sso cancel');
           ssoModalScope.modal.hide();
         };
         
@@ -172,7 +172,7 @@ angular.module('services.Auth', ['restangular'])
           };
           loginModal();
         }else{
-          confirmSso()
+          confirmSso();
         }
       },
 
@@ -195,7 +195,7 @@ angular.module('services.Auth', ['restangular'])
           },function(){
             //关闭登陆窗
             //Todo: 跳转，但不记录本次state
-            alert('跳回上一页')
+            alert('跳回上一页');
             // $state.go('app.playlists');
           });
         }else{
@@ -203,4 +203,4 @@ angular.module('services.Auth', ['restangular'])
         }
     });
 
-}]);;
+}]);

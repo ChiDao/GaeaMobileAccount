@@ -5,5 +5,5 @@ angular.module('controllers.UserInfoCtrl',['ionic'])
 		Auth.logout(function(){
 			alert('跳回上一页');
 		});
-	}
+	};
   });

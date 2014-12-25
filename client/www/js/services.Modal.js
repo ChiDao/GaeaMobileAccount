@@ -19,7 +19,7 @@ angular.module('services.Modal',['ionic'])
 	       $scope.modal.show();
 	     };
 	     $scope.closeModal = function() {
-	     	_.isFunction($scope.onClose) && $scope.onClose();
+	     	if (_.isFunction($scope.onClose)) $scope.onClose();
 	     	//Todo: handle放在一个数组里，统一进行清理
 	      	$scope.onSuccess = undefined;
 	      	$scope.onError = undefined;
@@ -28,22 +28,22 @@ angular.module('services.Modal',['ionic'])
 	       	$scope.modal.hide();
 	     };
 	     $scope.cancelModal = function(){
-	     	_.isFunction($scope.onCancel) && $scope.onCancel();
+	     	if (_.isFunction($scope.onCancel)) $scope.onCancel();
 	     	//Todo: handle放在一个数组里，统一进行清理
 	       	$scope.modal.hide();
 	      	$scope.onSuccess = undefined;
 	      	$scope.onError = undefined;
 	      	$scope.onClose = undefined;
 	      	$scope.onCancel = undefined;
-	     }
+	     };
 	     $scope.$on('$destroy', function() {
 	       $scope.modal.remove();
 	     });
 
 	    return promise;
-	  }
+	  };
 
 	  return {
 	    init: init
-	  }
+	  };
   });

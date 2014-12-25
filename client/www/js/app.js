@@ -19,7 +19,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     var openUrl = localStorage.getItem('openUrl');
     localStorage.removeItem('openUrl');
     console.log(localStorage.getItem('openUrl'));
-    if (openUrl != null){
+    if (openUrl !== null){
       var parsedUrl = purl(openUrl);
       Auth.ssoAuth(parsedUrl.param());
     }
@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                   userRoles.user,
           user:   userRoles.user     // 10
       };
-  })(typeof exports === 'undefined'? this['routingConfig']={}: exports);
+  })(typeof exports === 'undefined'? this.routingConfig={}: exports);
 
   var access = routingConfig.accessLevels;
 
@@ -137,8 +137,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     var parsedUrl = purl(url);  
     console.log(JSON.stringify(parsedUrl.param()));
     Auth.ssoAuth(parsedUrl.param());
-  }
-})
+  };
+});
 
 
 
@@ -146,4 +146,4 @@ function handleOpenURL(url) {
     var body = document.getElementsByTagName("body")[0];
     var mainController = angular.element(body).scope();
     mainController.requestAuth(url);
-};
+}

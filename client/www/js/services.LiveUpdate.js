@@ -50,7 +50,7 @@ angular.module('services.LiveUpdate', ['restangular'])
               }
           }
       );
-    }
+    };
 
     return {
       loadIndex: function(){
@@ -66,15 +66,21 @@ angular.module('services.LiveUpdate', ['restangular'])
         }
         var versionData = JSON.parse(localStorage.getItem('version'));
         console.log('current version:' + versionData.currentUrl);
-        window.location = versionData.currentUrl;
+        //做个保护，处理初始化后马上卸载重新安装路径不一样
+        if (versionData.currentUiVersion == installVersion.uiVersion){
+          window.location = cordova.file.applicationDirectory + "www/index.html";
+        }
+        else{
+          window.location = versionData.currentUrl;
+        }
       },
       update: function () {
       //检查版本
       var versionData = JSON.parse(localStorage.getItem('version'));
-      Restangular.allUrl('uiVersions', 'http://192.168.1.111:9001/ui_versions?'
-        + 'codeBaseVersion=' + versionData.codeBaseVersion
-        + '&currentUiVersion=' + versionData.currentUiVersion
-        + '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
+      Restangular.allUrl('uiVersions', 'http://192.168.1.111:9001/ui_versions?' + 
+        'codeBaseVersion=' + versionData.codeBaseVersion + 
+        '&currentUiVersion=' + versionData.currentUiVersion + 
+        '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
 
           //没有可用更新
           if (uiUpdates.length === 0) return;
@@ -99,8 +105,8 @@ angular.module('services.LiveUpdate', ['restangular'])
               versionData.currentUiVersion = versionData.updateUiVersion;
               versionData.currentUrl = versionData.updateUrl;
               localStorage.setItem('version', JSON.stringify(versionData));
-            })
-          })
+            });
+          });
         });
       }//End of function update
     };//End of factory return
