@@ -6,11 +6,24 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth) {
+    console.log(10);
   
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    LiveUpdate.update();
+
+    //检查是否被调用
+    console.log(localStorage.getItem('openUrl'));
+    var openUrl = localStorage.getItem('openUrl');
+    localStorage.removeItem('openUrl');
+    console.log(localStorage.getItem('openUrl'));
+    if (openUrl != null){
+      var parsedUrl = purl(openUrl);
+      Auth.ssoAuth(parsedUrl.param());
+    }
+
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -119,26 +132,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $urlRouterProvider.otherwise('/app/playlists');
 })
 
+.controller("MainCtrl", function($scope, Auth) {
+  $scope.requestAuth = function(url) {
+    var parsedUrl = purl(url);  
+    console.log(JSON.stringify(parsedUrl.param()));
+    Auth.ssoAuth(parsedUrl.param());
+  }
+})
 
-.controller("MainCtrl", function($rootScope, $location, $scope, Auth) {
-    $scope.requestAuth = function(url) {
-      var parsedUrl = purl(url);  
-      console.log(JSON.stringify(parsedUrl.param()));
-      Auth.ssoAuth(parsedUrl.param());
-      // if(ionic.Platform.isIOS()){
-      //   window.open('gaea00002://?loginData=111111111111', '_system');
-      // }
-      // if (ionic.Platform.isAndroid()){
-      //   window.OpenApplication(callbackHandle);
-      // }
-    }
-});
+
 
 function handleOpenURL(url) {
     var body = document.getElementsByTagName("body")[0];
-    // setTimeout(function(){
-    //   alert(1)
-    // });
     var mainController = angular.element(body).scope();
     mainController.requestAuth(url);
 };

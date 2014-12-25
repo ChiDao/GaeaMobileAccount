@@ -1,0 +1,18 @@
+{
+    "version": "0.1.0",
+    "name": "technology.kulak.cordova.appopen",
+    "cordova_name": "Open Application",
+    "description": "Cordova External Application Open Plugin",
+    "license": "Apache 2.0",
+    "repo": "https://github.com/kulak-at/cordova-application-open-plugin.git",
+    "issue": "https://github.com/kulak-at/cordova-application-open-plugin/issues",
+    "keywords": [
+        "cordova",
+        "application",
+        "intent"
+    ],
+    "platforms": [
+        "android"
+    ],
+    "engines": []
+}

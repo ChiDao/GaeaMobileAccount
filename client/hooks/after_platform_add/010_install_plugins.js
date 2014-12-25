@@ -6,13 +6,16 @@
 // the identifier, the filesystem location 
 // or the URL
 var pluginlist = [
-    "org.apache.cordova.device",
-    "org.apache.cordova.console",
-    "org.apache.cordova.inappbrowser",
-    "com.ionic.keyboard",
-    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaea00001",
-    "technology.kulak.cordova.appopen",
-    "https://github.com/ohh2ahh/AppAvailability.git"
+    // "org.apache.cordova.device",
+    // "org.apache.cordova.console",
+    // "org.apache.cordova.inappbrowser",
+    // "com.ionic.keyboard",
+    // "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaea00001",
+    // "technology.kulak.cordova.appopen",
+    // "https://github.com/ohh2ahh/AppAvailability.git",
+    // "org.apache.cordova.file",
+    // "org.apache.cordova.file-transfer",
+    // "org.chromium.zip",
 ];
 
 // no need to configure below

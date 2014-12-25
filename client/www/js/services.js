@@ -1,1 +1,1 @@
-angular.module('starter.services', ['services.Modal', 'services.Auth']);
+angular.module('starter.services', ['services.LiveUpdate', 'services.Modal', 'services.Auth']);

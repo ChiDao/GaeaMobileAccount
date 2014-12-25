@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="loader">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="cordova.js"></script>
+    <script src="lib/purl/purl.js"></script>
+    <script src="lib/restangular/dist/restangular.js"></script>
+    <script src="lib/lodash/dist/lodash.js"></script>
+
+    <script src="js/services.LiveUpdate.js"></script>
+    <script type="text/javascript">
+      
+      function handleOpenURL(openUrl) {
+        localStorage.setItem('openUrl', openUrl);
+      };
+      
+      angular.module('loader', ['services.LiveUpdate'])
+
+      .run(function(LiveUpdate){
+        document.addEventListener(
+          'deviceready', 
+          function(){
+            console.log('load index.html');
+            LiveUpdate.loadIndex();
+          }, 
+          false
+        );
+      });
+
+
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

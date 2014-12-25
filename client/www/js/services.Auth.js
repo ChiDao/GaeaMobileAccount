@@ -137,6 +137,7 @@ angular.module('services.Auth', ['restangular'])
           }
         }
         var confirmSso = function(){
+          //Todo: 如果曾经授权，不需再授权
           ssoAuthModal();
         }
 
