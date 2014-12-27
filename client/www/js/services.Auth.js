@@ -13,41 +13,77 @@ angular.module('services.Auth', ['restangular'])
     //Todo: 从缓存读取用户信息
     var currentUser = { userName: '', role: routingConfig.userRoles.public };
 
+    //定义输入邮箱对话框
+    var signupModalScope = $rootScope.$new();
+    signupModalScope.formData = {};
+    signupModalScope.commitForm = function(){
+      console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
+      // var LoginApi = $resource('http://42.120.45.236\\:8485/signup');
+      // var loginData = new LoginApi(signupModalScope.formData);
+      // loginData.save(function(u, postResponseHeaders){
+      //   console.log(u + JSON.stringify(postResponseHeaders));
+      // })
+      // Restangular.oneUrl('start', 'http://42.120.45.236:8485/start').get().then(function(data){
+      //   // $scope.restData = data;
+      //   console.log(data);
+      //   // RestRoute.jumpFirstApiLink($scope.restData);
+      // },
+      // function(error){
+      //   console.log("Restangular error:" + JSON.stringify(error));
+      // })
+      // var baseApi = Restangular.allUrl("signup", "http://42.120.45.236:8485");
+      var Signup = Restangular.all('signup');
+      Signup.post({'email': '18675629290@163.com'},{},{"Content-Type":"application/json","Accept":undefined}).then(function(data){
+      // Restangular.allUrl("signup", "http://42.120.45.236:8485/signup").post({email: '18675629290@163.com'}).then(function(data){
+        console.log('Signup success, get data:' + JSON.stringify(data));
+      //   signupModalScope.modal.hide();
+      //   if (_.isFunction(signupModalScope.onSuccess)) signupModalScope.onSuccess();
+      }, function(error){
+        console.log('Signup error, get data:' + JSON.stringify(error));
+      //   if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();
+      })
+    }
+    var signupModal = function(){
+      Modal
+        .init('templates/modal-signup.html', signupModalScope)
+        .then(function(modal){
+          modal.show();
+        });
+    };
+
     //定义登陆对话框
-    var modalScope = $rootScope.$new();
-    modalScope.loginData = {};
-    modalScope.doLogin = function(){
-      console.log('Doing login:' + JSON.stringify(modalScope.loginData));
+    var preRegistModalScope = $rootScope.$new();
+    preRegistModalScope.formData = {};
+    preRegistModalScope.commitForm = function(){
+      console.log('Doing login:' + JSON.stringify(preRegistModalScope.formData));
       //校验用户名、密码
       //Todo: 访问服务器进行登陆
-      // Restangular.allUrl("login", "http://192.168.1.144:3000/api/1.0.0/sessions").post(modalScope.loginData).then(function(data){
-      //   console.log('get data:' + JSON.stringify(data));
-
-      // })
-      var user = _.find(users, {username: modalScope.loginData.userName});
-      //登陆失败
-      if (_.isUndefined(user) || user.password != modalScope.loginData.password){
-        console.log('login fail');
-        if (_.isFunction(modalScope.onError)) modalScope.onError();
-      }
-      //成功登陆
-      else{
-        currentUser.userName = modalScope.loginData.userName;
+      Restangular.allUrl("login", "http://42.120.45.236:8485/login").post(preRegistModalScope.formData).then(function(data){
+        console.log('get data:' + JSON.stringify(data));
+        currentUser.userName = preRegistModalScope.formData.userName;
         currentUser.role = userRoles.user;
-
-        if (_.isFunction(modalScope.onSuccess)) modalScope.onSuccess();
-
+        if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
         //Todo: 保存到缓存
         console.log('login success.');
         $timeout(function() {
-          modalScope.closeModal();
+          preRegistModalScope.closeModal();
         }, 1000);
-      }
+      }, function(error){
+        console.log('login fail, get data: ' + error);
+        if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
+      })
+      // var user = _.find(users, {username: preRegistModalScope.formData.userName});
+      //登陆失败
+      // if (_.isUndefined(user) || user.password != preRegistModalScope.formData.password){
+      // }
+      //成功登陆
+      // else{
+      // }
       
     };
     var loginModal = function(){
       Modal
-        .init('templates/login.html', modalScope)
+        .init('templates/modal-login.html', preRegistModalScope)
         .then(function(modal){
           modal.show();
         });
@@ -57,7 +93,7 @@ angular.module('services.Auth', ['restangular'])
     var ssoModalScope = $rootScope.$new();
     var ssoAuthModal = function(){
       Modal
-        .init('templates/sso-auth.html', ssoModalScope)
+        .init('templates/modal-sso-auth.html', ssoModalScope)
         .then(function(modal){
           modal.show();
         });
@@ -103,11 +139,17 @@ angular.module('services.Auth', ['restangular'])
         //Todo
       },
       login: function(success, error, close){
-        modalScope.mustChoise = false;
-        modalScope.onSuccess = success;
-        modalScope.onError = error;
-        modalScope.onClose = close;
-        loginModal();
+        signupModalScope.mustChoise = false;
+        signupModalScope.onSuccess = function(){
+          loginModal();
+        };
+        signupModalScope.onError = error;
+        signupModalScope.onClose = close;
+        preRegistModalScope.mustChoise = false;
+        preRegistModalScope.onSuccess = success;
+        preRegistModalScope.onError = error;
+        preRegistModalScope.onClose = close;
+        signupModal();
       },
       isLoggedIn: function(){
         return currentUser.role == userRoles.user;
@@ -162,15 +204,24 @@ angular.module('services.Auth', ['restangular'])
           return;
         }
         if (!this.isLoggedIn()){
-          modalScope.mustChoise = true;
-          modalScope.onSuccess = confirmSso;
-          modalScope.onError = function(){
-            //登录错误不做任何处理
+          signupModalScope.mustChoise = true;
+          signupModalScope.onSuccess = function(){
+            loginModal();
           };
-          modalScope.onCancel = function(){
+          signupModalScope.onError = function(){
+          };
+          signupModalScope.onCancel = function(){
             ssoCallBack('logined cancel');
           };
-          loginModal();
+          preRegistModalScope.mustChoise = true;
+          preRegistModalScope.onSuccess = confirmSso;
+          preRegistModalScope.onError = function(){
+            //登录错误不做任何处理
+          };
+          preRegistModalScope.onCancel = function(){ 
+            ssoCallBack('logined cancel');
+          };
+          signupModal();
         }else{
           confirmSso();
         }

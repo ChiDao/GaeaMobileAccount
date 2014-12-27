@@ -9,6 +9,7 @@ angular.module('services.Modal',['ionic'])
 
 	    promise = $ionicModal.fromTemplateUrl(tpl, {
 	      scope: $scope,
+	      hardwareBackButtonClose: false,
 	      animation: 'slide-in-up'
 	    }).then(function(modal) {
 	      $scope.modal = modal;

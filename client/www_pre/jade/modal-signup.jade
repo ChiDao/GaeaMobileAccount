@@ -1,0 +1,14 @@
+ion-modal-view
+  ion-header-bar
+    h1.title 输入Email
+    .buttons
+      button.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') Close
+  ion-content
+    form(ng-submit='commitForm()')
+      .list
+        label.item.item-input
+          span.input-label Email
+          input(type='text', ng-model='formData.email')
+        label.item
+          button.button.button-block.button-positive(type='submit') 下一步
+

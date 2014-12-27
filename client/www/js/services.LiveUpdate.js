@@ -1,25 +1,6 @@
 
 angular.module('services.LiveUpdate', ['restangular'])
 
-.config(function(RestangularProvider) {
-
-    // add a response intereceptor
-    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-      var extractedData;
-        // console.log(JSON.stringify(data));
-      // .. to look for getList operations
-      if (operation === "getList") {
-        // .. and handle the data and meta data
-        extractedData = data.splices;
-        //extractedData.meta = data.data.meta;
-      } else {
-        extractedData = data.data;
-      }
-      return extractedData;
-    });
-
-})
-
 .factory('LiveUpdate', function(Restangular) {
 
     var installVersion = {

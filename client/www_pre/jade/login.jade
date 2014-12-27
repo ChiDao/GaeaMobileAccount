@@ -1,17 +1,13 @@
-ion-modal-view
-  ion-header-bar
-    h1.title Login
-    .buttons
-      button.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') Close
+ion-view(view-title='Login')
   ion-content
-    form(ng-submit='doLogin()')
+    form(ng-submit='restCommit()')
       .list
         label.item.item-input
-          span.input-label Username
-          input(type='text', ng-model='loginData.userName')
+          span.input-label Email
+          input(type='text', ng-model='restCommitData.email')
         label.item.item-input
           span.input-label Password
-          input(type='password', ng-model='loginData.password')
+          input(type='password', ng-model='restCommitData.password')
         label.item
           button.button.button-block.button-positive(type='submit') Log in
 

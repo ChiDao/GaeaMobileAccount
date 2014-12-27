@@ -12,7 +12,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    LiveUpdate.update();
+    // LiveUpdate.update();
 
     //检查是否被调用
     console.log(localStorage.getItem('openUrl'));
@@ -33,6 +33,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
 
   });
+})
+
+.config(function(RestangularProvider) {
+
+    RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
+    // add a response intereceptor
+    // RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+    //   var extractedData;      // .. to look for getList operations
+    //   if (operation === "getList") {
+    //     // .. and handle the data and meta data
+    //     extractedData = data.splices;
+    //     //extractedData.meta = data.data.meta;
+    //   } else {
+    //     extractedData = {'rawData': data};
+    //   }
+    //   return extractedData;
+    // });
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -64,6 +82,21 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   //Should not delete the placeHolder
   //stateProviderPlaceHolder
+
+
+      .state('app.start', {
+      url: '/start',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/start.html',
+          controller: 'StartCtrl'
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
 
       .state('app.user-info', {
       url: '/user_info',
