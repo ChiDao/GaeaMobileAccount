@@ -18,26 +18,12 @@ angular.module('services.Auth', ['restangular'])
     signupModalScope.formData = {};
     signupModalScope.commitForm = function(){
       console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
-      // var LoginApi = $resource('http://42.120.45.236\\:8485/signup');
-      // var loginData = new LoginApi(signupModalScope.formData);
-      // loginData.save(function(u, postResponseHeaders){
-      //   console.log(u + JSON.stringify(postResponseHeaders));
-      // })
-      // Restangular.oneUrl('start', 'http://42.120.45.236:8485/start').get().then(function(data){
-      //   // $scope.restData = data;
-      //   console.log(data);
-      //   // RestRoute.jumpFirstApiLink($scope.restData);
-      // },
-      // function(error){
-      //   console.log("Restangular error:" + JSON.stringify(error));
-      // })
-      // var baseApi = Restangular.allUrl("signup", "http://42.120.45.236:8485");
       var Signup = Restangular.all('signup');
-      Signup.post({'email': '18675629290@163.com'},{},{"Content-Type":"application/json","Accept":undefined}).then(function(data){
+      Signup.post(signupModalScope.formData).then(function(data){
       // Restangular.allUrl("signup", "http://42.120.45.236:8485/signup").post({email: '18675629290@163.com'}).then(function(data){
         console.log('Signup success, get data:' + JSON.stringify(data));
-      //   signupModalScope.modal.hide();
-      //   if (_.isFunction(signupModalScope.onSuccess)) signupModalScope.onSuccess();
+        signupModalScope.modal.hide();
+        if (_.isFunction(signupModalScope.onSuccess)) signupModalScope.onSuccess();
       }, function(error){
         console.log('Signup error, get data:' + JSON.stringify(error));
       //   if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();

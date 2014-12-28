@@ -16,8 +16,8 @@ var minifyCss = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
 
 var paths = {
-  sass: ['./scss/**/*.scss'],
   scripts: ['www/js/**/*.js'],
+  sass: ['www_pre/scss/**/*.scss'],
   jade: ['www_pre/jade/**/*.jade'],
 };
 
@@ -46,7 +46,7 @@ gulp.task('jade', function (done) {
 // .scss文件
 //----------
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src('www_pre/scss/ionic.app.scss')
     .pipe(sass())
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({
