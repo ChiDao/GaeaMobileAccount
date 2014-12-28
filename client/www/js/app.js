@@ -83,6 +83,34 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   //Should not delete the placeHolder
   //stateProviderPlaceHolder
 
+      .state('app.games', {
+      url: '/games',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/games.html',
+          controller: 'GamesCtrl'
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+
+      .state('app.game', {
+      url: '/games/:gameId' ,
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/game.html',
+          controller: 'GameCtrl'
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+
 
       .state('app.start', {
       url: '/start',

@@ -19,5 +19,8 @@ ionic serve
  2. scss文件路径：www_pre/scss
  
 ###预注册流程文件
- 1. step1: modal-signup.jade
- 2. step2: modal-login.jade
+ 1. 开始页面: start.jade
+ 2. step1: modal-signup.jade
+ 3. step2: modal-login.jade
+ 4. step3: modal-allow-notification.jade
+ 5. 游戏页面: game.jade

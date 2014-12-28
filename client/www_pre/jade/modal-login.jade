@@ -7,11 +7,8 @@ ion-modal-view
     form(ng-submit='commitForm()')
       .list
         label.item.item-input
-          span.input-label Username
-          input(type='text', ng-model='loginData.userName')
-        label.item.item-input
           span.input-label Password
-          input(type='password', ng-model='loginData.password')
+          input(type='password', ng-model='formData.password')
         label.item
-          button.button.button-block.button-positive(type='submit') Log in
+          button.button.button-block.button-positive(type='submit') 登陆
 
