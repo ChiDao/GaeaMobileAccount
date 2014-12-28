@@ -4,7 +4,7 @@ angular.module('services.Auth', ['restangular'])
 /**
  * A simple example service that returns some data.
  */
-.factory('Auth', function($rootScope, $timeout, $ionicModal, Restangular, Modal) {
+.factory('Auth', function($rootScope, $timeout, $state, $ionicModal, Restangular, Modal) {
     //Todo: 把定义从app.config移到这里
     var accessLevels = routingConfig.accessLevels,
         userRoles = routingConfig.userRoles,
@@ -20,13 +20,12 @@ angular.module('services.Auth', ['restangular'])
       console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
       var Signup = Restangular.all('signup');
       Signup.post(signupModalScope.formData).then(function(data){
-      // Restangular.allUrl("signup", "http://42.120.45.236:8485/signup").post({email: '18675629290@163.com'}).then(function(data){
-        console.log('Signup success, get data:' + JSON.stringify(data));
+      console.log('Signup success, get data:' + JSON.stringify(data));
         signupModalScope.modal.hide();
         if (_.isFunction(signupModalScope.onSuccess)) signupModalScope.onSuccess();
       }, function(error){
         console.log('Signup error, get data:' + JSON.stringify(error));
-      //   if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();
+        if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();
       })
     }
     var signupModal = function(){
@@ -44,36 +43,46 @@ angular.module('services.Auth', ['restangular'])
       console.log('Doing login:' + JSON.stringify(preRegistModalScope.formData));
       //校验用户名、密码
       //Todo: 访问服务器进行登陆
-      Restangular.allUrl("login", "http://42.120.45.236:8485/login").post(preRegistModalScope.formData).then(function(data){
+      var PreRegist = Restangular.all("pre-register");
+      PreRegist.post(preRegistModalScope.formData).then(function(data){
         console.log('get data:' + JSON.stringify(data));
         currentUser.userName = preRegistModalScope.formData.userName;
         currentUser.role = userRoles.user;
+        console.log('login success.');
         if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
         //Todo: 保存到缓存
-        console.log('login success.');
         $timeout(function() {
           preRegistModalScope.closeModal();
         }, 1000);
       }, function(error){
-        console.log('login fail, get data: ' + error);
+        console.log('login fail, get data: ' + JSON.stringify(error));
         if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
       })
-      // var user = _.find(users, {username: preRegistModalScope.formData.userName});
-      //登陆失败
-      // if (_.isUndefined(user) || user.password != preRegistModalScope.formData.password){
-      // }
-      //成功登陆
-      // else{
-      // }
       
     };
-    var loginModal = function(){
+    var preRegistModal = function(){
       Modal
         .init('templates/modal-login.html', preRegistModalScope)
         .then(function(modal){
           modal.show();
         });
     };
+
+    //定义开通消息通知对话框
+    var allowNotificationModalScope = $rootScope.$new();
+    allowNotificationModalScope.ok = function(){
+      allowNotificationModalScope.modal.hide();
+      if (_.isFunction(allowNotificationModalScope.onOk)) allowNotificationModalScope.onOk();
+
+    }
+    var allowNotificationModal = function(){
+      Modal
+        .init('templates/modal-allow-notification.html', allowNotificationModalScope)
+        .then(function(modal){
+          modal.show();
+        });
+    };
+
 
     //定义SSO单点登录对话框
     var ssoModalScope = $rootScope.$new();
@@ -86,32 +95,6 @@ angular.module('services.Auth', ['restangular'])
     };
 
 
-    //Todo: 实现从服务器验证后，从该处移除
-    var users = [
-      {
-        username: 'rui',
-        password: '123'
-      },
-      {
-        username: 'zakk',
-        password: '123'
-      }
-    ];
-    //Todo: 实现从服务器验证后，从该处移除
-    var gameClients = [
-        {
-          appId: '1',
-          gameId: '11111',
-          platform: 'ios',
-          callbackHandle: 'gaea00002'
-        },
-        {
-          appId: '2',
-          gameId: '11111',
-          platform: 'android',
-          callbackHandle: 'com.gaeamobile.game'
-        }
-      ];
 
     // Public API here
     return {
@@ -125,14 +108,21 @@ angular.module('services.Auth', ['restangular'])
         //Todo
       },
       login: function(success, error, close){
+        
         signupModalScope.mustChoise = false;
         signupModalScope.onSuccess = function(){
-          loginModal();
+          preRegistModalScope.formData.email = signupModalScope.formData.email;
+          preRegistModal();
         };
         signupModalScope.onError = error;
         signupModalScope.onClose = close;
         preRegistModalScope.mustChoise = false;
-        preRegistModalScope.onSuccess = success;
+        allowNotificationModalScope.onOk = function(){
+          $state.go('app.game',{gameId: 1});
+        }
+        preRegistModalScope.onSuccess = function(){
+          allowNotificationModal();
+        }
         preRegistModalScope.onError = error;
         preRegistModalScope.onClose = close;
         signupModal();
@@ -181,18 +171,19 @@ angular.module('services.Auth', ['restangular'])
         };
         
         //检验参数是否正确
-        if (!_.isObject(ssoData) || _.keys(_.pick(ssoData, ['appId', 'gameId','callbackHandle'])).length != 3){
-          ssoCallBack("params error");
-          return;
-        }
-        if (_.find(gameClients, {appId: ssoData.appId, gameId: ssoData.gameId, callbackHandle:ssoData.callbackHandle}) === undefined){
-          ssoCallBack("unregistered app client");
-          return;
-        }
+        // if (!_.isObject(ssoData) || _.keys(_.pick(ssoData, ['appId', 'gameId','callbackHandle'])).length != 3){
+        //   ssoCallBack("params error");
+        //   return;
+        // }
+        // if (_.find(gameClients, {appId: ssoData.appId, gameId: ssoData.gameId, callbackHandle:ssoData.callbackHandle}) === undefined){
+        //   ssoCallBack("unregistered app client");
+        //   return;
+        // }
         if (!this.isLoggedIn()){
           signupModalScope.mustChoise = true;
           signupModalScope.onSuccess = function(){
-            loginModal();
+            preRegistModalScope.formData.email = signupModalScope.formData.email;
+            preRegistModal();
           };
           signupModalScope.onError = function(){
           };
@@ -241,3 +232,43 @@ angular.module('services.Auth', ['restangular'])
     });
 
 }]);
+
+
+
+
+      // var user = _.find(users, {username: preRegistModalScope.formData.userName});
+      //登陆失败
+      // if (_.isUndefined(user) || user.password != preRegistModalScope.formData.password){
+      // }
+      //成功登陆
+      // else{
+      // }
+
+
+
+    //Todo: 实现从服务器验证后，从该处移除
+    // var users = [
+    //   {
+    //     username: 'rui',
+    //     password: '123'
+    //   },
+    //   {
+    //     username: 'zakk',
+    //     password: '123'
+    //   }
+    // ];
+    // //Todo: 实现从服务器验证后，从该处移除
+    // var gameClients = [
+    //     {
+    //       appId: '1',
+    //       gameId: '11111',
+    //       platform: 'ios',
+    //       callbackHandle: 'gaea00002'
+    //     },
+    //     {
+    //       appId: '2',
+    //       gameId: '11111',
+    //       platform: 'android',
+    //       callbackHandle: 'com.gaeamobile.game'
+    //     }
+    //   ];
