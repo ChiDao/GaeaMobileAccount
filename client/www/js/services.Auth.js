@@ -17,16 +17,16 @@ angular.module('services.Auth', ['restangular'])
     var signupModalScope = $rootScope.$new();
     signupModalScope.formData = {};
     signupModalScope.commitForm = function(){
-      console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
-      var Signup = Restangular.all('signup');
-      Signup.post(signupModalScope.formData).then(function(data){
-      console.log('Signup success, get data:' + JSON.stringify(data));
+      // console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
+      // var Signup = Restangular.all('signup');
+      // Signup.post(signupModalScope.formData).then(function(data){
+      // console.log('Signup success, get data:' + JSON.stringify(data));
         signupModalScope.modal.hide();
         if (_.isFunction(signupModalScope.onSuccess)) signupModalScope.onSuccess();
-      }, function(error){
-        console.log('Signup error, get data:' + JSON.stringify(error));
-        if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();
-      })
+      // }, function(error){
+      //   console.log('Signup error, get data:' + JSON.stringify(error));
+      //   if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();
+      // })
     }
     var signupModal = function(){
       Modal
@@ -155,8 +155,13 @@ angular.module('services.Auth', ['restangular'])
           }
         };
         var confirmSso = function(){
+          Restangular.oneUrl('user-client-authorize/ga14a66eaac9ae6457/wb1121741102').get().then(function(data){
+            console.log('Get client authorize Success, Get data:');// + JSON.stringify(data));
+            ssoAuthModal();
+          }, function(error){
+            console.log('Get client authorize Error:' + JSON.stringify(error));
+          })
           //Todo: 如果曾经授权，不需再授权
-          ssoAuthModal();
         };
 
         //请求授权确认按钮
@@ -169,6 +174,7 @@ angular.module('services.Auth', ['restangular'])
           ssoCallBack('sso cancel');
           ssoModalScope.modal.hide();
         };
+        
         
         //检验参数是否正确
         // if (!_.isObject(ssoData) || _.keys(_.pick(ssoData, ['appId', 'gameId','callbackHandle'])).length != 3){

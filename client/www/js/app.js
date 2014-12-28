@@ -35,6 +35,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
+// .config(function ($httpProvider) {
+
+//   $httpProvider.defaults.withCredentials = true;
+
+// })
+
 .config(function(RestangularProvider) {
 
     RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
@@ -50,6 +56,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     //   }
     //   return extractedData;
     // });
+  RestangularProvider.setDefaultHeaders({
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+  });
+  RestangularProvider.setDefaultHttpFields({
+    withCredentials: true
+  });
 
 })
 
