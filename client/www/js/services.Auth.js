@@ -96,7 +96,10 @@ angular.module('services.Auth', ['restangular'])
     allowNotificationModalScope.ok = function(){
       allowNotificationModalScope.modal.hide();
       if (_.isFunction(allowNotificationModalScope.onOk)) allowNotificationModalScope.onOk();
-
+    }
+    allowNotificationModalScope.cancel = function(){
+      allowNotificationModalScope.modal.hide();
+      if (_.isFunction(allowNotificationModalScope.onCancel)) allowNotificationModalScope.onCancel();
     }
     var allowNotificationModal = function(){
       Modal
@@ -109,6 +112,14 @@ angular.module('services.Auth', ['restangular'])
 
     //定义SSO单点登录对话框
     var ssoModalScope = $rootScope.$new();
+    ssoModalScope.ok = function(){
+      ssoModalScope.modal.hide();
+      if (_.isFunction(ssoModalScope.onOk)) ssoModalScope.onOk();
+    }
+    ssoModalScope.cancel = function(){
+      ssoModalScope.modal.hide();
+      if (_.isFunction(ssoModalScope.onCancel)) ssoModalScope.onCancel();
+    }
     var ssoAuthModal = function(){
       Modal
         .init('templates/modal-sso-auth.html', ssoModalScope)
@@ -168,35 +179,39 @@ angular.module('services.Auth', ['restangular'])
 
       ssoAuth: function(ssoData){
         //Todo: 返回授权结果给第三方应用
-        var ssoCallBack = function(info){
+        var ssoCallBack = function(status, info){
+          if (ionic.Platform.platform() === 'macintel'){
+            console.log(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''));
+          }
           if(ionic.Platform.isIOS()){
             console.log("ios loginByClient");
-            window.open('gaea00002://?ssoInfo=' + encodeURIComponent(info), '_system');
+            window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''), '_system');
           }
           if (ionic.Platform.isAndroid()){
             console.log("android loginByClient");
-            window.open('gaea00002://?ssoInfo=' + encodeURIComponent(info), '_system');
+            window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''), '_system');
           }
         };
         var confirmSso = function(){
-          Restangular.oneUrl('user-client-authorize/ga14a66eaac9ae6457/wb1121741102').get().then(function(data){
+          Restangular.oneUrl('user-client-authorize/' + ssoData.appId + '/' + ssoData.url).get().then(function(data){
             console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
+            ssoModalScope.gameClientTitle = data.rawData.description;
+            ssoModalScope.authCode = data.rawData.code;
             ssoAuthModal();
           }, function(error){
+            ssoCallBack('-3', 'sso fail');
             console.log('Get client authorize Error:' + JSON.stringify(error));
           })
           //Todo: 如果曾经授权，不需再授权
         };
 
         //请求授权确认按钮
-        ssoModalScope.ok = function(){
-          ssoCallBack('sso ok');
-          ssoModalScope.modal.hide();
+        ssoModalScope.onOk = function(){
+          ssoCallBack('0', 'sso ok');
         };
         //请求授权取消按钮
-        ssoModalScope.cancel = function(){
-          ssoCallBack('sso cancel');
-          ssoModalScope.modal.hide();
+        ssoModalScope.onCancel = function(){
+          ssoCallBack('-2', 'sso cancel');
         };
         
         
@@ -218,7 +233,7 @@ angular.module('services.Auth', ['restangular'])
           signupModalScope.onError = function(){
           };
           signupModalScope.onCancel = function(){
-            ssoCallBack('logined cancel');
+            ssoCallBack('-1', 'logined cancel');
           };
           preRegistModalScope.mustChoise = true;
           preRegistModalScope.onSuccess = confirmSso;
@@ -226,7 +241,7 @@ angular.module('services.Auth', ['restangular'])
             //登录错误不做任何处理
           };
           preRegistModalScope.onCancel = function(){ 
-            ssoCallBack('logined cancel');
+            ssoCallBack('-1', 'logined cancel');
           };
           signupModal();
         }else{
