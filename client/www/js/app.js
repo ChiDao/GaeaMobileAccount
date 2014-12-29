@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMessages'])
 
 .run(function($ionicPlatform, $rootScope, LiveUpdate, Auth) {
     console.log(10);
@@ -36,33 +36,34 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 })
 
 // .config(function ($httpProvider) {
-
 //   $httpProvider.defaults.withCredentials = true;
-
 // })
 
 .config(function(RestangularProvider) {
 
+    RestangularProvider.setDefaultHeaders({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+    });
+    RestangularProvider.setDefaultHttpFields({
+      withCredentials: true
+    });
+
     RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
+    // RestangularProvider.setBaseUrl('http://localhost:8485');
+
     // add a response intereceptor
-    // RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-    //   var extractedData;      // .. to look for getList operations
-    //   if (operation === "getList") {
-    //     // .. and handle the data and meta data
-    //     extractedData = data.splices;
-    //     //extractedData.meta = data.data.meta;
-    //   } else {
-    //     extractedData = {'rawData': data};
-    //   }
-    //   return extractedData;
-    // });
-  RestangularProvider.setDefaultHeaders({
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
-  });
-  RestangularProvider.setDefaultHttpFields({
-    withCredentials: true
-  });
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+      var extractedData;      // .. to look for getList operations
+      if (operation === "getList") {
+        // .. and handle the data and meta data
+        extractedData = data.splices;
+        //extractedData.meta = data.data.meta;
+      } else {
+        extractedData = {'rawData': data};
+      }
+      return extractedData;
+    });
 
 })
 

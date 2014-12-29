@@ -4,7 +4,7 @@ angular.module('services.Auth', ['restangular'])
 /**
  * A simple example service that returns some data.
  */
-.factory('Auth', function($rootScope, $timeout, $state, $ionicModal, Restangular, Modal) {
+.factory('Auth', function($rootScope, $timeout, $state, $http, $ionicModal, Restangular, Modal) {
     //Todo: 把定义从app.config移到这里
     var accessLevels = routingConfig.accessLevels,
         userRoles = routingConfig.userRoles,
@@ -15,9 +15,11 @@ angular.module('services.Auth', ['restangular'])
 
     //定义输入邮箱对话框
     var signupModalScope = $rootScope.$new();
-    signupModalScope.formData = {};
-    signupModalScope.commitForm = function(){
-      // console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
+    signupModalScope.formData = {email:''};
+    signupModalScope.commitForm = function(commitForm){
+      if (commitForm.$invalid) return;
+      // console.log(signupModalScope.formData.email.$in);
+      console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
       // var Signup = Restangular.all('signup');
       // Signup.post(signupModalScope.formData).then(function(data){
       // console.log('Signup success, get data:' + JSON.stringify(data));
@@ -38,22 +40,66 @@ angular.module('services.Auth', ['restangular'])
 
     //定义登陆对话框
     var preRegistModalScope = $rootScope.$new();
-    preRegistModalScope.formData = {};
-    preRegistModalScope.commitForm = function(){
+    preRegistModalScope.formData = {password: ''};
+    preRegistModalScope.commitForm = function(commitForm){
+      if (commitForm.$invalid) return;
+
+
+      // 使用测试跨域
+      // $http({method:'POST',
+      //        url:'http://42.120.45.236:8485/pre-register',
+      //        data:{email: '18675629290@163.com', password: '3226'},
+      //        withCredentials: true,
+      //        headers:   {
+      //                    'Content-Type': 'application/json',
+      //                    'X-Requested-With': 'XMLHttpRequest'
+      //       }
+      //    }).success(function(data, status, headers, config){
+
+      //     console.log(data);
+      //     console.log(headers())
+
+      //     $http({method:    'GET',
+      //            url:       'http://42.120.45.236:8485/user-client-authorize/ga14a66eaac9ae6457/wb1121741102',
+      //            withCredentials: true,
+      //            headers:   {
+      //                       'Content-Type': 'application/json',
+      //                       'X-Requested-With': 'XMLHttpRequest'
+      //                       }
+      //         }).success(function(data){
+
+      //         console.log(data);
+              
+
+      //         })
+      //         .error(function(data, status, headers, config) {
+      //           console.log(headers())
+      //           // called asynchronously if an error occurs
+      //           // or server returns response with an error status.
+      //         });;
+      // })
+
       console.log('Doing login:' + JSON.stringify(preRegistModalScope.formData));
       //校验用户名、密码
       //Todo: 访问服务器进行登陆
       var PreRegist = Restangular.all("pre-register");
       PreRegist.post(preRegistModalScope.formData).then(function(data){
-        console.log('get data:' + JSON.stringify(data));
-        currentUser.userName = preRegistModalScope.formData.userName;
-        currentUser.role = userRoles.user;
-        console.log('login success.');
-        if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
-        //Todo: 保存到缓存
-        $timeout(function() {
-          preRegistModalScope.closeModal();
-        }, 1000);
+        console.log('login success.get data:' + JSON.stringify(data));
+        //Todo: 请求用户信息
+        var Me = Restangular.one("me");
+        Me.get().then(function(me){
+          console.log(me);
+          currentUser.userName = preRegistModalScope.formData.email;
+          currentUser.role = userRoles.user;
+          //存储用户信息到localStorage
+          localStorage.setItem('user', me);
+          if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
+          $timeout(function() {
+            preRegistModalScope.closeModal();
+          }, 1000);
+        },function(error){
+          console.log('login fail, get data: ' + JSON.stringify(error));
+        })
       }, function(error){
         console.log('login fail, get data: ' + JSON.stringify(error));
         if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
@@ -156,7 +202,7 @@ angular.module('services.Auth', ['restangular'])
         };
         var confirmSso = function(){
           Restangular.oneUrl('user-client-authorize/ga14a66eaac9ae6457/wb1121741102').get().then(function(data){
-            console.log('Get client authorize Success, Get data:');// + JSON.stringify(data));
+            console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
             ssoAuthModal();
           }, function(error){
             console.log('Get client authorize Error:' + JSON.stringify(error));

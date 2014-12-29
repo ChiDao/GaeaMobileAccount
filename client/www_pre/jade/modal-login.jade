@@ -4,11 +4,15 @@ ion-modal-view
     .buttons
       button.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') Close
   ion-content
-    form(ng-submit='commitForm()')
+    form(name='loginForm', novalidate="", ng-submit='commitForm(loginForm)')
       .list
-        label.item.item-input
+        label.item.item-input(ng-class="{'has-error': loginForm.password.$invalid}")
           span.input-label Password
-          input(type='password', ng-model='formData.password')
+          input(name='password', type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
+        div.form-errors(ng-messages='loginForm.password.$error', ng-messages-include='templates/form-errors.html')
+          div.form-error(ng-message='number') 4 digit number
+          div.form-error(ng-message='minlength') 4 digit
+          div.form-error(ng-message='maxlength') 4 digit
         label.item
           button.button.button-block.button-positive(type='submit') 登陆
 
