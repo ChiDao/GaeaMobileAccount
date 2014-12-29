@@ -6,9 +6,9 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMessages'])
 
-.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth) {
+.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth,PushProcessingService) {
     console.log(10);
-  
+   PushProcessingService.initialize();
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -66,6 +66,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     });
 
 })
+
+//i18n
+.config(function(TranslationsProvider) {
+    TranslationsProvider.translateConfig();
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
     //角色配置

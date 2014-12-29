@@ -15,7 +15,8 @@ var pluginlist = [
     "com.ohh2ahh.plugins.appavailability",
     "org.apache.cordova.file",
     "org.apache.cordova.file-transfer",
-    "org.chromium.zip"
+    "org.chromium.zip",
+    "com.phonegap.plugins.PushPlugin"
 ];
 
 // no need to configure below

@@ -16,6 +16,7 @@ var pluginlist = [
     // "org.apache.cordova.file",
     // "org.apache.cordova.file-transfer",
     // "org.chromium.zip",
+    "https://github.com/phonegap-build/PushPlugin.git"
 ];
 
 // no need to configure below
