@@ -22,19 +22,19 @@ angular.module('starter', ['ionic'])
   $scope.loginByClient = function(){
     if(ionic.Platform.isIOS()){
       console.log("ios loginByClient");
-      window.open('gaea00001://?appId=1&gameId=11111&callbackHandle=gaea00002', '_system');
+      window.open('GaeaPlay://?appId=ga14a66eaac9ae6457&url=wb1121741102', '_system');
     }
     if (ionic.Platform.isAndroid()){
       console.log("android loginByClient");
-      window.open('gaea00001://?appId=2&gameId=11111&callbackHandle=com.gaeamobile.game', '_system');
+      window.open('GaeaPlay://?appId=2&gameId=11111&callbackHandle=com.gaeamobile.game', '_system');
     }
   }
 
   $scope.getLoginData = function(url){
       var parsedUrl = purl(url);  
-      var loginData = parsedUrl.param('ssoInfo');
+      var loginData = parsedUrl.param();
       setTimeout(function(){
-        alert(loginData);
+        alert(JSON.stringify(loginData));
       }, 100);
   }
 });

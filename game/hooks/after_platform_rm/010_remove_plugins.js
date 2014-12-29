@@ -9,6 +9,7 @@ var pluginlist = [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
+    "nl.x-services.plugins.launchmyapp",
     "com.ionic.keyboard",
 ];
 
