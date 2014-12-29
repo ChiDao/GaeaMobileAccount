@@ -11,7 +11,13 @@ angular.module('services.Auth', ['restangular'])
         modalData = {};
 
     //Todo: 从缓存读取用户信息
-    var currentUser = { userName: '', role: routingConfig.userRoles.public };
+    var userData = (localStorage.getItem('user') === null?{a:1}:JSON.parse(localStorage.getItem('user')));
+    console.log(userData);
+    var currentUser = (localStorage.getItem('user') === null?
+                       { userName: '', role: routingConfig.userRoles.public, userData: {} }:
+                       { userName: userData.email, role:routingConfig.userRoles.user, userData: userData}
+                       )
+    // var currentUser = { userName: '', role: routingConfig.userRoles.public, userData: {} }
 
     //定义输入邮箱对话框
     var signupModalScope = $rootScope.$new();
@@ -43,41 +49,7 @@ angular.module('services.Auth', ['restangular'])
     preRegistModalScope.formData = {password: ''};
     preRegistModalScope.commitForm = function(commitForm){
       if (commitForm.$invalid) return;
-
-
-      // 使用测试跨域
-      // $http({method:'POST',
-      //        url:'http://42.120.45.236:8485/pre-register',
-      //        data:{email: '18675629290@163.com', password: '3226'},
-      //        withCredentials: true,
-      //        headers:   {
-      //                    'Content-Type': 'application/json',
-      //                    'X-Requested-With': 'XMLHttpRequest'
-      //       }
-      //    }).success(function(data, status, headers, config){
-
-      //     console.log(data);
-      //     console.log(headers())
-
-      //     $http({method:    'GET',
-      //            url:       'http://42.120.45.236:8485/user-client-authorize/ga14a66eaac9ae6457/wb1121741102',
-      //            withCredentials: true,
-      //            headers:   {
-      //                       'Content-Type': 'application/json',
-      //                       'X-Requested-With': 'XMLHttpRequest'
-      //                       }
-      //         }).success(function(data){
-
-      //         console.log(data);
-              
-
-      //         })
-      //         .error(function(data, status, headers, config) {
-      //           console.log(headers())
-      //           // called asynchronously if an error occurs
-      //           // or server returns response with an error status.
-      //         });;
-      // })
+      preRegistModalScope.commitFormError = false;
 
       console.log('Doing login:' + JSON.stringify(preRegistModalScope.formData));
       //校验用户名、密码
@@ -92,15 +64,20 @@ angular.module('services.Auth', ['restangular'])
           currentUser.userName = preRegistModalScope.formData.email;
           currentUser.role = userRoles.user;
           //存储用户信息到localStorage
-          localStorage.setItem('user', me);
+          localStorage.setItem('user', JSON.stringify(me.rawData));
+          console.log(me.rawData);
           if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
           $timeout(function() {
             preRegistModalScope.closeModal();
           }, 1000);
         },function(error){
+          preRegistModalScope.commitFormError = true;
+          preRegistModalScope.commitFormErrorMsg = error.data.alertMsg;
           console.log('login fail, get data: ' + JSON.stringify(error));
         })
       }, function(error){
+        preRegistModalScope.commitFormError = true;
+        preRegistModalScope.commitFormErrorMsg = error.data.alertMsg;
         console.log('login fail, get data: ' + JSON.stringify(error));
         if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
       })
@@ -185,6 +162,7 @@ angular.module('services.Auth', ['restangular'])
       logout:function(success){
         currentUser.userName = '';
         currentUser.role = userRoles.public;
+        localStorage.removeItem('user', null);
         success();
       },
 
@@ -296,8 +274,6 @@ angular.module('services.Auth', ['restangular'])
       // else{
       // }
 
-
-
     //Todo: 实现从服务器验证后，从该处移除
     // var users = [
     //   {
@@ -324,3 +300,38 @@ angular.module('services.Auth', ['restangular'])
     //       callbackHandle: 'com.gaeamobile.game'
     //     }
     //   ];
+
+
+      // 使用测试跨域
+      // $http({method:'POST',
+      //        url:'http://42.120.45.236:8485/pre-register',
+      //        data:{email: '18675629290@163.com', password: '3226'},
+      //        withCredentials: true,
+      //        headers:   {
+      //                    'Content-Type': 'application/json',
+      //                    'X-Requested-With': 'XMLHttpRequest'
+      //       }
+      //    }).success(function(data, status, headers, config){
+
+      //     console.log(data);
+      //     console.log(headers())
+
+      //     $http({method:    'GET',
+      //            url:       'http://42.120.45.236:8485/user-client-authorize/ga14a66eaac9ae6457/wb1121741102',
+      //            withCredentials: true,
+      //            headers:   {
+      //                       'Content-Type': 'application/json',
+      //                       'X-Requested-With': 'XMLHttpRequest'
+      //                       }
+      //         }).success(function(data){
+
+      //         console.log(data);
+              
+
+      //         })
+      //         .error(function(data, status, headers, config) {
+      //           console.log(headers())
+      //           // called asynchronously if an error occurs
+      //           // or server returns response with an error status.
+      //         });;
+      // })

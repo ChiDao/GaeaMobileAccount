@@ -13,6 +13,7 @@ ion-modal-view
           div.form-error(ng-message='number') 4 digit number
           div.form-error(ng-message='minlength') 4 digit
           div.form-error(ng-message='maxlength') 4 digit
+          div.form-error(ng-if="commitFormError") {{commitFormErrorMsg}}
         label.item
           button.button.button-block.button-positive(type='submit') 登陆
 
