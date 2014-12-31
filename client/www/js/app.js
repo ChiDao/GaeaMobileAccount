@@ -6,9 +6,9 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMessages'])
 
-.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth,PushProcessingService) {
+.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth) {
     console.log(10);
-   PushProcessingService.initialize();
+   
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

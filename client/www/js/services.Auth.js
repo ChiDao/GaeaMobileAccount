@@ -1,10 +1,10 @@
 
-angular.module('services.Auth', ['restangular'])
+angular.module('services.Auth', ['restangular','services.Push'])
 
 /**
  * A simple example service that returns some data.
  */
-.factory('Auth', function($rootScope, $timeout, $state, $http, $ionicModal, Restangular, Modal) {
+.factory('Auth', function($rootScope, $timeout, $state, $http, $ionicModal, Restangular, Modal,PushProcessingService) {
     //Todo: 把定义从app.config移到这里
     var accessLevels = routingConfig.accessLevels,
         userRoles = routingConfig.userRoles,
@@ -152,6 +152,7 @@ angular.module('services.Auth', ['restangular'])
         signupModalScope.onClose = close;
         preRegistModalScope.mustChoise = false;
         allowNotificationModalScope.onOk = function(){
+         PushProcessingService.initialize();
           $state.go('app.game',{gameId: 1});
         }
         preRegistModalScope.onSuccess = function(){
