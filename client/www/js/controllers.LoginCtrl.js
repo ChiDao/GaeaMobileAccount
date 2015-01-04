@@ -1,6 +1,6 @@
-angular.module('controllers.LoginCtrl',['restangular'])
-
-  .controller('LoginCtrl', function ($scope, Restangular) {
+define(['app'], function(app)
+{
+  app.controller('LoginCtrl', function ($scope, Restangular) {
   	$scope.restCommitData = {};
     $scope.restCommit = function(){
     	Restangular.allUrl('login', 'http://42.120.45.236:8485/login').post($scope.restCommitData).then(function(data){
@@ -10,3 +10,4 @@ angular.module('controllers.LoginCtrl',['restangular'])
     	});
     }
   });
+});

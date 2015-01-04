@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 define(function()
 {
-  var starter = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMessages'])
+  var starter = angular.module('starter', ['ionic', 'starter.services', 'ngMessages'])
 
   starter.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth) {
       console.log(10);

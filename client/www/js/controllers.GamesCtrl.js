@@ -1,5 +1,6 @@
-angular.module('controllers.GamesCtrl', [])
-
-.controller('GamesCtrl', function($scope, Games) {
-  $scope.games = Games.all();
+define(['app'], function(app)
+{
+	app.controller('GamesCtrl', function($scope, Games) {
+	  $scope.games = Games.all();
+	});
 });

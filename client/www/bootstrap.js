@@ -35,6 +35,13 @@ require
 (
     [
         'app',
+        'controllers.StartCtrl',
+        'controllers.GameCtrl',
+        'controllers.PlaylistCtrl',
+        'controllers.PlaylistsCtrl',
+        'controllers.LoginCtrl',
+        'controllers.UserInfoCtrl',
+        'controllers.AppCtrl'
         // 'controllers',
         // 'services',
     ],

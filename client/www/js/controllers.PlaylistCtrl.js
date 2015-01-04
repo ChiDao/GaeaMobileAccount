@@ -1,4 +1,5 @@
-angular.module('controllers.PlaylistCtrl', [])
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+define(['app'], function(app)
+{
+	app.controller('PlaylistCtrl', function($scope, $stateParams) {
+	});
 });
