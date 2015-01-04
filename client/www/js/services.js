@@ -1,1 +1,1 @@
-angular.module('starter.services', ['services.Games', 'services.RestRoute', 'services.LiveUpdate', 'services.Modal', 'services.Auth','services.Push','services.Translation']);
+angular.module('starter.services', ['services.LiveUpdate', 'services.Push','services.Translation']);

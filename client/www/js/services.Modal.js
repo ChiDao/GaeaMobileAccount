@@ -1,6 +1,6 @@
-angular.module('services.Modal',['ionic'])
-
-  .service('Modal', function ($ionicModal, $rootScope) {
+define(['app'], function(app)
+{
+  	app.service('Modal', function ($ionicModal, $rootScope) {
     
 	  var init = function(tpl, $scope) {
 
@@ -49,3 +49,4 @@ angular.module('services.Modal',['ionic'])
 	    init: init
 	  };
   });
+});

@@ -17,11 +17,15 @@ require.config({
             exports: '_'
         },
         'restangular': {
-            deps: ['lodash']
+            deps: ['lodash'],
+            exports: 'Restangular'
         },
 		'app': {
 			deps: ['cordova', 'purl', 'restangular']
 		},
+        'services.LiveUpdate': {
+            deps: ['restangular']
+        }
         // 'controllers': {
         //     deps: ['app']
         // },
@@ -35,13 +39,20 @@ require
 (
     [
         'app',
+
         'controllers.StartCtrl',
         'controllers.GameCtrl',
         'controllers.PlaylistCtrl',
         'controllers.PlaylistsCtrl',
         'controllers.LoginCtrl',
         'controllers.UserInfoCtrl',
-        'controllers.AppCtrl'
+        'controllers.AppCtrl',
+        'services.Games',
+
+        'services.Modal',
+        'services.Auth',
+        'services.RestRoute',
+        // 'services.LiveUpdate',
         // 'controllers',
         // 'services',
     ],
