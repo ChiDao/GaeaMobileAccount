@@ -1,17 +1,17 @@
-define(['app'], function(app)
+define(['app', 'services.Modal', 'services.Push'], function(app)
 {
     app.factory('Auth', function($rootScope, $timeout, $state, $http, $ionicModal, Restangular, Modal,PushProcessingService) {
       //Todo: 把定义从app.config移到这里
-      var accessLevels = routingConfig.accessLevels,
-          userRoles = routingConfig.userRoles,
+      var accessLevels = app.routingConfig.accessLevels,
+          userRoles = app.routingConfig.userRoles,
           modalData = {};
 
       //Todo: 从缓存读取用户信息
       var userData = (localStorage.getItem('user') === null?{a:1}:JSON.parse(localStorage.getItem('user')));
       console.log(userData);
       var currentUser = (localStorage.getItem('user') === null?
-                         { userName: '', role: routingConfig.userRoles.public, userData: {} }:
-                         { userName: userData.email, role:routingConfig.userRoles.user, userData: userData}
+                         { userName: '', role: app.routingConfig.userRoles.public, userData: {} }:
+                         { userName: userData.email, role:app.routingConfig.userRoles.user, userData: userData}
                          )
       // var currentUser = { userName: '', role: routingConfig.userRoles.public, userData: {} }
 

@@ -7,7 +7,7 @@ angular.module('services.Translation', ['pascalprecht.translate','ngCookies'])
 	};
 	 
 	var translationsJP= {
-	 // HEADLINE: 'Was für ein großartiges Modul!',
+	  HEADLINE: 'Was für ein großartiges Modul!',
 	  PREREGISTER: '予備登録'
 	};
 

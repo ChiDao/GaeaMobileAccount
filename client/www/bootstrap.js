@@ -1,10 +1,26 @@
 require.config({
-    baseUrl: '/js',
     paths: {
-  		'cordova': '/cordova',
-        'purl': '/lib/purl/purl',
-        'restangular': '/lib/restangular/dist/restangular',
-        'lodash': '/lib/lodash/dist/lodash',
+  		'cordova': 'cordova',
+        'purl': 'lib/purl/purl',
+        'lodash': 'lib/lodash/dist/lodash',
+        'restangular': 'lib/restangular/dist/restangular',
+        'app': 'js/app',
+        'routes': 'routes',
+        'services.Auth': 'js/services.Auth',
+        'services.Modal': 'js/services.Modal',
+        'services.Push': 'js/services.Push',
+        'services.RestRoute': 'js/services.RestRoute',
+        'services.Translation': 'js/services.Translation',
+
+        'controllers.StartCtrl': 'js/controllers.StartCtrl',
+        'controllers.GamesCtrl': 'js/controllers.GamesCtrl',
+        'controllers.GameCtrl': 'js/controllers.GameCtrl',
+        'controllers.PlaylistsCtrl': 'js/controllers.PlaylistsCtrl',
+        'controllers.PlaylistCtrl': 'js/controllers.PlaylistCtrl',
+        'controllers.LoginCtrl': 'js/controllers.LoginCtrl',
+        'controllers.UserInfoCtrl': 'js/controllers.UserInfoCtrl',
+        'controllers.AppCtrl': 'js/controllers.AppCtrl',
+        'services.Games': 'js/services.Games',
     },
 	shim: {
 		'corodva': {
@@ -23,9 +39,22 @@ require.config({
 		'app': {
 			deps: ['cordova', 'purl', 'restangular']
 		},
-        'services.LiveUpdate': {
-            deps: ['restangular']
-        }
+        'routes': {
+            deps: [
+                'controllers.StartCtrl',
+                'controllers.GamesCtrl',
+                'controllers.GameCtrl',
+                'controllers.PlaylistCtrl',
+                'controllers.PlaylistsCtrl',
+                'controllers.LoginCtrl',
+                'controllers.UserInfoCtrl',
+                'controllers.AppCtrl',
+                'services.Games'
+            ]
+        },
+        // 'services.LiveUpdate': {
+        //     deps: ['restangular']
+        // },
         // 'controllers': {
         //     deps: ['app']
         // },
@@ -40,24 +69,19 @@ require
     [
         'app',
 
-        'controllers.StartCtrl',
-        'controllers.GameCtrl',
-        'controllers.PlaylistCtrl',
-        'controllers.PlaylistsCtrl',
-        'controllers.LoginCtrl',
-        'controllers.UserInfoCtrl',
-        'controllers.AppCtrl',
-        'services.Games',
-
-        'services.Modal',
-        'services.Auth',
-        'services.RestRoute',
+        // 'services.Modal',
+        // 'services.Auth',
+        // 'services.RestRoute',
+        // 'services.Push',
+        // 'services.Translation',
+        'routes',
         // 'services.LiveUpdate',
         // 'controllers',
         // 'services',
     ],
     function(app)
     {
+        console.log('bootstrap');
         angular.bootstrap(document, ['starter']);
     }
 );

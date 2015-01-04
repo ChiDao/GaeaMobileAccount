@@ -1,4 +1,4 @@
-define(['app'], function(app)
+define(['app', 'services.RestRoute'], function(app)
 {
 	app.controller('StartCtrl', function ($scope, RestRoute, Restangular) {
 		console.log('startCtrl');

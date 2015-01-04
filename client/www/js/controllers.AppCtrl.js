@@ -1,4 +1,4 @@
-define(['app'], function(app)
+define(['app', 'services.Auth'], function(app)
 {
 	app.controller('AppCtrl', function($scope, Auth) {
 	  // Form data for the login modal

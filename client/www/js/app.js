@@ -4,11 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-define(function()
-{
-  var starter = angular.module('starter', ['ionic', 'starter.services', 'ngMessages'])
+define(function(){
 
-  starter.run(function($ionicPlatform, $rootScope, LiveUpdate, Auth) {
+  var starter = angular.module('starter', ['ionic', 'starter.services', 'ngMessages', 'ngCookies'])
+
+  starter.run(function($ionicPlatform, $rootScope) {//, Auth, LiveUpdate, 
       console.log(10);
      
     $ionicPlatform.ready(function() {
@@ -16,7 +16,7 @@ define(function()
       // for form inputs)
       // LiveUpdate.update();
 
-      //检查是否被调用
+      // 检查是否被调用
       console.log(localStorage.getItem('openUrl'));
       var openUrl = localStorage.getItem('openUrl');
       localStorage.removeItem('openUrl');
@@ -35,11 +35,21 @@ define(function()
       }
 
     });
-  })
+  });
 
-  // .config(function ($httpProvider) {
-  //   $httpProvider.defaults.withCredentials = true;
-  // })
+  //角色配置
+  (function(exports){
+    var userRoles = {
+        public: 1, // 001
+        user:   2 // 010
+    };
+    exports.userRoles = userRoles;
+    exports.accessLevels = {
+        public: userRoles.public | // 11
+                userRoles.user,
+        user:   userRoles.user     // 10
+    };
+    })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
   starter.config(function(RestangularProvider) {
 
@@ -70,155 +80,11 @@ define(function()
   })
 
   //i18n
-  .config(function(TranslationsProvider) {
+  starter.config(function(TranslationsProvider) {
       TranslationsProvider.translateConfig();
     })
 
-  .config(function($stateProvider, $urlRouterProvider) {
-      //角色配置
-      (function(exports){
-        var userRoles = {
-            public: 1, // 001
-            user:   2 // 010
-        };
-        exports.userRoles = userRoles;
-        exports.accessLevels = {
-            public: userRoles.public | // 11
-                    userRoles.user,
-            user:   userRoles.user     // 10
-        };
-    })(typeof exports === 'undefined'? this.routingConfig={}: exports);
-
-    var access = routingConfig.accessLevels;
-
-    //路由配置
-    $stateProvider
-
-    .state('app', {
-      url: "/app",
-      abstract: true,
-      templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
-    })
-
-    //Should not delete the placeHolder
-    //stateProviderPlaceHolder
-
-        .state('app.games', {
-        url: '/games',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/games.html',
-            controller: 'GamesCtrl'
-          }
-        },
-        data: {
-          access: access.public
-        }
-      })
-
-
-        .state('app.game', {
-        url: '/games/:gameId' ,
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/game.html',
-            controller: 'GameCtrl'
-          }
-        },
-        data: {
-          access: access.public
-        }
-      })
-
-
-
-        .state('app.start', {
-        url: '/start',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/start.html',
-            controller: 'StartCtrl'
-          }
-        },
-        data: {
-          access: access.public
-        }
-      })
-
-
-        .state('app.user-info', {
-        url: '/user_info',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/user-info.html',
-            controller: 'UserInfoCtrl'
-          }
-        },
-        data: {
-          access: access.user
-        }
-      })
-
-
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/search.html"
-        }
-      },
-      data: {
-        access: access.public
-      }
-    })
-
-    .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/browse.html"
-        }
-      },
-      data: {
-        access: access.user
-      }
-    })
-
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      },
-      data: {
-        access: access.public
-      }
-    })
-
-    .state('app.single', {
-      url: "/playlists/:playlistId",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
-        }
-      },
-      data: {
-        access: access.public
-      }
-    });
-    // if none of the above states are matched, use this as the fallback
-    if (localStorage.getItem('user') !== null){
-      $urlRouterProvider.otherwise('/app/games/1');
-    }else{
-      $urlRouterProvider.otherwise('/app/start');
-    }
-  })
-
-  starter.controller("MainCtrl", function($scope, Auth) {
+  starter.controller("MainCtrl", function($scope) {//, Auth
     $scope.requestAuth = function(url) {
       var parsedUrl = purl(url);  
       console.log(JSON.stringify(parsedUrl.param()));
