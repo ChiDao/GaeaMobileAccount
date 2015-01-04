@@ -1,3 +1,42 @@
-ion-view(view-title='Start')
-  ion-content(class="padding")
-    button#buttonOk.button.button-block.button-positive(ng-click='Auth.login()') 预注册
+ion-view#index(view-title='事先登錄')
+	ion-content.auto-size.color-w
+		div.game-bg
+			div.top.auto-height
+				img(src="img/data/soul-clash/logo.png")
+			div.black
+				div.store
+					.row.row-center
+						.col.text-center
+							img(src="img/data/soul-clash/sotre.png")
+						.col
+							b Soul Clash
+							p Gaea Mobile
+						.col.text-right
+							button.mini-button 事先登錄
+				div.big-photo.margin-bottom
+					img.full-width(src="img/data/soul-clash/big-photo.png")
+				div.row.text-center
+					div.col
+						div.icon
+							span.i-user.margin-0-auto
+							b 35
+							p Pre-Register
+					div.col
+						div.icon
+							span.i-calendar.margin-0-auto
+							b 2015.1.15
+							p online
+				.div.row.text-center.segmented-control
+					div.col.on
+						| 介紹
+					div.col
+						| 截圖
+					div.col
+						| 禮包
+				.div.t-indent.margin-bottom
+					p 歡樂聖誕節就要來啦！各位冰友們~ 準備好一同來瘋刀塔了嗎？
+					p 在這歡樂的佳節中，《刀塔傳奇》除了準備豐富的遊戲活動，還有諸多精彩的合作活動等玩家們一同來挖掘！
+					p 活動名稱：刀塔傳奇送祝福！分享簽名檔！領取400萬鑽石聖誕好禮！
+				hr
+				button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') 今・事前登録
+				button.button.a-button.button-block.nol-button.right-arrowsVv 査察官網
