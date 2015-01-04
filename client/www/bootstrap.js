@@ -5,6 +5,11 @@ require.config({
         'lodash': 'lib/lodash/dist/lodash',
         'restangular': 'lib/restangular/dist/restangular',
         'angular-messages': 'lib/angular-messages/angular-messages',
+        'angular-translate': 'lib/angular-translate/angular-translate',
+        'angular-translate-handler-log': 'lib/angular-translate-handler-log/angular-translate-handler-log',
+        'angular-cookies': 'lib/angular-cookies/angular-cookies',
+        'angular-translate-storage-cookie': 'lib/angular-translate-storage-cookie/angular-translate-storage-cookie',
+        'angular-translate-storage-local': 'lib/angular-translate-storage-local/angular-translate-storage-local',
 
         'app': 'js/app',
         'routes': 'js/routes',
@@ -53,12 +58,6 @@ require.config({
                 'services.Games'
             ]
         },
-        // 'controllers': {
-        //     deps: ['app']
-        // },
-        // 'services': {
-        //     deps: ['app']
-        // }
 	}
 });
 
@@ -67,15 +66,13 @@ require
     [
         'app',
 
-        // 'services.Modal',
-        // 'services.Auth',
-        // 'services.RestRoute',
-        // 'services.Push',
+        'services.Modal',
+        'services.Auth',
+        'services.RestRoute',
+        'services.Push',
         'services.Translation',
         'services.LiveUpdate',
         'routes',
-        // 'controllers',
-        // 'services',
     ],
     function(app)
     {

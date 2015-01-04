@@ -1,37 +1,43 @@
-define(['app'], function(app)
-{
-    app.provider('Translations', function($translateProvider) {
-		var translationsCN = {
-		  HEADLINE: '开始',
-		  PREREGISTER: '预注册'
-		};
-		 
-		var translationsJP= {
-		  HEADLINE: 'Was für ein großartiges Modul!',
-		  PREREGISTER: '予備登録'
-		};
-
-		this.translateConfig = function(){
-			$translateProvider.translations('jp', translationsJP);
-			$translateProvider.translations('cn', translationsCN);
-				 // $translateProvider.useMessageFormatInterpolation();
-				 $translateProvider.preferredLanguage('jp');
-			//	 $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
-				 $translateProvider.fallbackLanguage(['jp', 'cn']);
-				 $translateProvider.useLocalStorage();
-				 $translateProvider.useMissingTranslationHandlerLog();
-				 $translateProvider.useSanitizeValueStrategy('escaped');
-				 return ;
+define(['app', 
+	'angular-cookies', 
+	'angular-translate-storage-local', 
+	'angular-translate-storage-cookie',
+	'angular-translate-handler-log',
+	'angular-translate'
+	], function(app)
+		{
+		    app.provider('Translations', function($translateProvider) {
+				var translationsCN = {
+				  HEADLINE: '开始',
+				  PREREGISTER: '预注册'
+				};
+				 
+				var translationsJP= {
+				  //HEADLINE: 'Was für ein großartiges Modul!',
+				  PREREGISTER: '予備登録'
 				};
 
-		this.$get = function() { 
-			return {}
-		}	
-	})
+				this.translateConfig = function(){
+					$translateProvider.translations('jp', translationsJP);
+					$translateProvider.translations('cn', translationsCN);
+						 // $translateProvider.useMessageFormatInterpolation();
+						 $translateProvider.preferredLanguage('jp');
+					//	 $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
+						 $translateProvider.fallbackLanguage(['jp', 'cn']);
+						 $translateProvider.useLocalStorage();
+						 $translateProvider.useMissingTranslationHandlerLog();
+						 $translateProvider.useSanitizeValueStrategy('escaped');
+						 return ;
+						};
 
-	//i18n
-	app.config(function(TranslationsProvider) {
-		TranslationsProvider.translateConfig();
-	})
+				this.$get = function() { 
+					return {}
+				}	
+			})
+
+			//i18n
+			app.config(function(TranslationsProvider) {
+				TranslationsProvider.translateConfig();
+			})
 
 });

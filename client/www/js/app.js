@@ -9,6 +9,7 @@ define([
     'purl',
     'restangular',
     'angular-messages',
+    'angular-translate',
     ], function(){
 
   var starter = angular.module('starter', [
