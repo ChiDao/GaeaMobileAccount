@@ -1,0 +1,23 @@
+/*
+	特定的設定
+*/
+
+#index {
+	.store {
+		padding: 16px 0;
+		.app-icon {
+			padding: 0;
+			margin: 0;
+			width: 177px;
+		}
+		.title {
+			b {
+				font-size: $f-big + 4;
+			}
+			p {
+				font-size: $f-small;
+				font-weight: 400;
+			}
+		}
+	}
+}
