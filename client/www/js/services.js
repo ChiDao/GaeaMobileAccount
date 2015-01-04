@@ -1,1 +1,1 @@
-angular.module('starter.services', ['services.LiveUpdate', 'services.Translation']);
+angular.module('starter.services', ['services.LiveUpdate']);

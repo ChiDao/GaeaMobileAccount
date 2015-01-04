@@ -4,11 +4,17 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-define(function(){
+define(['restangular'], function(){
 
-  var starter = angular.module('starter', ['ionic', 'starter.services', 'ngMessages', 'ngCookies'])
+  var starter = angular.module('starter', [
+    'ionic', 
+    'ngMessages', 
+    'ngCookies', 
+    'pascalprecht.translate',
+    'restangular'
+    ])
 
-  starter.run(function($ionicPlatform, $rootScope) {//, Auth, LiveUpdate, 
+  starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope) {
       console.log(10);
      
     $ionicPlatform.ready(function() {
@@ -51,40 +57,7 @@ define(function(){
     };
     })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
-  starter.config(function(RestangularProvider) {
-
-      RestangularProvider.setDefaultHeaders({
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-      });
-      RestangularProvider.setDefaultHttpFields({
-        withCredentials: true
-      });
-
-      RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
-      // RestangularProvider.setBaseUrl('http://localhost:8485');
-
-      // add a response intereceptor
-      RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-        var extractedData;      // .. to look for getList operations
-        if (operation === "getList") {
-          // .. and handle the data and meta data
-          extractedData = data.splices;
-          //extractedData.meta = data.data.meta;
-        } else {
-          extractedData = {'rawData': data};
-        }
-        return extractedData;
-      });
-
-  })
-
-  //i18n
-  starter.config(function(TranslationsProvider) {
-      TranslationsProvider.translateConfig();
-    })
-
-  starter.controller("MainCtrl", function($scope) {//, Auth
+  starter.controller("MainCtrl", function($scope, Auth) {
     $scope.requestAuth = function(url) {
       var parsedUrl = purl(url);  
       console.log(JSON.stringify(parsedUrl.param()));

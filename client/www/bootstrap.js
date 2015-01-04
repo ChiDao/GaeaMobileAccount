@@ -5,12 +5,13 @@ require.config({
         'lodash': 'lib/lodash/dist/lodash',
         'restangular': 'lib/restangular/dist/restangular',
         'app': 'js/app',
-        'routes': 'routes',
+        'routes': 'js/routes',
         'services.Auth': 'js/services.Auth',
         'services.Modal': 'js/services.Modal',
         'services.Push': 'js/services.Push',
         'services.RestRoute': 'js/services.RestRoute',
         'services.Translation': 'js/services.Translation',
+        'services.LiveUpdate': 'js/services.LiveUpdate',
 
         'controllers.StartCtrl': 'js/controllers.StartCtrl',
         'controllers.GamesCtrl': 'js/controllers.GamesCtrl',
@@ -37,7 +38,11 @@ require.config({
             exports: 'Restangular'
         },
 		'app': {
-			deps: ['cordova', 'purl', 'restangular']
+			deps: [
+                'cordova', 
+                'purl', 
+                'restangular'
+            ]
 		},
         'routes': {
             deps: [
@@ -52,9 +57,6 @@ require.config({
                 'services.Games'
             ]
         },
-        // 'services.LiveUpdate': {
-        //     deps: ['restangular']
-        // },
         // 'controllers': {
         //     deps: ['app']
         // },
@@ -73,9 +75,9 @@ require
         // 'services.Auth',
         // 'services.RestRoute',
         // 'services.Push',
-        // 'services.Translation',
+        'services.Translation',
+        'services.LiveUpdate',
         'routes',
-        // 'services.LiveUpdate',
         // 'controllers',
         // 'services',
     ],
