@@ -4,8 +4,11 @@ require.config({
         'purl': 'lib/purl/purl',
         'lodash': 'lib/lodash/dist/lodash',
         'restangular': 'lib/restangular/dist/restangular',
+        'angular-messages': 'lib/angular-messages/angular-messages',
+
         'app': 'js/app',
         'routes': 'js/routes',
+
         'services.Auth': 'js/services.Auth',
         'services.Modal': 'js/services.Modal',
         'services.Push': 'js/services.Push',
@@ -37,13 +40,6 @@ require.config({
             deps: ['lodash'],
             exports: 'Restangular'
         },
-		'app': {
-			deps: [
-                'cordova', 
-                'purl', 
-                'restangular'
-            ]
-		},
         'routes': {
             deps: [
                 'controllers.StartCtrl',
