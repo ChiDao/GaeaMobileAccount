@@ -24,10 +24,11 @@ define([
       console.log(10);
      
     $ionicPlatform.ready(function() {
+
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       // LiveUpdate.update();
-
+      navigator.splashscreen.hide();
       // 检查是否被调用
       console.log(localStorage.getItem('openUrl'));
       var openUrl = localStorage.getItem('openUrl');
