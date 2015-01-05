@@ -1,3 +1,4 @@
+@import url(/lib/animate.css/animate.css);
 /*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -7061,6 +7062,8 @@ a.button {
 */
 .bar {
   border: none !important;
+  background: none !important;
+  background-color: #4a4a4a !important;
   border-bottom: 1px solid #555555 !important; }
 
 .pane, .view {
@@ -7121,6 +7124,9 @@ p {
   padding: 4px 12px; }
 
 .segmented-control {
+  width: 100%;
+  margin-left: -20px;
+  width: calc(100% + (20px * 2));
   margin-bottom: 24px;
   color: #ff7e86; }
   .segmented-control .on {

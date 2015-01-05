@@ -121,6 +121,8 @@ $background-padding:		32px;
 
 .bar {
 	border: none !important;
+	background: none !important;
+	background-color: #4a4a4a !important;
 	border-bottom: 1px solid #555555 !important;
 }
 
@@ -188,6 +190,7 @@ p {
 }
 
 .segmented-control {
+	@include full-width("20px");
 	margin-bottom: $margin-bottom;
 	color: $height-color;
 	.on {
