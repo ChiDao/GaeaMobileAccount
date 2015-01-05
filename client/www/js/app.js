@@ -46,6 +46,9 @@ define([
         StatusBar.styleDefault();
       }
 
+      // Effect Loading
+
+
     });
   });
 
