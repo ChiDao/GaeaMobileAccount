@@ -2,6 +2,7 @@ define(['app', 'services.RestRoute'], function(app)
 {
 	app.controller('StartCtrl', function ($scope, RestRoute, Restangular) {
 		console.log('startCtrl');
+		$scope.show = true;
 		RestRoute.initController($scope);
 			$scope.jumpApiAttr('url');
 			Restangular.oneUrl('start', 'http://42.120.45.236:8485/start').get().then(function(data){

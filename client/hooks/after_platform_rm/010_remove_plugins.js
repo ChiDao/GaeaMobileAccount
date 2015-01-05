@@ -16,7 +16,8 @@ var pluginlist = [
     "org.apache.cordova.file",
     "org.apache.cordova.file-transfer",
     "org.chromium.zip",
-    "com.phonegap.plugins.PushPlugin"
+    "com.phonegap.plugins.PushPlugin",
+    "org.apache.cordova.statusbar"
 ];
 
 // no need to configure below
