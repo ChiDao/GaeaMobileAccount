@@ -2,19 +2,19 @@ ion-view#index(view-title='事先登錄')
 	ion-content.auto-size.color-w
 		div.game-bg
 			div.top.auto-height
-				img(src="img/data/soul-clash/logo.png")
+				img(src="img/data/soul-clash/logo.png",srcset="img/data/soul-clash/logo@2x.png 2x")
 			div.black
 				div.store
 					.row.row-center
 						.col.text-center
-							img(src="img/data/soul-clash/sotre.png")
-						.col
+							img(src="img/data/soul-clash/sotre.png",srcset="img/data/soul-clash/sotre@2x.png 2x")
+						.col.text-title
 							b Soul Clash
 							p Gaea Mobile
 						.col.text-right
 							button.mini-button 事先登錄
 				div.big-photo.margin-bottom
-					img.full-width(src="img/data/soul-clash/big-photo.png")
+					img.full-width(src="img/data/soul-clash/big-photo.png",srcset="img/data/soul-clash/big-photo@2x.png 2x")
 				div.row.text-center
 					div.col
 						div.icon
@@ -26,7 +26,7 @@ ion-view#index(view-title='事先登錄')
 							span.i-calendar.margin-0-auto
 							b 2015.1.15
 							p online
-				.div.row.text-center.segmented-control
+				.div.row.text-center.segmented-control.full-width
 					div.col.on
 						| 介紹
 					div.col
@@ -39,4 +39,4 @@ ion-view#index(view-title='事先登錄')
 					p 活動名稱：刀塔傳奇送祝福！分享簽名檔！領取400萬鑽石聖誕好禮！
 				hr
 				button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') 今・事前登録
-				button.button.a-button.button-block.nol-button.right-arrowsVv 査察官網
+				button.button.a-button.button-block.nol-button.right-arrows 査察官網

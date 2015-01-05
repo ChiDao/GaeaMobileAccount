@@ -1,22 +1,40 @@
 /*
-	auto size
-	自適應大小
+	var
+	變量
 */
 
-//
+// Color
 $height-color:				#ff7e86;
 
-// For iOS - @2x
+// 尺寸
 $background-width:			640px !default;
 $f-size:					13px;
 $f-small:					11px;
 $f-big:						16px;
-$margin-bottom:				50px;
+$margin-bottom:				24px;
+$margin-left:				16px;
 $background-padding:		32px;
 
 /*
 	mixin
 */
+
+@mixin at2x($path, $ext: "png", $w: auto, $h: auto) {
+  $at1x_path: "#{$path}.#{$ext}";
+  $at2x_path: "#{$path}@2x.#{$ext}";
+
+  background-image: url("#{$at1x_path}");
+  background-image: -webkit-image-set(
+  	url("#{$at1x_path}") 1x,
+  	url("#{$at2x_path}") 2x
+  );
+  background-image: image-set(
+  	url("#{$at1x_path}") 1x,
+  	url("#{$at2x_path}") 2x
+  );
+}
+
+
 
 @mixin t-indent {
 	text-indent: $f-size * 2 !important;
@@ -27,17 +45,10 @@ $background-padding:		32px;
 	line-height: $height;
 }
 
-/*
-    Legacy Firefox implementation treats all flex containers
-    as inline-block elements.
-*/
-
-@-moz-document url-prefix() {
-.flex-container {
-    width: 100%;
-    -moz-box-sizing: border-box;
-    }
-
+@mixin full-width ($mb) {
+	width: 100%;
+	margin-left: -#{$mb};
+	width: calc(100% + (#{$mb} * 2));
 }
 
 /*
@@ -76,14 +87,12 @@ $background-padding:		32px;
 	width: auto;
 }
 
-.color-w {
-	color: #fff;
+.full-width {
+	@include full-width($margin-left)
 }
 
-.full-width {
-	width: 100%;
-	margin-left: -32px;
-	width: calc(100% + 32px + 16px + 6px);
+.color-w {
+	color: #fff;
 }
 
 .text-right {
@@ -111,6 +120,7 @@ $background-padding:		32px;
 */
 
 .bar {
+	border: none !important;
 	border-bottom: 1px solid #555555 !important;
 }
 
@@ -121,16 +131,16 @@ $background-padding:		32px;
 .game-bg {
 	background-repeat: no-repeat;
 	background-size: 100%;
-	background-image: url("../img/data/soul-clash/background.png") !important;
-	height: 5000px;
+	@include at2x("../img/data/soul-clash/background",'png');
+	// background-image: url("../img/data/soul-clash/background.png") !important;
 }
 
 .top {
+	@include at2x("../img/data/soul-clash/top",'png');
 	padding: 0px 2%;
 	padding-top: 44px;
 	background-repeat: no-repeat;
 	background-position: top right;
-	background-image: url("../img/data/soul-clash/top.png") !important;
 	display: block;
 	width: 100%;
 	height: 150px;
@@ -142,8 +152,9 @@ $background-padding:		32px;
 	display: block;
 	background-repeat: no-repeat;
 	background-size: 100%;
-	background-image: url("../img/app/balck-layer.png") !important;
-	padding: 8px;
+	@include at2x("../img/app/balck-layer",'png');
+	// background-image: url("../img/app/balck-layer.png") !important;
+	padding: 0 $margin-left;
 	min-height: 100%;
 }
 
@@ -153,31 +164,39 @@ p {
 	font-weight: bold;
 }
 
+.text-title {
+	margin-left: 12px;
+	b {
+		font-weight: 800;
+	}
+	p {
+		font-weight: 400;
+	}
+}
+
 /*
 	控件
 */
 
 .mini-button {
-	border-width: 2px;
-	border-color: rgb(255, 255, 255);
-	border-style: solid;
-	border-radius: 8px;
+	border: none;
+	border-radius: 4px;
 	background-color: rgb(78, 78, 78);
 	font-size: $f-size;
 	color: #fff;
-	padding: 6px 18px;
+	padding: 4px 12px;
 }
 
 .segmented-control {
 	margin-bottom: $margin-bottom;
-	margin-left: -32px;
-	width: calc(100% + 32px + 16px + 6px);
+	color: $height-color;
 	.on {
-		background-color: #ff7e86;
+		background-color: $height-color;
+		color: #fff;
 	}
 	.col {
 		font-size: $f-size;
-		padding: 8px 0;
+		padding: 4px 0;
 		margin-left: -2px;
 		border: 2px solid #ff7e86;
 	}
@@ -186,18 +205,20 @@ p {
 .icon {
 	margin-bottom: $margin-bottom;
 	span {
-		height: 50px;
-		width: 50px;
+		height: 25px;
+		width: 25px;
 		display: block;
 		background-position: 50%;
 		background-repeat: no-repeat;
-		margin-bottom: 16px;
+		margin-bottom: 8px;
 	}
 	.i-user {
-		background-image: url("../img/app/icon-user.png") !important;
+		@include at2x("../img/app/icon-user",'png');
+		// background-image: url("../img/app/icon-user.png") !important;
 	}
 	.i-calendar {
-		background-image: url("../img/app/icon-calendar.png") !important;
+		@include at2x("../img/app/icon-calendar",'png');
+		// background-image: url("../img/app/icon-calendar.png") !important;
 	}
 	b {
 		font-size: $f-size;
@@ -232,11 +253,11 @@ hr {
 	font-size: $f-big;
 	color: #fff;
 	font-weight: bolder;
-	margin: 18px 0 !important;
+	margin: 8px 0 !important;
 }
 
 .main-button {
-	background-color: #ff7e86;
+	background-color: $height-color;
 	box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.36), inset 0px 1px 1px 0px rgba(255, 255, 255, 0.5);
 }
 
@@ -247,5 +268,6 @@ hr {
 .right-arrows {
 	background-repeat: no-repeat;
 	background-position: 97% 50%;
-	background-image: url("../img/app/right-arrows.png") !important;
+	@include at2x("../img/app/right-arrows",'png');
+	// background-image: url("../img/app/right-arrows.png") !important;
 }
