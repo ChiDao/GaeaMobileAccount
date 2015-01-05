@@ -7061,6 +7061,8 @@ a.button {
 */
 .bar {
   border: none !important;
+  background: none !important;
+  background-color: #4a4a4a !important;
   border-bottom: 1px solid #555555 !important; }
 
 .pane, .view {
@@ -7121,6 +7123,9 @@ p {
   padding: 4px 12px; }
 
 .segmented-control {
+  width: 100%;
+  margin-left: -22px;
+  width: calc(100% + (22px * 2));
   margin-bottom: 24px;
   color: #ff7e86; }
   .segmented-control .on {
