@@ -13,7 +13,12 @@
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
+<<<<<<< HEAD
   <preference name="StatusBarBackgroundColor" value="#FFFFFF" />
+=======
+  <preference name="SplashScreen" value="screen" />
+  <preference name="SplashScreenDelay" value="10000" />
+>>>>>>> FETCH_HEAD
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>

@@ -35,9 +35,5 @@ define(['app',
 				}	
 			})
 
-			//i18n
-			app.config(function(TranslationsProvider) {
-				TranslationsProvider.translateConfig();
-			})
 
 });

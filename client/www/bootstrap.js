@@ -12,7 +12,8 @@ require.config({
         'angular-translate-storage-local': 'lib/angular-translate-storage-local/angular-translate-storage-local',
 
         'app': 'js/app',
-        'routes': 'js/routes',
+        'routes': 'js/app.routes',
+        'config': 'js/app.config',
 
         'services.Auth': 'js/services.Auth',
         'services.Modal': 'js/services.Modal',
@@ -73,6 +74,7 @@ require
         'services.Translation',
         'services.LiveUpdate',
         'routes',
+        'config',
     ],
     function(app)
     {

@@ -1,7 +1,6 @@
 
 define(['app'], function(app){
 
-  console.log(11111);
   app.config(function($stateProvider, $urlRouterProvider) {
 
 

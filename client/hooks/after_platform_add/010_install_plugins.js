@@ -16,6 +16,7 @@ var pluginlist = [
     // "org.apache.cordova.file",
     // "org.apache.cordova.file-transfer",
     // "org.chromium.zip",
+    "org.apache.cordova.splashscreen",
     "https://github.com/phonegap-build/PushPlugin.git"
 ];
 
