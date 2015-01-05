@@ -7063,7 +7063,7 @@ a.button {
   padding: 0 32px; }
 
 .margin-bottom {
-  margin-bottom: 50px; }
+  margin-bottom: 24px; }
 
 /*
 	全局設定
@@ -7105,6 +7105,11 @@ p {
   line-height: 1.2;
   font-weight: bold; }
 
+.text-title b {
+  font-weight: 800; }
+.text-title p {
+  font-weight: 400; }
+
 /*
 	控件
 */
@@ -7112,33 +7117,33 @@ p {
   border-width: 2px;
   border-color: white;
   border-style: solid;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: #4e4e4e;
   font-size: 13px;
   color: #fff;
-  padding: 6px 18px; }
+  padding: 3px 12px; }
 
 .segmented-control {
-  margin-bottom: 50px;
-  margin-left: -32px;
-  width: calc(100% + 32px + 16px + 6px); }
+  margin-bottom: 24px;
+  margin-left: -10px;
+  width: calc(100% + 10px + 12px); }
   .segmented-control .on {
     background-color: #ff7e86; }
   .segmented-control .col {
     font-size: 13px;
-    padding: 8px 0;
+    padding: 4px 0;
     margin-left: -2px;
     border: 2px solid #ff7e86; }
 
 .icon {
-  margin-bottom: 50px; }
+  margin-bottom: 24px; }
   .icon span {
-    height: 50px;
-    width: 50px;
+    height: 25px;
+    width: 25px;
     display: block;
     background-position: 50%;
     background-repeat: no-repeat;
-    margin-bottom: 16px; }
+    margin-bottom: 8px; }
   .icon .i-user {
     background-image: url("../img/app/icon-user.png") !important; }
   .icon .i-calendar {
@@ -7172,7 +7177,7 @@ hr {
   font-size: 16px;
   color: #fff;
   font-weight: bolder;
-  margin: 18px 0 !important; }
+  margin: 8px 0 !important; }
 
 .main-button {
   background-color: #ff7e86;

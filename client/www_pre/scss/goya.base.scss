@@ -11,7 +11,7 @@ $background-width:			640px !default;
 $f-size:					13px;
 $f-small:					11px;
 $f-big:						16px;
-$margin-bottom:				50px;
+$margin-bottom:				24px;
 $background-padding:		32px;
 
 /*
@@ -153,6 +153,15 @@ p {
 	font-weight: bold;
 }
 
+.text-title {
+	b {
+		font-weight: 800;
+	}
+	p {
+		font-weight: 400;
+	}
+}
+
 /*
 	控件
 */
@@ -161,23 +170,23 @@ p {
 	border-width: 2px;
 	border-color: rgb(255, 255, 255);
 	border-style: solid;
-	border-radius: 8px;
+	border-radius: 4px;
 	background-color: rgb(78, 78, 78);
 	font-size: $f-size;
 	color: #fff;
-	padding: 6px 18px;
+	padding: 3px 12px;
 }
 
 .segmented-control {
 	margin-bottom: $margin-bottom;
-	margin-left: -32px;
-	width: calc(100% + 32px + 16px + 6px);
+	margin-left: -10px;
+	width: calc(100% + 10px + 12px ); //寬度 ＋ 左側縮進 ＋ 邊距 
 	.on {
 		background-color: #ff7e86;
 	}
 	.col {
 		font-size: $f-size;
-		padding: 8px 0;
+		padding: 4px 0;
 		margin-left: -2px;
 		border: 2px solid #ff7e86;
 	}
@@ -186,12 +195,12 @@ p {
 .icon {
 	margin-bottom: $margin-bottom;
 	span {
-		height: 50px;
-		width: 50px;
+		height: 25px;
+		width: 25px;
 		display: block;
 		background-position: 50%;
 		background-repeat: no-repeat;
-		margin-bottom: 16px;
+		margin-bottom: 8px;
 	}
 	.i-user {
 		background-image: url("../img/app/icon-user.png") !important;
@@ -232,7 +241,7 @@ hr {
 	font-size: $f-big;
 	color: #fff;
 	font-weight: bolder;
-	margin: 18px 0 !important;
+	margin: 8px 0 !important;
 }
 
 .main-button {
