@@ -7000,21 +7000,12 @@ a.button {
   transition-duration: 0s; }
 
 /*
-	auto size
-	自適應大小
+	var
+	變量
 */
 /*
 	mixin
 */
-/*
-    Legacy Firefox implementation treats all flex containers
-    as inline-block elements.
-*/
-@-moz-document url-prefix() {
-  .flex-container {
-    width: 100%;
-    -moz-box-sizing: border-box; } }
-
 /*
 	組件
 */
@@ -7042,13 +7033,13 @@ a.button {
 .auto-width {
   width: auto; }
 
-.color-w {
-  color: #fff; }
-
 .full-width {
   width: 100%;
-  margin-left: -32px;
-  width: calc(100% + 32px + 16px + 6px); }
+  margin-left: -16px;
+  width: calc(100% + (16px * 2)); }
+
+.color-w {
+  color: #fff; }
 
 .text-right {
   text-align: right; }
@@ -7069,6 +7060,7 @@ a.button {
 	全局設定
 */
 .bar {
+  border: none !important;
   border-bottom: 1px solid #555555 !important; }
 
 .pane, .view {
@@ -7077,15 +7069,18 @@ a.button {
 .game-bg {
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("../img/data/soul-clash/background.png") !important;
-  height: 5000px; }
+  background-image: url("../img/data/soul-clash/background.png");
+  background-image: -webkit-image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x);
+  background-image: image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x); }
 
 .top {
+  background-image: url("../img/data/soul-clash/top.png");
+  background-image: -webkit-image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x);
+  background-image: image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x);
   padding: 0px 2%;
   padding-top: 44px;
   background-repeat: no-repeat;
   background-position: top right;
-  background-image: url("../img/data/soul-clash/top.png") !important;
   display: block;
   width: 100%;
   height: 150px;
@@ -7096,8 +7091,10 @@ a.button {
   display: block;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("../img/app/balck-layer.png") !important;
-  padding: 8px;
+  background-image: url("../img/app/balck-layer.png");
+  background-image: -webkit-image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x);
+  background-image: image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x);
+  padding: 0 16px;
   min-height: 100%; }
 
 p {
@@ -7105,30 +7102,30 @@ p {
   line-height: 1.2;
   font-weight: bold; }
 
-.text-title b {
-  font-weight: 800; }
-.text-title p {
-  font-weight: 400; }
+.text-title {
+  margin-left: 12px; }
+  .text-title b {
+    font-weight: 800; }
+  .text-title p {
+    font-weight: 400; }
 
 /*
 	控件
 */
 .mini-button {
-  border-width: 2px;
-  border-color: white;
-  border-style: solid;
+  border: none;
   border-radius: 4px;
   background-color: #4e4e4e;
   font-size: 13px;
   color: #fff;
-  padding: 3px 12px; }
+  padding: 4px 12px; }
 
 .segmented-control {
   margin-bottom: 24px;
-  margin-left: -10px;
-  width: calc(100% + 10px + 12px); }
+  color: #ff7e86; }
   .segmented-control .on {
-    background-color: #ff7e86; }
+    background-color: #ff7e86;
+    color: #fff; }
   .segmented-control .col {
     font-size: 13px;
     padding: 4px 0;
@@ -7145,9 +7142,13 @@ p {
     background-repeat: no-repeat;
     margin-bottom: 8px; }
   .icon .i-user {
-    background-image: url("../img/app/icon-user.png") !important; }
+    background-image: url("../img/app/icon-user.png");
+    background-image: -webkit-image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x);
+    background-image: image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x); }
   .icon .i-calendar {
-    background-image: url("../img/app/icon-calendar.png") !important; }
+    background-image: url("../img/app/icon-calendar.png");
+    background-image: -webkit-image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x);
+    background-image: image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x); }
   .icon b {
     font-size: 13px;
     font-weight: bolder; }
@@ -7189,7 +7190,9 @@ hr {
 .right-arrows {
   background-repeat: no-repeat;
   background-position: 97% 50%;
-  background-image: url("../img/app/right-arrows.png") !important; }
+  background-image: url("../img/app/right-arrows.png");
+  background-image: -webkit-image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x);
+  background-image: image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x); }
 
 /*
 	特定的設定

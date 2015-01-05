@@ -1,7 +1,11 @@
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+// Var
 @import "www_pre/scss/_variables.scss";
+
+// Libs
 @import "www/lib/ionic/scss/ionic";
 
+//
 @import "www_pre/scss/goya.base.scss";
 @import "www_pre/scss/goya.app.scss";
