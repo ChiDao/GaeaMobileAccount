@@ -1,3 +1,12 @@
+#前提条件
+
+```bash
+install cordova-icon -g
+install cordova-splash -g
+brew install ImageMagick
+```
+
+
 ##项目编译
 
 ###增加平台，注意ios平台需指定版本，否则url schema的处理不正常
@@ -10,37 +19,13 @@ cordova platforms add ios@3.6.3 android
  
 ```bash
 cordova plugins add org.apache.cordova.file
-```
-
-```bash
 cordova plugins add org.apache.cordova.file-transfer
-```
-
-```bash
 cordova plugins add org.chromium.zip
-```
-
-```bash
 cordova plugins add org.apache.cordova.statusbar
-```
-
-```bash
 cordova plugins add org.apache.cordova.device
-```
-
-```bash
 cordova plugins add org.apache.cordova.console
-```
-
-```bash
 cordova plugins add org.apache.cordova.inappbrowser
-```
-
-```bash
 cordova plugins add com.ionic.keyboard
-```
-
-```bash
 cordova plugins add https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=GaeaGo
 ```
 
@@ -70,15 +55,4 @@ ionic serve
  3. step2: modal-login.jade
  4. step3: modal-allow-notification.jade
  5. 游戏页面: game.jade
-
-## icon与splashscreen的设置
-
-```bash
-$ sudo npm install cordova-icon -g
-$ sudo npm install cordova-splash -g
-```
-### Requirements
-
- 1. ImageMagick 
- 2. icon.png / splash.png file must be in the root folder of the project
 
