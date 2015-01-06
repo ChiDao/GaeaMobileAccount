@@ -11,7 +11,7 @@ ion-side-menus(enable-menu-with-back-views='false')
     ion-content
       ion-list
         ion-item(nav-clear='', menu-close='', href='#/app/start')
-          | Search
+          | Start
         ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
           | Login
         ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
