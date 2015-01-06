@@ -100,6 +100,32 @@ define(['app'], function(app){
       }
     })
 
+    // about >>>
+    .state('app.a-terms', {
+      url: "/a-terms",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/a-terms.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+    .state('app.a-privacy', {
+      url: "/a-privacy",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/a-privacy.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+    // <<< about end
+
     .state('app.modal-allow-notification', {
       url: "/modal-allow-notification",
       views: {

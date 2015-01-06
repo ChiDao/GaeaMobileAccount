@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 define([
     'cordova',
-    'purl',
+    // 'purl',
     'restangular',
     'angular-messages',
     'angular-translate',
