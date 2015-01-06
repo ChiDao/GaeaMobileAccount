@@ -7175,9 +7175,9 @@ p {
   border: none;
   color: #fff; }
 
-.item {
+.list .item {
   background: none; }
-  .item a {
+  .list .item a {
     color: #fff;
     text-decoration: none; }
 
@@ -7306,6 +7306,10 @@ hr {
 /*
 	特定的設定
 */
+.item-content {
+  background: none !important;
+  border-bottom: 1px solid #555555 !important; }
+
 .store {
   padding: 16px 0; }
   .store .app-icon {
