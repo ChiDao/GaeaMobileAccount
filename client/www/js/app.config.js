@@ -18,23 +18,26 @@ define(['app', 'restangular'], function(app){
       // add a response intereceptor
       RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
         var extractedData;      // .. to look for getList operations
+        console.log('data:' + JSON.stringify(data));
+        console.log('response:' +JSON.stringify(response));
+        console.log('response.data:' +JSON.stringify(response.data));
         if (operation === "getList") {
           // .. and handle the data and meta data
           extractedData = data.splices;
           //extractedData.meta = data.data.meta;
         } else {
-          extractedData = {'rawData': data};
+          extractedData = data;
         }
         return extractedData;
       });
 
-      
+
       RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
         if (response.headers('my-xsrf-header')){
           localStorage.setItem('my-xsrf-header', response.headers('my-xsrf-header'));
         }
+        return {rawData: data};
       });
-
 
       RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig ) {
         if(localStorage.getItem('my-xsrf-header')){

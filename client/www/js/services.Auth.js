@@ -60,8 +60,8 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             currentUser.userName = preRegistModalScope.formData.email;
             currentUser.role = userRoles.user;
             //存储用户信息到localStorage
-            localStorage.setItem('user', JSON.stringify(me.rawData));
-            console.log(me.rawData);
+            localStorage.setItem('user', JSON.stringify(me.data.rawData));
+            console.log(me.data.rawData);
             if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
             $timeout(function() {
               preRegistModalScope.closeModal();
@@ -192,8 +192,8 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           var confirmSso = function(){
             Restangular.oneUrl('user-client-authorize/' + ssoData.appId + '/' + ssoData.url).get().then(function(data){
               console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
-              ssoModalScope.gameClientTitle = data.rawData.description;
-              ssoModalScope.authCode = data.rawData.code;
+              ssoModalScope.gameClientTitle = data.data.rawData.description;
+              ssoModalScope.authCode = data.data.rawData.code;
               ssoAuthModal();
             }, function(error){
               ssoCallBack('-3', 'sso fail');
