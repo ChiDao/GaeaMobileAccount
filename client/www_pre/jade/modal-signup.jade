@@ -1,16 +1,37 @@
-ion-modal-view
-  ion-header-bar
-    h1.title 输入Email
+ion-modal-view.Pages
+  ion-header-bar.bar
+    .title.color-w 郵件地址
     .buttons
-      button.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') Close
-  ion-content
-    form(name='signUpForm', novalidate="", ng-submit='commitForm(signUpForm)')
-      .list
-        label.item.item-input(ng-class="{'has-error': signUpForm.email.$invalid}")
-          span.input-label Email
-          input(name='email', type='email', ng-model='formData.email', required)
-        div.form-errors(ng-messages='signUpForm.email.$error', ng-messages-include='templates/form-errors.html')
-          div.form-error(ng-message='email') This field is must be a email address
-        label.item
-          button.button.button-block.button-positive(type='submit') 下一步
+      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') 关闭
+  form(name='signUpForm', novalidate="", ng-submit='commitForm(signUpForm)')
+    ion-content.color-w.dark
+      .game-bg.screenHeight
+        div.top
+          img(src="img/data/soul-clash/logo.png",srcset="img/data/soul-clash/logo@2x.png 2x")
+        .black
+          .row
+            .col
+              .input(ng-class="{'has-error': signUpForm.email.$invalid}")
+                input.right-arrows(name='email', type='email', placeholder="貴方的電子郵件地址", ng-model='formData.email', required)
+              hr
+              div(ng-messages='signUpForm.email.$error', ng-messages-include='templates/form-errors.html')
+                p.message(ng-message='email') 郵件格式?
+    .page-footer.page-padding
+        .row
+          .col
+            button#buttonOk.a-button.button.main-button.right-arrows(type='submit') 下一步
+      
+      
+
+
+
+      //- form(name='signUpForm', novalidate="", ng-submit='commitForm(signUpForm)')
+      //-   .list
+      //-     label.item.item-input(ng-class="{'has-error': signUpForm.email.$invalid}")
+      //-       span.input-label Email
+      //-       input(name='email', type='email', ng-model='formData.email', required)
+      //-     div.form-errors(ng-messages='signUpForm.email.$error', ng-messages-include='templates/form-errors.html')
+      //-       div.form-error(ng-message='email') This field is must be a email address
+      //-     label.item
+      //-       button.button.button-block.button-positive(type='submit') 下一步
 

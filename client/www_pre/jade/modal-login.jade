@@ -1,19 +1,49 @@
-ion-modal-view
-  ion-header-bar
-    h1.title Login
+ion-modal-view.Pages.pass-code
+  ion-header-bar.bar
+    .title.color-w 驗證碼
     .buttons
-      button.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') Close
-  ion-content
-    form(name='loginForm', novalidate="", ng-submit='commitForm(loginForm)')
-      .list
-        label.item.item-input(ng-class="{'has-error': loginForm.password.$invalid}")
-          span.input-label Password
-          input(name='password', type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
-        div.form-errors(ng-messages='loginForm.password.$error', ng-messages-include='templates/form-errors.html')
-          div.form-error(ng-message='number') 4 digit number
-          div.form-error(ng-message='minlength') 4 digit
-          div.form-error(ng-message='maxlength') 4 digit
-          div.form-error(ng-if="commitFormError") {{commitFormErrorMsg}}
-        label.item
-          button.button.button-block.button-positive(type='submit') 登陆
+      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') 关闭
+  form(name='signUpForm', novalidate="", ng-submit='commitForm(loginForm)')
+    ion-content.color-w.dark
+      .game-bg.screenHeight
+        div.top
+          img(src="img/data/soul-clash/logo.png",srcset="img/data/soul-clash/logo@2x.png 2x")
+        .black
+          .row.no-padding
+            .col.no-padding
+
+              .input(ng-class="{'has-error': loginForm.password.$invalid}")
+                input(name='password',placeholder="驗證碼" type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
+                //- .timer 
+                //-   input.number(type="tel", placeholder="")
+                //-   input.number(type="tel", placeholder="")
+                //-   input.number(type="tel", placeholder="")
+                //-   input.number(type="tel", placeholder="")
+              p.text-center 請輸入郵件收到的驗證碼
+    //- .hide
+        
+    .page-footer.page-padding
+        .row
+          .col
+            button#buttonOk.a-button.button.main-button.right-arrows(type='submit') 下一步
+      
+
+//- ion-modal-view.Pages
+//-   ion-header-bar.bar
+//-     h1.title Login
+//-     .buttons
+//-       button.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') Close
+//-   ion-content
+//-     form(name='loginForm', novalidate="", ng-submit='commitForm(loginForm)')
+//-       .list
+//-         label.item.item-input(ng-class="{'has-error': loginForm.password.$invalid}")
+//-           span.input-label Password
+//-           input(name='password', type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
+//-         div.form-errors(ng-messages='loginForm.password.$error', ng-messages-include='templates/form-errors.html')
+//-           div.form-error(ng-message='number') 4 digit number
+//-           div.form-error(ng-message='minlength') 4 digit
+//-           div.form-error(ng-message='maxlength') 4 digit
+//-           div.form-error(ng-if="commitFormError") {{commitFormErrorMsg}}
+//-         label.item
+//-           button.button.button-block.button-positive(type='submit') 登陆
 

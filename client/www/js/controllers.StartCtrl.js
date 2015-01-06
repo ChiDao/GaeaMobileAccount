@@ -1,7 +1,8 @@
 define(['app', 'services.RestRoute'], function(app)
 {
-	app.controller('StartCtrl', function ($scope, RestRoute, Restangular) {
+	app.controller('StartCtrl', function ($scope, RestRoute, Restangular, Auth) {
 		console.log('startCtrl');
+
 		RestRoute.initController($scope);
 			$scope.jumpApiAttr('url');
 			Restangular.oneUrl('start', 'http://42.120.45.236:8485/start').get().then(function(data){
@@ -11,5 +12,8 @@ define(['app', 'services.RestRoute'], function(app)
 			function(error){
 			console.log("Restangular error:" + JSON.stringify(error));
 		})
+
+		// Auth.login();
+
 	});
 });

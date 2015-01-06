@@ -5,6 +5,7 @@
 
 // Color
 $height-color:				#ff7e86;
+$sec-height-color:			#4da3ff;
 
 // 尺寸
 $background-width:			640px !default;
@@ -13,8 +14,15 @@ $f-small:					11px;
 $f-big:						16px;
 $margin-bottom:				24px;
 $margin-left:				16px;
-$background-padding:		32px;
+$background-padding:		16px;
 
+
+// 
+/* webkit专用 */
+input::-webkit-input-placeholder {
+	opacity: 0.4;
+	font-size: $f-big;
+}
 /*
 	mixin
 */
@@ -49,6 +57,16 @@ $background-padding:		32px;
 	width: 100%;
 	margin-left: -#{$mb};
 	width: calc(100% + (#{$mb} * 2));
+}
+
+@mixin right-arrows () {
+	background-repeat: no-repeat;
+	background-position: 97% 50%;
+	@include at2x("../img/app/right-arrows",'png');
+}
+
+@mixin page-padding() {
+	padding: 0 $margin-left;
 }
 
 /*
@@ -115,6 +133,62 @@ $background-padding:		32px;
 	margin-bottom: $margin-bottom;
 }
 
+.h2000 {
+	height: 2000px;
+}
+
+.w26 {
+	width: 26px;
+}
+
+.h100 {
+	height: 100%;
+}
+
+.color-bule {
+	color: $sec-height-color !important;
+}
+
+.color-pink {
+	color: $height-color;
+}
+
+.screen-h100 {
+
+}
+
+.screen-bottom {
+	
+}
+
+.page-padding {
+	@include page-padding();
+}
+
+.block-empty {
+	display: block;
+	height: 1em;
+	width: 100%;
+}
+
+.margin-top {
+	margin-top: 40px;
+}
+
+.margin-bottom {
+	margin-bottom: 40px;
+}
+
+.no-padding {
+	padding: 0 !important;
+}
+
+.no-margin {
+	margin: 0 !important;
+}
+
+
+
 /*
 	全局設定
 */
@@ -126,7 +200,22 @@ $background-padding:		32px;
 	border-bottom: 1px solid #555555 !important;
 }
 
-.pane, .view {
+.page-footer {
+	display: flex;
+	flex-wrap: wrap;
+	position: absolute;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: none;
+	background: transparent;
+	.button {
+		margin-bottom: 30px !important;
+	}
+}
+
+.pane, .view, .dark {
 	background-color: #343434 !important;
 }
 
@@ -156,18 +245,23 @@ $background-padding:		32px;
 	background-size: 100%;
 	@include at2x("../img/app/balck-layer",'png');
 	// background-image: url("../img/app/balck-layer.png") !important;
-	padding: 0 $margin-left;
-	min-height: 100%;
+	min-height: 380px;
+	@include page-padding();
+}
+
+article {
+	h1 {
+		line-height: 1.4;
+	}
 }
 
 p {
 	font-size: $f-size;
-	line-height: 1.2;
+	line-height: 1.4;
 	font-weight: bold;
 }
 
 .text-title {
-	margin-left: 12px;
 	b {
 		font-weight: 800;
 	}
@@ -179,6 +273,10 @@ p {
 /*
 	控件
 */
+
+.message {
+
+}
 
 .mini-button {
 	border: none;
@@ -223,6 +321,18 @@ p {
 		@include at2x("../img/app/icon-calendar",'png');
 		// background-image: url("../img/app/icon-calendar.png") !important;
 	}
+	.i-warning {
+		@include at2x("../img/app/icon-warning",'png');
+	}
+	.i-flag {
+		@include at2x("../img/app/icon-flag");
+	}
+	.i-document {
+		@include at2x("../img/app/icon-document");
+	}
+	.i-media {
+		@include at2x("../img/app/icon-media");
+	}
 	b {
 		font-size: $f-size;
 		font-weight: bolder;
@@ -233,6 +343,26 @@ p {
 	}
 }
 
+input {
+	font-size: $f-big !important;
+	background: none;
+	color: #fff !important;
+	font-weight: bolder !important;
+}
+
+input.number {
+	display: block;
+	box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.48), inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24);
+	background-color: rgb(38, 38, 38);
+	width: 72px;
+	height: 88px;
+	margin-right: 5px;
+	text-align: center;
+	font-size: 42px;
+	line-height: 88px;
+	font-weight: 500;
+}
+
 hr {
 	background: none;
 	border: none;
@@ -240,23 +370,27 @@ hr {
 	display: block;
 	width: 100%;
 	background-color: #000;
-	border-bottom: 1px solid #525252;
+	// border-bottom: 1px solid #325357;
+	box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15);
 	margin-left: -32px;
-	padding: 0 32px;
-	margin-bottom: 46px;
+	padding: 0 32px; 
+	margin-top: 10px;
+	margin-bottom: 16px;
 }
 
 .a-button {
 	background: none;
 	border: none;
 	border-radius: 4px;
-	width: 100%;
+	width: 100% !important;
 	text-align: left;
-	padding: 2px 8px;
-	font-size: $f-big;
+	padding: 0px 8px !important;
+	font-size:  $f-big !important;
 	color: #fff;
-	font-weight: bolder;
+	font-weight: bolder !important;
 	margin: 8px 0 !important;
+	min-height: 36px;
+	line-height: 36px;
 }
 
 .main-button {
@@ -269,8 +403,5 @@ hr {
 }
 
 .right-arrows {
-	background-repeat: no-repeat;
-	background-position: 97% 50%;
-	@include at2x("../img/app/right-arrows",'png');
-	// background-image: url("../img/app/right-arrows.png") !important;
+	@include right-arrows();
 }

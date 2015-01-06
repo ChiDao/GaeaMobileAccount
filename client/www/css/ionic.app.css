@@ -7003,6 +7003,11 @@ a.button {
 	var
 	變量
 */
+/* webkit专用 */
+input::-webkit-input-placeholder {
+  opacity: 0.4;
+  font-size: 16px; }
+
 /*
 	mixin
 */
@@ -7051,10 +7056,45 @@ a.button {
   margin: 0 auto; }
 
 .background-padding {
-  padding: 0 32px; }
+  padding: 0 16px; }
 
 .margin-bottom {
   margin-bottom: 24px; }
+
+.h2000 {
+  height: 2000px; }
+
+.w26 {
+  width: 26px; }
+
+.h100 {
+  height: 100%; }
+
+.color-bule {
+  color: #4da3ff !important; }
+
+.color-pink {
+  color: #ff7e86; }
+
+.page-padding {
+  padding: 0 16px; }
+
+.block-empty {
+  display: block;
+  height: 1em;
+  width: 100%; }
+
+.margin-top {
+  margin-top: 40px; }
+
+.margin-bottom {
+  margin-bottom: 40px; }
+
+.no-padding {
+  padding: 0 !important; }
+
+.no-margin {
+  margin: 0 !important; }
 
 /*
 	全局設定
@@ -7065,7 +7105,20 @@ a.button {
   background-color: #4a4a4a !important;
   border-bottom: 1px solid #555555 !important; }
 
-.pane, .view {
+.page-footer {
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: none;
+  background: transparent; }
+  .page-footer .button {
+    margin-bottom: 30px !important; }
+
+.pane, .view, .dark {
   background-color: #343434 !important; }
 
 .game-bg {
@@ -7096,20 +7149,21 @@ a.button {
   background-image: url("../img/app/balck-layer.png");
   background-image: -webkit-image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x);
   background-image: image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x);
-  padding: 0 16px;
-  min-height: 100%; }
+  min-height: 380px;
+  padding: 0 16px; }
+
+article h1 {
+  line-height: 1.4; }
 
 p {
   font-size: 13px;
-  line-height: 1.2;
+  line-height: 1.4;
   font-weight: bold; }
 
-.text-title {
-  margin-left: 12px; }
-  .text-title b {
-    font-weight: 800; }
-  .text-title p {
-    font-weight: 400; }
+.text-title b {
+  font-weight: 800; }
+.text-title p {
+  font-weight: 400; }
 
 /*
 	控件
@@ -7154,12 +7208,46 @@ p {
     background-image: url("../img/app/icon-calendar.png");
     background-image: -webkit-image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x);
     background-image: image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x); }
+  .icon .i-warning {
+    background-image: url("../img/app/icon-warning.png");
+    background-image: -webkit-image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x);
+    background-image: image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x); }
+  .icon .i-flag {
+    background-image: url("../img/app/icon-flag.png");
+    background-image: -webkit-image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x);
+    background-image: image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x); }
+  .icon .i-document {
+    background-image: url("../img/app/icon-document.png");
+    background-image: -webkit-image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x);
+    background-image: image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x); }
+  .icon .i-media {
+    background-image: url("../img/app/icon-media.png");
+    background-image: -webkit-image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x);
+    background-image: image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x); }
   .icon b {
     font-size: 13px;
     font-weight: bolder; }
   .icon p {
     font-size: 11px;
     font-weight: 200; }
+
+input {
+  font-size: 16px !important;
+  background: none;
+  color: #fff !important;
+  font-weight: bolder !important; }
+
+input.number {
+  display: block;
+  box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.48), inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24);
+  background-color: #262626;
+  width: 72px;
+  height: 88px;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 42px;
+  line-height: 88px;
+  font-weight: 500; }
 
 hr {
   background: none;
@@ -7168,22 +7256,25 @@ hr {
   display: block;
   width: 100%;
   background-color: #000;
-  border-bottom: 1px solid #525252;
+  box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15);
   margin-left: -32px;
   padding: 0 32px;
-  margin-bottom: 46px; }
+  margin-top: 10px;
+  margin-bottom: 16px; }
 
 .a-button {
   background: none;
   border: none;
   border-radius: 4px;
-  width: 100%;
+  width: 100% !important;
   text-align: left;
-  padding: 2px 8px;
-  font-size: 16px;
+  padding: 0px 8px !important;
+  font-size: 16px !important;
   color: #fff;
-  font-weight: bolder;
-  margin: 8px 0 !important; }
+  font-weight: bolder !important;
+  margin: 8px 0 !important;
+  min-height: 36px;
+  line-height: 36px; }
 
 .main-button {
   background-color: #ff7e86;
@@ -7202,14 +7293,71 @@ hr {
 /*
 	特定的設定
 */
-#index .store {
+.store {
   padding: 16px 0; }
-  #index .store .app-icon {
+  .store .app-icon {
     padding: 0;
     margin: 0;
     width: 177px; }
-  #index .store .title b {
+  .store .text-title {
+    margin-left: 12px;
+    margin-top: -36px; }
+  .store .title b {
     font-size: 18px; }
-  #index .store .title p {
+  .store .title p {
     font-size: 11px;
     font-weight: 200; }
+  .store .watting {
+    background-color: #ff7e86; }
+
+.article-list .unit {
+  margin-bottom: 2.2em; }
+.article-list .unit-p {
+  padding: 0 !important;
+  padding-right: 28px !important;
+  padding-left: 8px !important; }
+.article-list .icon span {
+  margin: 0 !important; }
+.article-list p {
+  margin: 0 !important; }
+
+article {
+  padding-top: 1em; }
+  article h1 {
+    font-size: 16px !important;
+    color: #fff !important; }
+
+.text-body {
+  text-align: justify; }
+
+.timer {
+  text-align: center; }
+  .timer .number {
+    display: inline-block; }
+  .timer span {
+    display: block;
+    box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.48), inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24);
+    background-color: #262626;
+    width: 72px;
+    height: 88px;
+    margin-right: 5px;
+    text-align: center;
+    font-size: 42px;
+    line-height: 88px;
+    font-weight: 500; }
+  .timer p {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 400; }
+
+.pass-code p {
+  margin-top: 8px; }
+
+.Pages .timer {
+  margin-left: -8px;
+  margin-right: -12px;
+  margin-top: 24px; }
+
+#AllowNoti .note {
+  padding-top: 38px;
+  margin-bottom: 30px; }

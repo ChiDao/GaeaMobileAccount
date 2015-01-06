@@ -1,4 +1,4 @@
-ion-side-menus(enable-menu-with-back-views='false')
+ion-side-menus#Menu(enable-menu-with-back-views='false')
   ion-side-menu-content
     ion-nav-bar.bar-stable
       ion-nav-back-button
@@ -7,19 +7,33 @@ ion-side-menus(enable-menu-with-back-views='false')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
     ion-header-bar.bar-stable
-      h1.title Left
+      h1.title GOYA
     ion-content
       ion-list
-        ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
-          | Login
-        ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
-          | {{Auth.currentUser().userName}}
-        ion-item(nav-clear='', menu-close='', href='#/app/search')
-          | Search
-        ion-item(nav-clear='', menu-close='', href='#/app/browse')
-          | Browse
-        ion-item(nav-clear='', menu-close='', href='#/app/playlists')
-          | Playlists
-        ion-item(nav-clear='', menu-close='', ng-click='Auth.ssoAuth({appId:"ga14a66eaac9ae6457", url: "wb1121741102" })')
-          | SSO
+        ion-item(nav-clear='', menu-close='', href='#/app/start')
+          | 預註冊
+        ion-item(nav-clear='', menu-close='', href='#/app/all-done')
+          | 註冊完成后
+        ion-item(nav-clear='', menu-close='', href='#/app/about')
+          | 关于 GOYA
+        ion-item(nav-clear='', menu-close='', href='#/app/modal-allow-notification')
+          | modal-allow-notification
+        ion-item(nav-clear='', menu-close='', href='#/app/article')
+          | article.jade
+
+
+        //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
+        //-   | Login
+        //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
+        //-   | {{Auth.currentUser().userName}}
+        //- ion-item(nav-clear='', menu-close='', href='#/app/search')
+        //-   | Search
+        //- ion-item(nav-clear='', menu-close='', href='#/app/browse')
+        //-   | Browse
+        //- ion-item(nav-clear='', menu-close='', href='#/app/playlists')
+        //-   | Playlists
+        //- ion-item(nav-clear='', menu-close='', href='#/app/about')
+        //-   | 关于 GOYA
+        //- ion-item(nav-clear='', menu-close='', ng-click='Auth.ssoAuth({appId:"ga14a66eaac9ae6457", url: "wb1121741102" })')
+        //-   | SSO
 

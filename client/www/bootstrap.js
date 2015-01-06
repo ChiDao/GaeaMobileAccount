@@ -31,6 +31,7 @@ require.config({
         'controllers.UserInfoCtrl': 'js/controllers.UserInfoCtrl',
         'controllers.AppCtrl': 'js/controllers.AppCtrl',
         'services.Games': 'js/services.Games',
+        'services.UI': 'js/services.UI',
     },
 	shim: {
 		'corodva': {
@@ -75,6 +76,7 @@ require
         'services.LiveUpdate',
         'routes',
         'config',
+        'services.UI',
     ],
     function(app)
     {

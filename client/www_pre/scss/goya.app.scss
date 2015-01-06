@@ -2,22 +2,104 @@
 	特定的設定
 */
 
-#index {
-	.store {
-		padding: 16px 0;
-		.app-icon {
-			padding: 0;
-			margin: 0;
-			width: 177px;
+
+.store {
+	padding: 16px 0;
+	.app-icon {
+		padding: 0;
+		margin: 0;
+		width: 177px;
+	}
+	.text-title {
+		margin-left: 12px;
+		margin-top: -36px;
+	}
+	.title {
+		b {
+			font-size: $f-big + 2;
 		}
-		.title {
-			b {
-				font-size: $f-big + 2;
-			}
-			p {
-				font-size: $f-small;
-				font-weight: 200;
-			}
+		p {
+			font-size: $f-small;
+			font-weight: 200;
 		}
+	}
+	.watting {
+		background-color: $height-color;
+	}
+}
+
+.article-list {
+	.unit {
+		margin-bottom: 2.2em;
+	}
+	.unit-p {
+		padding: 0 !important;
+		padding-right: 28px !important;
+		padding-left: 8px !important;
+	}
+	.icon {
+		span {
+			margin: 0 !important;
+		}
+	}
+	p {
+		margin: 0 !important;
+	}
+}
+
+article {
+	padding-top: 1em;
+	h1 {
+		font-size: $f-big !important;
+		color: #fff !important;
+	}
+}
+
+.text-body {
+	text-align: justify;
+}
+
+.timer {
+	text-align: center;
+	.number {
+		display: inline-block;
+	}
+	span {
+		display: block;
+		box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.48), inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24);
+		background-color: rgb(38, 38, 38);
+		width: 72px;
+		height: 88px;
+		margin-right: 5px;
+		text-align: center;
+		font-size: 42px;
+		line-height: 88px;
+		font-weight: 500;
+	}
+	p {
+		margin-top: 8px;
+		font-size: 12px;
+		font-weight: 400;
+	}
+}
+
+.pass-code {
+	p {
+		margin-top: 8px;
+	}
+}
+
+.Pages {
+	.timer {
+		margin-left: -8px;
+		margin-right: -12px;
+		margin-top: 24px;
+	}
+}
+
+#AllowNoti {
+	.note {
+		padding-top: 38px;
+		margin-bottom: 30px;
 	}
 }
