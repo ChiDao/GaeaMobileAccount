@@ -4,6 +4,7 @@
 install cordova-icon -g
 install cordova-splash -g
 brew install ImageMagick
+npm install
 ```
 
 
@@ -15,19 +16,15 @@ brew install ImageMagick
 cordova platforms add ios@3.6.3 android
 ```
 
-###增加插件，因对安装顺序有要求，暂时停用hook进行安装，使用一下命令行
- 
+###打开项目并运行
+
+####ios，用xcode打开项目并编译执行
+
 ```bash
-cordova plugins add org.apache.cordova.file
-cordova plugins add org.apache.cordova.file-transfer
-cordova plugins add org.chromium.zip
-cordova plugins add org.apache.cordova.statusbar
-cordova plugins add org.apache.cordova.device
-cordova plugins add org.apache.cordova.console
-cordova plugins add org.apache.cordova.inappbrowser
-cordova plugins add com.ionic.keyboard
-cordova plugins add https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=GaeaGo
+xed platforms/ios/client.xcodeproj/
 ```
+
+####android，用ADT打开项目并编译执行
 
 ##页面开发
 

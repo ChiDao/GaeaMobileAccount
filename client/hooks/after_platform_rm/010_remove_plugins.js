@@ -8,16 +8,17 @@
 var pluginlist = [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
-    "org.apache.cordova.inappbrowser",
+    "org.apache.cordova.statusbar",
+    "org.apache.cordova.splashscreen",
     "com.ionic.keyboard",
-    "nl.x-services.plugins.launchmyapp",
-    "technology.kulak.cordova.appopen",
-    "com.ohh2ahh.plugins.appavailability",
     "org.apache.cordova.file",
     "org.apache.cordova.file-transfer",
     "org.chromium.zip",
+    "org.apache.cordova.inappbrowser",
+    "technology.kulak.cordova.appopen",
+    "com.ohh2ahh.plugins.appavailability",
+    "nl.x-services.plugins.launchmyapp",
     "com.phonegap.plugins.PushPlugin",
-    "org.apache.cordova.statusbar"
 ];
 
 // no need to configure below
@@ -26,11 +27,18 @@ var fs = require('fs');
 var path = require('path');
 var sys = require('sys')
 var exec = require('child_process').exec;
- 
-function puts(error, stdout, stderr) {
-    sys.puts(stdout)
-}
- 
-pluginlist.forEach(function(plug) {
-    exec("cordova plugins rm " + plug, puts);
-});
+var async = require('async');
+
+async.eachSeries(pluginlist.reverse(), function(plugin, callback){
+    exec("cordova plugins rm " + plugin, function(error, stdout, stderr){
+        if (error){
+            console.log(error);
+            sys.puts(stdout);
+            callback(error);
+        }
+        sys.puts(stdout);
+        callback();
+    })
+}, function(error){
+    return false;
+})
