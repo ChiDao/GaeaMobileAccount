@@ -55,12 +55,12 @@ define(['app', 'restangular'], function(app)
         }
       },
       update: function () {
-      //检查版本
-      var versionData = JSON.parse(localStorage.getItem('version'));
-      Restangular.allUrl('uiVersions', 'http://192.168.1.111:9001/ui_versions?' + 
-        'codeBaseVersion=' + versionData.codeBaseVersion + 
-        '&currentUiVersion=' + versionData.currentUiVersion + 
-        '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
+        //检查版本
+        var versionData = JSON.parse(localStorage.getItem('version'));
+        Restangular.allUrl('uiVersions', 'http://192.168.1.111:9001/ui_versions?' + 
+          'codeBaseVersion=' + versionData.codeBaseVersion + 
+          '&currentUiVersion=' + versionData.currentUiVersion + 
+          '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
 
           //没有可用更新
           if (uiUpdates.length === 0) return;
