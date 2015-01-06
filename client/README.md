@@ -70,3 +70,14 @@ ionic serve
  3. step2: modal-login.jade
  4. step3: modal-allow-notification.jade
  5. 游戏页面: game.jade
+
+## icon与splashscreen的设置
+
+```bash
+$ sudo npm install cordova-icon -g
+$ sudo npm install cordova-splash -g
+```
+### Requirements
+
+. ImageMagick 
+. icon.png / splash.png file must be in the root folder of the project
