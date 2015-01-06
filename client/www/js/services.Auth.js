@@ -137,8 +137,9 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         register: function(registerData, success, error){
           //Todo
         },
-        login: function(success, error, close){
-          
+        login: function(success, error, close){      
+          // preRegistModal();
+          // allowNotificationModal();
           signupModalScope.mustChoise = false;
           signupModalScope.onSuccess = function(){
             preRegistModalScope.formData.email = signupModalScope.formData.email;

@@ -52,7 +52,7 @@ define(['app'], function(app){
         url: '/start',
         views: {
           'menuContent': {
-            templateUrl: 'templates/start.html',
+            templateUrl: 'templates/start.html', //第一頁
             controller: 'StartCtrl'
           }
         },
@@ -81,6 +81,54 @@ define(['app'], function(app){
       views: {
         'menuContent': {
           templateUrl: "templates/search.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+    .state('app.all-done', {
+      url: "/all-done",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/all-done.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+    .state('app.modal-allow-notification', {
+      url: "/modal-allow-notification",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/modal-allow-notification.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })  
+
+    .state('app.article', {
+      url: "/article",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/article.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })    
+
+    .state('app.about', {
+      url: "/about",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/about.html"
         }
       },
       data: {
