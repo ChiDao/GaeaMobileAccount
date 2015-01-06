@@ -17,7 +17,7 @@ var pluginlist = [
     "org.apache.cordova.inappbrowser",
     "technology.kulak.cordova.appopen",
     "https://github.com/ohh2ahh/AppAvailability.git",
-    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaea00001",
+    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=GaeaGo",
     "https://github.com/phonegap-build/PushPlugin.git",
 ];
 
