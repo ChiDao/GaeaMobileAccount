@@ -8,7 +8,7 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
   ion-side-menu(side='left')
     ion-header-bar.bar-stable
       h1.title GOYA
-    ion-content
+    ion-content.dark
       ion-list
         ion-item(nav-clear='', menu-close='', href='#/app/start')
           | 預註冊
@@ -20,6 +20,8 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
           | modal-allow-notification
         ion-item(nav-clear='', menu-close='', href='#/app/article')
           | article.jade
+        ion-item(nav-clear='', menu-close='', href='#/app/games/xxx')
+          | game
 
 
         //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')

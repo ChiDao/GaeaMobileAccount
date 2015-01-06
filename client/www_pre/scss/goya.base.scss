@@ -60,9 +60,9 @@ input::-webkit-input-placeholder {
 }
 
 @mixin right-arrows () {
-	background-repeat: no-repeat;
-	background-position: 97% 50%;
-	@include at2x("../img/app/right-arrows",'png');
+	background-repeat: no-repeat !important;
+	background-position: 97% 50% !important;
+	@include at2x("../img/app/right-arrows");
 }
 
 @mixin page-padding() {
@@ -187,6 +187,10 @@ input::-webkit-input-placeholder {
 	margin: 0 !important;
 }
 
+.padding-top {
+	padding-top: 50px;
+}
+
 
 
 /*
@@ -273,6 +277,21 @@ p {
 /*
 	控件
 */
+
+.list,.item {
+	border: none;
+	color: #fff;
+}
+
+.list {
+	.item {
+		background: none;
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+}
 
 .message {
 

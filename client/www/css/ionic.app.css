@@ -7096,6 +7096,9 @@ input::-webkit-input-placeholder {
 .no-margin {
   margin: 0 !important; }
 
+.padding-top {
+  padding-top: 50px; }
+
 /*
 	全局設定
 */
@@ -7168,6 +7171,16 @@ p {
 /*
 	控件
 */
+.list, .item {
+  border: none;
+  color: #fff; }
+
+.list .item {
+  background: none; }
+  .list .item a {
+    color: #fff;
+    text-decoration: none; }
+
 .mini-button {
   border: none;
   border-radius: 4px;
@@ -7284,8 +7297,8 @@ hr {
   background-color: #4c4c4c; }
 
 .right-arrows {
-  background-repeat: no-repeat;
-  background-position: 97% 50%;
+  background-repeat: no-repeat !important;
+  background-position: 97% 50% !important;
   background-image: url("../img/app/right-arrows.png");
   background-image: -webkit-image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x);
   background-image: image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x); }
@@ -7293,6 +7306,10 @@ hr {
 /*
 	特定的設定
 */
+.item-content {
+  background: none !important;
+  border-bottom: 1px solid #555555 !important; }
+
 .store {
   padding: 16px 0; }
   .store .app-icon {
@@ -7357,6 +7374,8 @@ article {
   margin-left: -8px;
   margin-right: -12px;
   margin-top: 24px; }
+.Pages .black {
+  padding-top: 1em; }
 
 #AllowNoti .note {
   padding-top: 38px;
