@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 define([
     'cordova',
-    'purl',
+    // 'purl',
     'restangular',
     'angular-messages',
     'angular-translate',
@@ -35,8 +35,12 @@ define([
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
-      LiveUpdate.update();
-      navigator.splashscreen.hide();
+      if (ionic.Platform.platform() !== 'macintel'){
+        LiveUpdate.update();
+      }
+      if (navigator.splashscreen){
+        navigator.splashscreen.hide();
+      }
 
       // 检查是否被调用
       console.log(localStorage.getItem('openUrl'));

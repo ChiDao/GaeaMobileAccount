@@ -21,7 +21,7 @@ cordova platforms add ios@3.6.3 android
 ####ios，用xcode打开项目并编译执行
 
 ```bash
-xed platforms/ios/client.xcodeproj/
+xed platforms/ios/GoYa\!.xcodeproj/
 ```
 
 ####android，用ADT打开项目并编译执行
