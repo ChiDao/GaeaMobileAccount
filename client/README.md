@@ -1,3 +1,49 @@
+##项目编译
+
+###增加平台，注意ios平台需指定版本，否则url schema的处理不正常
+
+```bash
+cordova platforms add ios@3.6.3 android
+```
+
+###增加插件，因对安装顺序有要求，暂时停用hook进行安装，使用一下命令行
+ 
+```bash
+cordova plugins add org.apache.cordova.file
+```
+
+```bash
+cordova plugins add org.apache.cordova.file-transfer
+```
+
+```bash
+cordova plugins add org.chromium.zip
+```
+
+```bash
+cordova plugins add org.apache.cordova.statusbar
+```
+
+```bash
+cordova plugins add org.apache.cordova.device
+```
+
+```bash
+cordova plugins add org.apache.cordova.console
+```
+
+```bash
+cordova plugins add org.apache.cordova.inappbrowser
+```
+
+```bash
+cordova plugins add com.ionic.keyboard
+```
+
+```bash
+cordova plugins add https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=GaeaGo
+```
+
 ##页面开发
 
 ###打开gulp watch，自动转换jade,scss
