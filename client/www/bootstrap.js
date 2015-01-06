@@ -1,7 +1,7 @@
 require.config({
     paths: {
   		'cordova': 'cordova',
-        'purl': 'lib/purl/purl',
+        // 'purl': 'lib/purl/purl',
         'lodash': 'lib/lodash/dist/lodash',
         'restangular': 'lib/restangular/dist/restangular',
         'angular-messages': 'lib/angular-messages/angular-messages',
@@ -37,9 +37,9 @@ require.config({
 		'corodva': {
 			exports: 'cordova'
 		},
-        'purl': {
-            exports: 'purl'
-        },
+        // 'purl': {
+        //     exports: 'purl'
+        // },
         'lodash': {
             exports: '_'
         },

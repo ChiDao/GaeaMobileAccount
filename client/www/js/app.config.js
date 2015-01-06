@@ -11,6 +11,7 @@ define(['app', 'restangular'], function(app){
         withCredentials: true
       });
 
+      RestangularProvider.setFullResponse(true);
       RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
       // RestangularProvider.setBaseUrl('http://localhost:8485');
 
@@ -25,6 +26,26 @@ define(['app', 'restangular'], function(app){
           extractedData = {'rawData': data};
         }
         return extractedData;
+      });
+
+      
+      RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        if (response.headers('my-xsrf-header')){
+          localStorage.setItem('my-xsrf-header', response.headers('my-xsrf-header'));
+        }
+      });
+
+
+      RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig ) {
+        if(localStorage.getItem('my-xsrf-header')){
+          headers.Authorization = 'Bearer '+ localStorage.getItem('my-xsrf-header');
+        }
+        return {
+          element: element,
+          params: _.extend(params, {single: true}),
+          headers: headers,
+          httpConfig: httpConfig
+        };
       });
 	});
 

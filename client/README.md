@@ -1,3 +1,31 @@
+#前提条件
+
+```bash
+install cordova-icon -g
+install cordova-splash -g
+brew install ImageMagick
+npm install
+```
+
+
+##项目编译
+
+###增加平台，注意ios平台需指定版本，否则url schema的处理不正常
+
+```bash
+cordova platforms add ios@3.6.3 android
+```
+
+###打开项目并运行
+
+####ios，用xcode打开项目并编译执行
+
+```bash
+xed platforms/ios/GoYa\!.xcodeproj/
+```
+
+####android，用ADT打开项目并编译执行
+
 ##页面开发
 
 ###打开gulp watch，自动转换jade,scss
@@ -24,3 +52,4 @@ ionic serve
  3. step2: modal-login.jade
  4. step3: modal-allow-notification.jade
  5. 游戏页面: game.jade
+

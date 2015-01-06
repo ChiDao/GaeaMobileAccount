@@ -55,12 +55,13 @@ define(['app', 'restangular'], function(app)
         }
       },
       update: function () {
-      //检查版本
-      var versionData = JSON.parse(localStorage.getItem('version'));
-      Restangular.allUrl('uiVersions', 'http://192.168.1.111:9001/ui_versions?' + 
-        'codeBaseVersion=' + versionData.codeBaseVersion + 
-        '&currentUiVersion=' + versionData.currentUiVersion + 
-        '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
+        //检查版本
+        console.log('Check update');
+        var versionData = JSON.parse(localStorage.getItem('version'));
+        Restangular.allUrl('uiVersions', 'http://192.168.10.100:9001/ui_versions?' + 
+          'codeBaseVersion=' + versionData.codeBaseVersion + 
+          '&currentUiVersion=' + versionData.currentUiVersion + 
+          '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
 
           //没有可用更新
           if (uiUpdates.length === 0) return;
@@ -87,6 +88,8 @@ define(['app', 'restangular'], function(app)
               localStorage.setItem('version', JSON.stringify(versionData));
             });
           });
+        },function(error){
+          console.log(JSON.stringify(error));
         });
       }//End of function update
     };//End of factory return

@@ -22,7 +22,7 @@ angular.module('starter', ['ionic'])
   $scope.loginByClient = function(){
     if(ionic.Platform.isIOS()){
       console.log("ios loginByClient");
-      window.open('GaeaPlay://?appId=ga14a66eaac9ae6457&url=wb1121741102', '_system');
+      window.open('GaeaGo://?appId=ga14a66eaac9ae6457&url=wb1121741102', '_system');
     }
     if (ionic.Platform.isAndroid()){
       console.log("android loginByClient");
