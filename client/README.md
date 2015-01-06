@@ -79,5 +79,6 @@ $ sudo npm install cordova-splash -g
 ```
 ### Requirements
 
-. ImageMagick 
-. icon.png / splash.png file must be in the root folder of the project
+ 1. ImageMagick 
+ 2. icon.png / splash.png file must be in the root folder of the project
+
