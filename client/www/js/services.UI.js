@@ -5,9 +5,6 @@ define(['app'], function(app)
     return {
       screenHeight: function(){
         
-      },
-      xxx: Function() {
-        return;
       }
 
     }
