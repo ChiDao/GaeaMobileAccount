@@ -74,12 +74,19 @@ module.exports = yeoman.Base.extend({
   },
   writing: function(){
     this.template(
-      '_page.html',
-      'www/templates/' + this.pageNameDasherize  + '.html', 
+      '_page.jade',
+      'www_pre/jade/' + this.pageNameDasherize  + '.jade', 
       {
         pageTitle: this.pageTitle,
         pageName: this.pageName
       });
+    // this.template(
+    //   '_page.html',
+    //   'www/templates/' + this.pageNameDasherize  + '.html', 
+    //   {
+    //     pageTitle: this.pageTitle,
+    //     pageName: this.pageName
+    //   });
 
     this.template(
       '_page.controller.js',

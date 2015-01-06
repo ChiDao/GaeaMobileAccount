@@ -1,6 +1,6 @@
-'use strict';
 
-angular.module('<%= angularApp %>')
+angular.module('services.<%= providerName %>', [])
+
   .provider('<%= providerName %>', function () {
 
     // Private variables

@@ -133,8 +133,8 @@ module.exports = yeoman.Base.extend({
   writing: function(){
   	if (this.objectsTemplate === '图标＋名称'){
 	    this.template(
-	      '_list_icon.html',
-	      'www/templates/' + this.objectsNameDasherize  + '.html', 
+	      '_list_icon.jade',
+	      'www_pre/jade/' + this.objectsNameDasherize  + '.jade', 
 	      {
 	        objectsTitle: this.objectsTitle,
 	        objectsName: this.objectsName,
@@ -144,8 +144,8 @@ module.exports = yeoman.Base.extend({
   	}
   	else if(this.objectsTemplate === '只有名称'){
 	    this.template(
-	      '_list.html',
-	      'www/templates/' + this.objectsNameDasherize  + '.html', 
+	      '_list.jade',
+	      'www_pre/jade/' + this.objectsNameDasherize  + '.jade', 
 	      {
 	        objectsTitle: this.objectsTitle,
 	        objectsName: this.objectsName,
@@ -154,8 +154,8 @@ module.exports = yeoman.Base.extend({
 	      });
   	}
     this.template(
-      '_detail.html',
-      'www/templates/' + this.objectNameDasherize  + '.html', 
+      '_detail.jade',
+      'www_pre/jade/' + this.objectNameDasherize  + '.jade', 
       {
         objectsName: this.objectsName,
         objectName: this.objectName

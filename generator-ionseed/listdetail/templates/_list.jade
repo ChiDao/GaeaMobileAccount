@@ -1,0 +1,6 @@
+ion-view(view-title='<%= objectsTitle %>')
+  ion-content
+    ion-list
+      ion-item(ng-repeat='<%= objectName %> in <%= objectsName %>', type='item-text-wrap', href='#/app/<%= objectStateUrl %>/{{<%= objectName %>.id}}')
+        | {{<%= objectName %>.name}}
+

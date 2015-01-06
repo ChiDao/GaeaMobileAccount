@@ -1,0 +1,7 @@
+ion-view(view-title='<%= objectsTitle %>')
+  ion-content
+    ion-list
+      ion-item.item-thumbnail-left(ng-repeat='<%= objectName %> in <%= objectsName %>', type='item-text-wrap', href='#/app/<%= objectStateUrl %>/{{<%= objectName %>.id}}')
+        img(src='{{<%= objectName %>.icon}}')
+        | {{<%= objectName %>.name}}
+
