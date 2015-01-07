@@ -3,8 +3,8 @@ define(['app'], function(app)
   app.factory('UI', function() {
 
     return {
-      screenHeight: function(){
-        
+      openURL: function(URL){
+        window.open(URL, '_system');
       }
 
     }

@@ -1,7 +1,8 @@
 define(['app', 'services.RestRoute'], function(app)
 {
-	app.controller('StartCtrl', function ($scope, RestRoute, Restangular, Auth) {
+	app.controller('StartCtrl', function ($scope, RestRoute, Restangular, Auth, UI) {
 		console.log('startCtrl');
+		$scope.UI = UI;
 		$scope.start = {
 			top_img:"img/data/soul-clash/logo.png",
 			top_img_2x:"img/data/soul-clash/logo@2x.png",
