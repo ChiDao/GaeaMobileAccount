@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+            id="com.gaeamobile.url-handler" version="0.2.3">
+        <name>UrlHandler</name>
+        <description>Url Handler</description>
+        <license>Apache 2.0</license>
+        <keywords>gaeamobile,url</keywords>
+        <platform name="ios">
+            <config-file target="config.xml" parent="/*">
+                <feature name="UrlHandler">
+                    <param name="ios-package" value="UrlHandle"/>
+                </feature>
+            </config-file>
+            <header-file src="src/ios/UrlHandler.h" />
+            <source-file src="src/ios/UrlHandler.m" />
+        </platform>
+    </plugin>

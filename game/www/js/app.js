@@ -22,11 +22,11 @@ angular.module('starter', ['ionic'])
   $scope.loginByClient = function(){
     if(ionic.Platform.isIOS()){
       console.log("ios loginByClient");
-      window.open('GaeaGo://?appId=ga14a66eaac9ae6457&url=wb1121741102', '_system');
+      window.open('GaeaGo://?appId=ga14a66eaac9ae6457&url=SoulClash', '_system');
     }
     if (ionic.Platform.isAndroid()){
       console.log("android loginByClient");
-      window.open('GaeaPlay://?appId=2&gameId=11111&callbackHandle=com.gaeamobile.game', '_system');
+      window.open('GaeaGo://?appId=ga14a66eaac9ae6457&url=SoulClash', '_system');
     }
   }
 
