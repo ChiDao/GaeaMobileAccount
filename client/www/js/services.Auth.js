@@ -1,6 +1,6 @@
 define(['app', 'services.Modal', 'services.Push'], function(app)
 {
-    app.factory('Auth', function($rootScope, $timeout, $state, $http, $ionicModal, Restangular, Modal,PushProcessingService) {
+    app.factory('Auth', function($rootScope, $ionicViewService, $timeout, $state, $http, $ionicModal, Restangular, Modal,PushProcessingService) {
       //Todo: 把定义从app.config移到这里
       var accessLevels = app.routingConfig.accessLevels,
           userRoles = app.routingConfig.userRoles,
@@ -162,6 +162,10 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
            var apnToken = PushProcessingService.apnToken();
             localStorage.setItem('apnToken', apnToken);
 
+$ionicViewService.nextViewOptions({
+  disableAnimate: true,
+  disableBack: true
+});
             $state.go('app.game',{gameId: 1});
           }
           preRegistModalScope.onSuccess = function(){
