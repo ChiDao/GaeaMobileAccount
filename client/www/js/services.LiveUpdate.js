@@ -70,7 +70,7 @@ define(['app', 'restangular'], function(app)
           var parsedUrl = purl(downloadUrl);
           var zipFileURL = cordova.file.dataDirectory + parsedUrl.attr('file');
           var unzipDir = zipFileURL.replace(/\.zip$/, '/');
-          versionData.updateUiVersion = uiUpdates.data.rawData.version;
+          versionData.updateUiVersion = uiUpdates.data.rawData.updateUiVersion;
           versionData.updateUrl = unzipDir + 'www/index.html';
           localStorage.setItem('version', JSON.stringify(versionData));
 

@@ -24,10 +24,6 @@ define([
       console.log(10);
       if(localStorage.getItem('apnToken') != null){
           PushProcessingService.initialize();
-          var apnToken = PushProcessingService.apnToken();
-          Restangular.oneUrl('apn-token','apn-token').post({base64Token:apnToken}).then(function(){
-               console.log("post ok!");
-          });
        }
      
     $ionicPlatform.ready(function() {
