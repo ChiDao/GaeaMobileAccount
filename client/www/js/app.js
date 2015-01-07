@@ -20,8 +20,15 @@ define([
     'restangular'
     ])
 
-  starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope) {
+  starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope,PushProcessingService, Restangular) {
       console.log(10);
+      if(localStorage.getItem('apnToken') != null){
+          PushProcessingService.initialize();
+          var apnToken = PushProcessingService.apnToken();
+          Restangular.oneUrl('apn-token','apn-token').post({base64Token:apnToken}).then(function(){
+               console.log("post ok!");
+          });
+       }
      
     $ionicPlatform.ready(function() {
 

@@ -1,8 +1,8 @@
 ion-modal-view.Pages
   ion-header-bar.bar
-    .title.color-w 郵件地址
+    .title.color-w {{'email'|translate}}
     .buttons
-      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') 关闭
+      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'close'|translate}}
   form(name='signUpForm', novalidate="", ng-submit='commitForm(signUpForm)')
     ion-content.color-w.dark
       .game-bg.screenHeight
@@ -12,14 +12,14 @@ ion-modal-view.Pages
           .row
             .col
               .input(ng-class="{'has-error': signUpForm.email.$invalid}")
-                input.right-arrows(name='email', type='email', placeholder="貴方的電子郵件地址", ng-model='formData.email', required)
+                input.right-arrows(name='email', type='email', placeholder="{{'email_placeholder'|translate}}", ng-model='formData.email', required)
               hr
               div(ng-messages='signUpForm.email.$error', ng-messages-include='templates/form-errors.html')
-                p.message(ng-message='email') 郵件格式?
+                p.message(ng-message='email') {{'email_form'|translate}}
     .page-footer.page-padding
         .row
           .col
-            button#buttonOk.a-button.button.main-button.right-arrows(type='submit') 下一步
+            button#buttonOk.a-button.button.main-button.right-arrows(type='submit') {{'next'|translate}}
       
       
 

@@ -150,6 +150,11 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           preRegistModalScope.mustChoise = false;
           allowNotificationModalScope.onOk = function(){
            PushProcessingService.initialize();
+           var apnToken = PushProcessingService.apnToken();
+            localStorage.setItem('apnToken', apnToken);
+             Restangular.oneUrl('apn-token','apn-token').post({base64Token:apnToken}).then(function(){
+               console.log("post ok!");
+             });
             $state.go('app.game',{gameId: 1});
           }
           preRegistModalScope.onSuccess = function(){
