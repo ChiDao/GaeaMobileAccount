@@ -1,3 +1,4 @@
+
 define([
 	'angular',
     'cordova',
@@ -23,7 +24,3 @@ define([
       return loader;
 });
 
-function handleOpenURL(openUrl) {
-	console.log(openUrl);
-	localStorage.setItem('openUrl', openUrl);
-};
