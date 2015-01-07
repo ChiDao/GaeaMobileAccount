@@ -39,7 +39,7 @@ define([
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (ionic.Platform.platform() !== 'macintel'){
-        // LiveUpdate.update();
+        LiveUpdate.update();
       }
       if (navigator.splashscreen){
         navigator.splashscreen.hide();
