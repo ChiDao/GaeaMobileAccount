@@ -88,11 +88,23 @@ define(['app'], function(app){
       }
     })
 
-    .state('app.all-done', {
-      url: "/all-done",
+    .state('app.s-game', {
+      url: "/s-game",
       views: {
         'menuContent': {
-          templateUrl: "templates/all-done.html"
+          templateUrl: "templates/s-game.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+    .state('app.message', {
+      url: "/message",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/message.html"
         }
       },
       data: {

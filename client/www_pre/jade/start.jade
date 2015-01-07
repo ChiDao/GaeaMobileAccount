@@ -9,7 +9,8 @@ ion-view#index(view-title='{{"preregister"|translate}}')
         div.store
           .row.row-center.no-padding
             .col.no-padding
-              img(src="{{start.game_icon}}",srcset="{{start.game_icon_2x}} 2x")
+              a(href="#/app/s-game")
+                img(src="{{start.game_icon}}",srcset="{{start.game_icon_2x}} 2x")
             .col.text-title
               b {{start.game_name}}
               p {{start.game_corp}}
@@ -28,16 +29,14 @@ ion-view#index(view-title='{{"preregister"|translate}}')
               span.i-calendar.margin-0-auto
               b {{start.online_date}}
               p online
-        //- div(ng-repeat='tab in tabs', heading='{{tab.title}}', active='tab.active', disabled='tab.disabled')
-        //-   | {{tab.content}}
-
-        div.row.text-center.segmented-control
-          div.col.on(ng-click='onClick("info")')
-            | {{'intro'|translate}}
-          div.col(ng-click='onClick("screen")')
-            | {{'trunc'|translate}}
-          div.col(ng-click='onClick("gift")')
-            | {{'gift'|translate}}
+        hr.margin-bottom
+        //- div.row.text-center.segmented-control
+        //-   div.col.on(ng-click='onClick("info")')
+        //-     | {{'intro'|translate}}
+        //-   div.col(ng-click='onClick("screen")')
+        //-     | {{'trunc'|translate}}
+        //-   div.col(ng-click='onClick("gift")')
+        //-     | {{'gift'|translate}}
         div.t-indent.margin-bottom
           #info.sc-div
             {{start.game_content|translate}}

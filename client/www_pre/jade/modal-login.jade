@@ -2,7 +2,7 @@ ion-modal-view.Pages.pass-code
   ion-header-bar.bar
     .title.color-w {{'captcha'|translate}}
     .buttons
-      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'close'|translate}}
+      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
   form(name='loginForm', novalidate="", ng-submit='commitForm(loginForm)')
     ion-content.color-w.dark
       .game-bg.screenHeight
@@ -13,13 +13,15 @@ ion-modal-view.Pages.pass-code
             .col.no-padding
 
               .input(ng-class="{'has-error': loginForm.password.$invalid}")
-                input(name='password',placeholder="驗證碼" type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
+                input.right-arrows(name='password',placeholder="驗證碼" type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
                 //- .timer 
                 //-   input.number(type="tel", placeholder="")
                 //-   input.number(type="tel", placeholder="")
                 //-   input.number(type="tel", placeholder="")
                 //-   input.number(type="tel", placeholder="")
-              p.text-center {{'captcha_prompt'|translate}}
+              hr
+              div(ng-messages='loginForm.password.$error', ng-messages-include='templates/form-errors.html')
+                p.message(ng-message='number') {{'captcha_prompt'|translate}}
     //- .hide
         
     .page-footer.page-padding
