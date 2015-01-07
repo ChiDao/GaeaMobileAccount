@@ -37,11 +37,11 @@ define(['app',
 				 
 				var translationsJP= {
 				  preregister: '予備登録',
-				  intro:'紹介',
-				  gift:'福袋',
-				  trunc:'截図',
-				  email:'電子メール',
-				  complete:'完成',
+				  // intro:'紹介',
+				  // gift:'福袋',
+				  // trunc:'截図',
+				  // email:'電子メール',
+				  // complete:'完成',
 				};
 
 				this.translateConfig = function(){
