@@ -55,7 +55,7 @@ var paths = {
     'www/**/angular-translate.js', 
     'www/**/angular-translate-handler-log.js',
     'www/**/angular-cookies.js', 
-    'www/**/angular-translateangular-translate-storage-cookie.js', 
+    'www/**/angular-translate-storage-cookie.js', 
     'www/**/angular-translate-storage-local.js',
     'www/**/angular-translate-handler-log.js',
     'www/**/angular-translate-handler-log.js',
