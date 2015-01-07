@@ -2,10 +2,10 @@
 <widget id="com.gaeagame.go" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>GoYa!</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Gaea Mobile's Game Center.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="gaeago@gaeamobile-inc.net" href="http://ionicframework.com/">
+      Gaea Go Team
     </author>
   <content src="loader.html"/>
   <access origin="*"/>

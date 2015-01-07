@@ -14,6 +14,7 @@ define(['app', 'restangular'], function(app){
       RestangularProvider.setFullResponse(true);
       RestangularProvider.setBaseUrl('http://42.120.45.236:8485');
       // RestangularProvider.setBaseUrl('http://localhost:8485');
+      // RestangularProvider.setBaseUrl('http://192.168.10.100:8485');
 
       // add a response intereceptor
       RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
@@ -36,7 +37,12 @@ define(['app', 'restangular'], function(app){
         if (response.headers('my-xsrf-header')){
           localStorage.setItem('my-xsrf-header', response.headers('my-xsrf-header'));
         }
-        return {rawData: data};
+
+        if (operation === "getList") {
+          return data;
+        } else {
+          return {rawData: data};
+        }
       });
 
       RestangularProvider.addFullRequestInterceptor(function(element, operation, what, url, headers, params, httpConfig ) {

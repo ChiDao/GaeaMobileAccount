@@ -58,21 +58,19 @@ define(['app', 'restangular'], function(app)
         //检查版本
         console.log('Check update');
         var versionData = JSON.parse(localStorage.getItem('version'));
-        Restangular.allUrl('uiVersions', 'http://192.168.10.100:9001/ui_versions?' + 
-          'codeBaseVersion=' + versionData.codeBaseVersion + 
-          '&currentUiVersion=' + versionData.currentUiVersion + 
-          '&platform=' + ionic.Platform.platform()).getList().then(function(uiUpdates){
+        Restangular.oneUrl('ui-update-pack/' + versionData.codeBaseVersion 
+          + '/' + versionData.currentUiVersion + '/' + ionic.Platform.platform()
+          ).get().then(function(uiUpdates){
 
           //没有可用更新
-          if (uiUpdates.length === 0) return;
-          console.log('检查到可用更新');
+          console.log('检查到可用更新' + JSON.stringify(uiUpdates));
 
           //更新localStorage
-          var downloadUrl = uiUpdates[0].downloadUrl;
+          var downloadUrl = uiUpdates.data.rawData.downloadUrl;
           var parsedUrl = purl(downloadUrl);
           var zipFileURL = cordova.file.dataDirectory + parsedUrl.attr('file');
           var unzipDir = zipFileURL.replace(/\.zip$/, '/');
-          versionData.updateUiVersion = uiUpdates[0].version;
+          versionData.updateUiVersion = uiUpdates.data.rawData.version;
           versionData.updateUrl = unzipDir + 'www/index.html';
           localStorage.setItem('version', JSON.stringify(versionData));
 
