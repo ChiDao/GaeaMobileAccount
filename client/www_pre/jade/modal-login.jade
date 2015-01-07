@@ -1,8 +1,8 @@
 ion-modal-view.Pages.pass-code
   ion-header-bar.bar
-    .title.color-w 驗證碼
+    .title.color-w {{'captcha'|translate}}
     .buttons
-      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') 关闭
+      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'close'|translate}}
   form(name='loginForm', novalidate="", ng-submit='commitForm(loginForm)')
     ion-content.color-w.dark
       .game-bg.screenHeight
@@ -19,13 +19,13 @@ ion-modal-view.Pages.pass-code
                 //-   input.number(type="tel", placeholder="")
                 //-   input.number(type="tel", placeholder="")
                 //-   input.number(type="tel", placeholder="")
-              p.text-center 請輸入郵件收到的驗證碼
+              p.text-center {{'captcha_prompt'|translate}}
     //- .hide
         
     .page-footer.page-padding
         .row
           .col
-            button#buttonOk.a-button.button.main-button.right-arrows(type='submit') 下一步
+            button#buttonOk.a-button.button.main-button.right-arrows(type='submit') {{'next'|translate}}
       
 
 //- ion-modal-view.Pages

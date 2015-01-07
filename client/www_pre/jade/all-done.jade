@@ -1,4 +1,4 @@
-ion-view#index(view-title='等待開服')
+ion-view#index(view-title='{{"wait_service"|translate}}')
   ion-content.color-w
     .game-bg
       div.top
@@ -12,7 +12,7 @@ ion-view#index(view-title='等待開服')
               b Soul Clash
               p Gaea Mobile
             .col.text-right.no-padding
-              button.mini-button.watting(ng-click='Auth.login()') 等待開服
+              button.mini-button.watting(ng-click='Auth.login()') {{"wait_service"|translate}}
           hr
         
         .article-list
@@ -21,7 +21,7 @@ ion-view#index(view-title='等待開服')
               div.icon.no-margin
                 span.i-flag
             .col.unit-p
-              p 置頂 玩家遊戲操作與儲值注意需知！
+              p {{'promotion'|translate}} 玩家遊戲操作與儲值注意需知！
           .row.unit.no-padding.right-arrows.row-center
             .col-10.no-padding
               div.icon.no-margin
@@ -46,7 +46,7 @@ ion-view#index(view-title='等待開服')
                 span.i-document
             .col.unit-p.no-padding
               p 聖誕跨年歡慶限定7-11四部曲
-          button.button.a-button.button-block.nol-button.right-arrows 全部攻略文章
+          button.button.a-button.button-block.nol-button.right-arrows {{'raider_articles'|translate}}
           hr.margin-top
         div.row.text-center
           div.col
@@ -75,11 +75,11 @@ ion-view#index(view-title='等待開服')
             p SECOND
         div.row.text-center.segmented-control
           div.col.on(ng-click='onClick("info")')
-            | 介紹
+            | {{'intro'|translate}}
           div.col(ng-click='onClick("screen")')
-            | 截圖
+            | {{'trunc'|translate}}
           div.col(ng-click='onClick("gift")')
-            | 禮包
+            | {{'gift'|translate}}
         div.t-indent.margin-bottom
           #info.sc-div
             p 歡樂聖誕節就要來啦！各位冰友們~ 準備好一同來瘋刀塔了嗎？
@@ -90,5 +90,5 @@ ion-view#index(view-title='等待開服')
           #gift.sc-div
 
         hr.margin-bottom
-        button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') 分享給好友
-        button.button.a-button.button-block.nol-button.right-arrows 査察官網
+        button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'share'|translate}}
+        button.button.a-button.button-block.nol-button.right-arrows {{'official_web'|translate}}
