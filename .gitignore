@@ -37,5 +37,3 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.xcuserstate
-
-client/www/js/app.js
