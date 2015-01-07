@@ -35,41 +35,6 @@ define(['app'], function(app)
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
       }
-      // {
-      //   name: 'games',
-      //   api: 'http://42.120.45.236:8485/discover?_last',
-      //   apiType: 'list',
-      //   stateUrl: '/games',
-      //   itemUrl: '#/tab/tags/{{data._id}}',
-      //   //Todo: displayType为自定义direcitve
-      //   displayFields: [
-      //     {
-      //       fieldName: 'name',
-      //       displayType: 'h1'
-      //     }, 
-      //     {
-      //       fieldName: 'androidName',
-      //       displayType: 'h3'
-      //     }, 
-      //     {
-      //       fieldName: '_id',
-      //       displayType: 'h3'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: 'tags',
-      //   api: 'http://42.120.45.236:8485/game-tags/<%= gameId %>?_last',//<%= gameId %>
-      //   apiType: 'list',
-      //   stateUrl: '/tags/:gameId',
-      //   stateUrlParams : ['gameId'],
-      //   displayFields: [
-      //     {
-      //       fieldName: 'title',
-      //       displayType: 'h1'
-      //     }
-      //   ]
-      // }
     ];
     var displayFieldFunc = {
       h1: function(fieldName){
