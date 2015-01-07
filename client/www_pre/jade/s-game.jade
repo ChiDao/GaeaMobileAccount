@@ -4,22 +4,21 @@ ion-view.Pages(view-title='單獨遊戲頁')
       div.top
         img(src="img/data/soul-clash/logo.png",srcset="img/data/soul-clash/logo@2x.png 2x")
       div.black
-        div.row.text-center.segmented-control
-          div.col.on(ng-click='onClick("info")')
-            | {{'intro'|translate}}
-          div.col(ng-click='onClick("screen")')
-            | {{'trunc'|translate}}
-          div.col(ng-click='onClick("gift")')
-            | {{'gift'|translate}}
+        //- div.row.text-center.segmented-control
+        //-   div.col.on(ng-click='onClick("info")')
+        //-     | {{'intro'|translate}}
+        //-   div.col(ng-click='onClick("screen")')
+        //-     | {{'trunc'|translate}}
+        //-   div.col(ng-click='onClick("gift")')
+        //-     | {{'gift'|translate}}
         div.t-indent.margin-bottom
           #info.sc-div
             p 歡樂聖誕節就要來啦！各位冰友們~ 準備好一同來瘋刀塔了嗎？
             p 在這歡樂的佳節中，《刀塔傳奇》除了準備豐富的遊戲活動，還有諸多精彩的合作活動等玩家們一同來挖掘！
             p 活動名稱：刀塔傳奇送祝福！分享簽名檔！領取400萬鑽石聖誕好禮！
           #screen.sc-div
-            p 截圖在這裡
           #gift.sc-div
 
         hr.margin-bottom
-        button#buttonOk.a-button.button.button-block.main-button.right-arrows 下載遊戲
-        button.button.a-button.button-block.nol-button.right-arrows {{'official_web'|translate}}
+        //- button#buttonOk.a-button.button.button-block.main-button.right-arrows 下載遊戲
+        button.button.a-button.button-block.nol-button.right-arrows(ng-click="UI.openURL('http://www.gaeamobile.net')") {{'official_web'|translate}}
