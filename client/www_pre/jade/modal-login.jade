@@ -21,8 +21,10 @@ ion-modal-view.Pages.pass-code
                 //-   input.number(type="tel", placeholder="")
               hr
               div(ng-messages='loginForm.password.$error', ng-messages-include='templates/form-errors.html')
-                p.message(ng-message='number') {{'captcha_prompt'|translate}}
-    //- .hide
+                p.message.form-error(ng-message='number') 需要 4 位驗證碼
+                p.message.form-error(ng-message='minlength') 最少 4 位驗證碼
+                p.message.form-error(ng-message='maxlength') 最大 4 位驗證碼
+                p.message.form-error(ng-if="commitFormError") {{commitFormErrorMsg}}
         
     .page-footer.page-padding
         .row
