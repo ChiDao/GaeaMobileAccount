@@ -21,6 +21,7 @@ ion-modal-view.Pages.pass-code
                 //-   input.number(type="tel", placeholder="")
               hr
               div(ng-messages='loginForm.password.$error', ng-messages-include='templates/form-errors.html')
+                p.message.form-error(ng-message='required') 請輸入郵箱收到的驗證碼
                 p.message.form-error(ng-message='number') 需要 4 位驗證碼
                 p.message.form-error(ng-message='minlength') 最少 4 位驗證碼
                 p.message.form-error(ng-message='maxlength') 最大 4 位驗證碼

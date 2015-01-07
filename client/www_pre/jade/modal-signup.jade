@@ -15,7 +15,7 @@ ion-modal-view.Pages
                 input.right-arrows(name='email', type='email', placeholder="{{'email_placeholder'|translate}}", ng-model='formData.email', required)
               hr
               div(ng-messages='signUpForm.email.$error', ng-messages-include='templates/form-errors.html')
-                p.message(ng-message='email') {{'email_form'|translate}}
+                p.message.form-error(ng-message='email') {{'email_form'|translate}}
     .page-footer.page-padding
         .row
           .col
