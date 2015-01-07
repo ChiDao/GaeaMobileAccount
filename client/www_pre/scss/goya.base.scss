@@ -35,11 +35,11 @@ input::-webkit-input-placeholder {
   background-image: -webkit-image-set(
   	url("#{$at1x_path}") 1x,
   	url("#{$at2x_path}") 2x
-  );
+  ) !important;
   background-image: image-set(
   	url("#{$at1x_path}") 1x,
   	url("#{$at2x_path}") 2x
-  );
+  ) !important;
 }
 
 
@@ -277,6 +277,19 @@ p {
 /*
 	控件
 */
+
+.new-red {
+	position: absolute;
+	display: block;
+	height: 8px;
+	width: 8px;
+	background-color: #ff1d2b;
+	border-radius: 50%;
+	left: 32px;
+	top: 10px;
+	z-index: 999;
+	opacity: 0.9;
+}
 
 .list,.item {
 	border: none;

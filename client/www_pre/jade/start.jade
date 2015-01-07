@@ -1,48 +1,50 @@
 ion-view#index(view-title='{{"preregister"|translate}}')
-	ion-content.color-w
-		.game-bg
-			div.top
-				img(src="{{start.top_img}}",srcset="{{start.top_img_2x}} 2x")
-			div.black
-				div.store
-					.row.row-center.no-padding
-						.col.no-padding
-							img(src="{{start.game_icon}}",srcset="{{start.game_icon_2x}} 2x")
-						.col.text-title
-							b {{start.game_name}}
-							p {{start.game_corp}}
-						.col.text-right.no-padding
-							button.mini-button(ng-click='Auth.login()') {{'preregister'|translate}}
-				div.big-photo.margin-bottom
-					img.full-width(src="{{start.big_img}}",srcset="{{start.big_img_2x}} 2x")
-				div.row.text-center
-					div.col
-						div.icon
-							span.i-user.margin-0-auto
-							b {{start.user_count}}
-							p Pre-Register
-					div.col
-						div.icon
-							span.i-calendar.margin-0-auto
-							b {{start.online_date}}
-							p online
-				//- div(ng-repeat='tab in tabs', heading='{{tab.title}}', active='tab.active', disabled='tab.disabled')
-				//- 	| {{tab.content}}
+  ion-nav-buttons(side='primary')
+    span.new-red
+  ion-content.color-w
+    .game-bg
+      div.top
+        img(src="{{start.top_img}}",srcset="{{start.top_img_2x}} 2x")
+      div.black
+        div.store
+          .row.row-center.no-padding
+            .col.no-padding
+              img(src="{{start.game_icon}}",srcset="{{start.game_icon_2x}} 2x")
+            .col.text-title
+              b {{start.game_name}}
+              p {{start.game_corp}}
+            .col.text-right.no-padding
+              button.mini-button(ng-click='Auth.login()') {{'preregister'|translate}}
+        div.big-photo.margin-bottom
+          img.full-width(src="{{start.big_img}}",srcset="{{start.big_img_2x}} 2x")
+        div.row.text-center
+          div.col
+            div.icon
+              span.i-user.margin-0-auto
+              b {{start.user_count}}
+              p Pre-Register
+          div.col
+            div.icon
+              span.i-calendar.margin-0-auto
+              b {{start.online_date}}
+              p online
+        //- div(ng-repeat='tab in tabs', heading='{{tab.title}}', active='tab.active', disabled='tab.disabled')
+        //-   | {{tab.content}}
 
-				div.row.text-center.segmented-control
-					div.col.on(ng-click='onClick("info")')
-						| {{'intro'|translate}}
-					div.col(ng-click='onClick("screen")')
-						| {{'trunc'|translate}}
-					div.col(ng-click='onClick("gift")')
-						| {{'gift'|translate}}
-				div.t-indent.margin-bottom
-					#info.sc-div
-						{{start.game_content|translate}}
-					#screen.sc-div
-						p 截圖在這裡
-					#gift.sc-div
+        div.row.text-center.segmented-control
+          div.col.on(ng-click='onClick("info")')
+            | {{'intro'|translate}}
+          div.col(ng-click='onClick("screen")')
+            | {{'trunc'|translate}}
+          div.col(ng-click='onClick("gift")')
+            | {{'gift'|translate}}
+        div.t-indent.margin-bottom
+          #info.sc-div
+            {{start.game_content|translate}}
+          #screen.sc-div
+            p 截圖在這裡
+          #gift.sc-div
 
-				hr.margin-bottom
-				button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'preregister2'|translate}}
-				button.button.a-button.button-block.nol-button.right-arrows {{'official_web'|translate}}
+        hr.margin-bottom
+        button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'preregister2'|translate}}
+        button.button.a-button.button-block.nol-button.right-arrows {{'official_web'|translate}}

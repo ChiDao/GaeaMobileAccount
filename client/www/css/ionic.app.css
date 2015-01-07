@@ -7128,13 +7128,13 @@ input::-webkit-input-placeholder {
   background-repeat: no-repeat;
   background-size: 100%;
   background-image: url("../img/data/soul-clash/background.png");
-  background-image: -webkit-image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x);
-  background-image: image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x); }
+  background-image: -webkit-image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x) !important;
+  background-image: image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x) !important; }
 
 .top {
   background-image: url("../img/data/soul-clash/top.png");
-  background-image: -webkit-image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x);
-  background-image: image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x);
+  background-image: -webkit-image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x) !important;
+  background-image: image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x) !important;
   padding: 0px 2%;
   padding-top: 44px;
   background-repeat: no-repeat;
@@ -7150,8 +7150,8 @@ input::-webkit-input-placeholder {
   background-repeat: no-repeat;
   background-size: 100%;
   background-image: url("../img/app/balck-layer.png");
-  background-image: -webkit-image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x);
-  background-image: image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x);
+  background-image: -webkit-image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x) !important;
+  background-image: image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x) !important;
   min-height: 380px;
   padding: 0 16px; }
 
@@ -7171,6 +7171,18 @@ p {
 /*
 	控件
 */
+.new-red {
+  position: absolute;
+  display: block;
+  height: 8px;
+  width: 8px;
+  background-color: #ff1d2b;
+  border-radius: 50%;
+  left: 32px;
+  top: 10px;
+  z-index: 999;
+  opacity: 0.9; }
+
 .list, .item {
   border: none;
   color: #fff; }
@@ -7215,28 +7227,28 @@ p {
     margin-bottom: 8px; }
   .icon .i-user {
     background-image: url("../img/app/icon-user.png");
-    background-image: -webkit-image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x);
-    background-image: image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x); }
+    background-image: -webkit-image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x) !important;
+    background-image: image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x) !important; }
   .icon .i-calendar {
     background-image: url("../img/app/icon-calendar.png");
-    background-image: -webkit-image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x);
-    background-image: image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x); }
+    background-image: -webkit-image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x) !important;
+    background-image: image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x) !important; }
   .icon .i-warning {
     background-image: url("../img/app/icon-warning.png");
-    background-image: -webkit-image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x);
-    background-image: image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x); }
+    background-image: -webkit-image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x) !important;
+    background-image: image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x) !important; }
   .icon .i-flag {
     background-image: url("../img/app/icon-flag.png");
-    background-image: -webkit-image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x);
-    background-image: image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x); }
+    background-image: -webkit-image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x) !important;
+    background-image: image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x) !important; }
   .icon .i-document {
     background-image: url("../img/app/icon-document.png");
-    background-image: -webkit-image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x);
-    background-image: image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x); }
+    background-image: -webkit-image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x) !important;
+    background-image: image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x) !important; }
   .icon .i-media {
     background-image: url("../img/app/icon-media.png");
-    background-image: -webkit-image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x);
-    background-image: image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x); }
+    background-image: -webkit-image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x) !important;
+    background-image: image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x) !important; }
   .icon b {
     font-size: 13px;
     font-weight: bolder; }
@@ -7300,8 +7312,8 @@ hr {
   background-repeat: no-repeat !important;
   background-position: 97% 50% !important;
   background-image: url("../img/app/right-arrows.png");
-  background-image: -webkit-image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x);
-  background-image: image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x); }
+  background-image: -webkit-image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x) !important;
+  background-image: image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x) !important; }
 
 /*
 	特定的設定
@@ -7337,6 +7349,9 @@ hr {
   margin: 0 !important; }
 .article-list p {
   margin: 0 !important; }
+.article-list a {
+  color: #fff;
+  text-decoration: none; }
 
 article {
   padding-top: 1em; }

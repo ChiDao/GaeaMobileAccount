@@ -11,15 +11,15 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
     ion-content.dark
       ion-list
         ion-item(nav-clear='', menu-close='', href='#/app/start')
-          | 預註冊
+          | {{"preregister"|translate}}
         ion-item(nav-clear='', menu-close='', href='#/app/all-done')
           | 註冊完成后
         ion-item(nav-clear='', menu-close='', href='#/app/about')
           | 关于 GOYA
         ion-item(nav-clear='', menu-close='', href='#/app/modal-allow-notification')
           | modal-allow-notification
-        ion-item(nav-clear='', menu-close='', href='#/app/article')
-          | article.jade
+        //- ion-item(nav-clear='', menu-close='', href='#/app/article')
+        //-   | article.jade
         ion-item(nav-clear='', menu-close='', href='#/app/games/xxx')
           | game
 
