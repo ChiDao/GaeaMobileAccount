@@ -1,6 +1,6 @@
 define(['app'], function(app){
     
-    app.factory('PushProcessingService', function() {
+    app.factory('PushProcessingService', function(Restangular) {
         function onDeviceReady() {
             console.info('NOTIFY  Device is ready.  Registering with GCM server');
            
@@ -12,10 +12,16 @@ define(['app'], function(app){
         		pushNotification.register(apnTokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
             }
         }
+        var base64;
         function apnTokenHandler(result) {
-        	var base64 = hexToBase64(result);
+        	 base64 = hexToBase64(result);
         	console.log("token:"+base64);
         	 console.log("token:"+result);
+              Restangular.all('apn-token').post({base64Token:base64}).then(function(){
+                                                                               console.log("post ok!");
+                                                                               },function(err){
+                                                                             console.log("post err"+JSON.stringify(err));
+                                                                               });
         	
         }
         function gcmSuccessHandler(result) {
@@ -28,6 +34,10 @@ define(['app'], function(app){
             initialize : function () {
                 console.info('NOTIFY  initializing');
                 document.addEventListener('deviceready', onDeviceReady, false);
+            },
+            apnToken:function () {
+                console.log("get token:" + base64);
+                return base64;
             },
             registerID : function (id) {
                 //Insert code here to store the user's ID on your notification server. 

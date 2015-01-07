@@ -7,6 +7,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+var rjs = require('requirejs');
 
 var jade = require('gulp-jade');
 
@@ -14,11 +15,53 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
 
 var paths = {
   scripts: ['www/js/**/*.js'],
   sass: ['www_pre/scss/**/*.scss'],
   jade: ['www_pre/jade/**/*.jade'],
+  buildCopy: [
+    '**/hooks/**/*',
+    '**/www/css/**/*',
+    '**/www/img/**/*',
+    '**/www/templates/**/*',
+    '**/www/index.html',
+    '**/www/bootstrap.js',
+    '**/www/loader.bootstrap.js',
+    '**/www/loader.html',
+    'bower.json',
+    'config.xml',
+    'gulpfile.js',
+    'icon.png',
+    'package.json',
+    'splash.png',
+    '!built_distribute/**/*',
+    '!plugins/**/*',
+    '!plugins-back/**/*',
+    '!node_modules/**/*',
+    '!platforms/**/*',
+  ],
+  buildScripts: [
+    'www/**/require.js',
+    'www/**/angular.js', 
+    'www/**/ionic.bundle.js.js',
+    'www/**/purl.js', 
+    'www/**/lodash.js', 
+    'www/**/dist/restangular.js', 
+    'www/**/loader.app.js', 
+    'www/**/services.LiveUpdate.js',
+    'www/**/angular-messages.js', 
+    'www/**/angular-translate.js', 
+    'www/**/angular-translate-handler-log.js',
+    'www/**/angular-cookies.js', 
+    'www/**/angular-translateangular-translate-storage-cookie.js', 
+    'www/**/angular-translate-storage-local.js',
+    'www/**/angular-translate-handler-log.js',
+    'www/**/angular-translate-handler-log.js',
+    'www/**/js/*.js',
+    '!platforms/**/*.js'
+    ]
 };
 
 gulp.task('default', ['sass']);
@@ -86,3 +129,21 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+
+//==========
+// built
+//==========
+gulp.task('build', ['build-scripts', 'build-copy']);
+
+gulp.task('build-scripts', function(cb){
+  gulp.src(paths.buildScripts)
+  .pipe(uglify())
+  .pipe(gulp.dest('../built_client/www'))
+});
+
+gulp.task('build-copy', function(cb){
+  gulp.src(paths.buildCopy)
+  .pipe(gulp.dest('../built_client/'))
+});
+
