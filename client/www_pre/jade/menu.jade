@@ -10,14 +10,14 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
       h1.title GOYA
     ion-content.dark
       ion-list
-        ion-item(nav-clear='', menu-close='', href='#/app/start')
+        ion-item(nav-clear='', menu-close='', href='#/app/')
           | {{"preregister"|translate}}
-        ion-item(nav-clear='', menu-close='', href='#/app/message')
-          | 信息
+        //- ion-item(nav-clear='', menu-close='', href='#/app/message')
+        //-   | 信息
         ion-item(nav-clear='', menu-close='', href='#/app/about')
           | 关于 GOYA
-        ion-item(nav-clear='', menu-close='', href='#/app/modal-sso-auth')
-          | 第三方授權
+        //- ion-item(nav-clear='', menu-close='', href='#/app/modal-sso-auth')
+        //-   | 第三方授權
         //- ion-item(nav-clear='', menu-close='', href='#/app/article')
         //-   | article
         //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')

@@ -7195,7 +7195,8 @@ p {
   background: none; }
   .list .item a {
     color: #fff;
-    text-decoration: none; }
+    text-decoration: none;
+    background: transparent; }
 
 .mini-button {
   border: none;
