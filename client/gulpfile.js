@@ -138,7 +138,7 @@ gulp.task('build', ['build-scripts', 'build-copy']);
 
 gulp.task('build-scripts', function(cb){
   gulp.src(paths.buildScripts)
-  .pipe(uglify())
+  // .pipe(uglify())
   .pipe(gulp.dest('../built_client/www'))
 });
 

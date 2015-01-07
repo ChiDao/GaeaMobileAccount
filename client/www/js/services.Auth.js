@@ -33,6 +33,9 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         })
       }
       var signupModal = function(){
+        if (signupModalScope.modal){
+          signupModalScope.modal.remove();
+        }
         Modal
           .init('templates/modal-signup.html', signupModalScope)
           .then(function(modal){
@@ -80,6 +83,9 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         
       };
       var preRegistModal = function(){
+        if (preRegistModal.modal){
+          preRegistModal.modal.remove();
+        }
         Modal
           .init('templates/modal-login.html', preRegistModalScope)
           .then(function(modal){
@@ -117,6 +123,9 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         if (_.isFunction(ssoModalScope.onCancel)) ssoModalScope.onCancel();
       }
       var ssoAuthModal = function(){
+        if (ssoAuthModal.modal){
+          ssoAuthModal.modal.remove();
+        }
         Modal
           .init('templates/modal-sso-auth.html', ssoModalScope)
           .then(function(modal){
@@ -181,6 +190,12 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         ssoAuth: function(ssoData){
           //Todo: 返回授权结果给第三方应用
           var ssoCallBack = function(status, info){
+            signupModalScope.onSuccess = undefined;
+            signupModalScope.onError = undefined;
+            signupModalScope.onCancel = undefined;
+            preRegistModalScope.onSuccess = undefined;
+            preRegistModalScope.onError = undefined;
+            preRegistModalScope.onError = undefined;
             if (ionic.Platform.platform() === 'macintel'){
               console.log(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''));
             }
@@ -194,6 +209,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             }
           };
           var confirmSso = function(){
+            $state.go('app.game',{gameId: 1});
             Restangular.oneUrl('user-client-authorize/' + ssoData.appId + '/' + ssoData.url).get().then(function(data){
               console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
               ssoModalScope.gameClientTitle = data.data.rawData.description;
@@ -216,15 +232,6 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           };
           
           
-          //检验参数是否正确
-          // if (!_.isObject(ssoData) || _.keys(_.pick(ssoData, ['appId', 'gameId','callbackHandle'])).length != 3){
-          //   ssoCallBack("params error");
-          //   return;
-          // }
-          // if (_.find(gameClients, {appId: ssoData.appId, gameId: ssoData.gameId, callbackHandle:ssoData.callbackHandle}) === undefined){
-          //   ssoCallBack("unregistered app client");
-          //   return;
-          // }
           if (!this.isLoggedIn()){
             signupModalScope.mustChoise = true;
             signupModalScope.onSuccess = function(){
