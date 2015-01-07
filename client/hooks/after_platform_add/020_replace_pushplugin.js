@@ -16,7 +16,7 @@ if (rootdir) {
 
     var pushforios = [
         {
-            file:"platforms/ios/client/Plugins/com.phonegap.plugins.PushPlugin/PushPlugin.m",
+            file:"platforms/ios/GoYa\!/Plugins/com.phonegap.plugins.PushPlugin/PushPlugin.m",
             to_replace:'registerForRemoteNotificationTypes:notificationTypes',
             replace_with:'registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)'
         }
