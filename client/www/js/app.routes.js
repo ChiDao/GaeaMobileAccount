@@ -187,6 +187,22 @@ define(['app'], function(app){
       }
     })
 
+    // >>>臨時路由 tmp-routes
+
+    .state('app.sso', {
+      url: "/modal-sso-auth",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/modal-sso-auth.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
+    })
+
+    // <<<tmp end
+
     .state('app.single', {
       url: "/playlists/:playlistId",
       views: {
@@ -199,6 +215,8 @@ define(['app'], function(app){
         access: access.public
       }
     });
+
+
     // if none of the above states are matched, use this as the fallback
     if (localStorage.getItem('user') !== null){
       $urlRouterProvider.otherwise('/app/games/1');

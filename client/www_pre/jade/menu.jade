@@ -12,24 +12,18 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
       ion-list
         ion-item(nav-clear='', menu-close='', href='#/app/start')
           | {{"preregister"|translate}}
-        ion-item(nav-clear='', menu-close='', href='#/app/all-done')
-          | 註冊完成后
         ion-item(nav-clear='', menu-close='', href='#/app/about')
           | 关于 GOYA
-        ion-item(nav-clear='', menu-close='', href='#/app/modal-allow-notification')
-          | modal-allow-notification
+        ion-item(nav-clear='', menu-close='', href='#/app/modal-sso-auth')
+          | 第三方授權
         //- ion-item(nav-clear='', menu-close='', href='#/app/article')
-        //-   | article.jade
-        ion-item(nav-clear='', menu-close='', href='#/app/games/xxx')
-          | game
-
-
+        //-   | article
         //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
         //-   | Login
-        //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
-        //-   | {{Auth.currentUser().userName}}
-        //- ion-item(nav-clear='', menu-close='', href='#/app/search')
-        //-   | Search
+        //- //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
+        //- //-   | {{Auth.currentUser().userName}}
+        //- //- ion-item(nav-clear='', menu-close='', href='#/app/search')
+        //- //-   | Search
         //- ion-item(nav-clear='', menu-close='', href='#/app/browse')
         //-   | Browse
         //- ion-item(nav-clear='', menu-close='', href='#/app/playlists')

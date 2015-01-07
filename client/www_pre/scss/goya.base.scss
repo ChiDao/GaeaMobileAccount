@@ -73,7 +73,10 @@ input::-webkit-input-placeholder {
 	組件
 */
 
-
+h5 {
+	padding-top: 1.4em;
+	font-weight: 800;
+}
 
 .t-indent {
 	@include t-indent();

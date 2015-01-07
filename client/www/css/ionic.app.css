@@ -7014,6 +7014,10 @@ input::-webkit-input-placeholder {
 /*
 	組件
 */
+h5 {
+  padding-top: 1.4em;
+  font-weight: 800; }
+
 .t-indent {
   text-indent: 26px !important; }
 
@@ -7338,6 +7342,9 @@ hr {
     font-weight: 200; }
   .store .watting {
     background-color: #ff7e86; }
+
+.item-avatar img {
+  border-radius: 0 !important; }
 
 .article-list .unit {
   margin-bottom: 2.2em; }
