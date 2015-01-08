@@ -7106,6 +7106,20 @@ h5 {
 /*
 	全局設定
 */
+.wide-as-needed {
+  overflow: scroll;
+  white-space: nowrap; }
+
+.scroll {
+  min-width: 100%; }
+
+.screenList {
+  margin: 24px 0; }
+  .screenList img {
+    width: 80%;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
+    margin-right: 10px; }
+
 .bar {
   border: none !important;
   background: none !important;
