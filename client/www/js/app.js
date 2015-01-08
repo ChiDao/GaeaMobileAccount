@@ -53,7 +53,7 @@ define([
       // }
 
       if (ionic.Platform.platform() !== 'macintel'){
-        // LiveUpdate.update();
+        LiveUpdate.update();
       }
 
       if (navigator.splashscreen){
