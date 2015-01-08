@@ -53,7 +53,7 @@ define(['app',
 					//	 $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
 						 $translateProvider.fallbackLanguage(['jp', 'cn']);
 						 $translateProvider.useLocalStorage();
-						 $translateProvider.useMissingTranslationHandlerLog();
+						 //$translateProvider.useMissingTranslationHandlerLog();
 						 $translateProvider.useSanitizeValueStrategy('escape');
 						 return ;
 						};

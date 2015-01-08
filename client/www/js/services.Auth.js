@@ -162,10 +162,10 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
            var apnToken = PushProcessingService.apnToken();
             localStorage.setItem('apnToken', apnToken);
 
-$ionicViewService.nextViewOptions({
-  disableAnimate: true,
-  disableBack: true
-});
+            $ionicViewService.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+            });
             $state.go('app.game',{gameId: 1});
           }
           preRegistModalScope.onSuccess = function(){
