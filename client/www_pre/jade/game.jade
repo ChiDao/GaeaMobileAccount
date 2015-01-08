@@ -71,14 +71,15 @@ ion-view#index(view-title='{{"wait_service"|translate}}')
 
         div.timer.margin-top.margin-bottom
           div.number
-            span 8
-            p DAYS
+            span#day {{cd | date: "dd"}}
+            p DAY
           div.number
-            span 32
+            span#minute {{cd | date: "hh"}}
+            p HOUR
+          div.number
+            span#second {{cd | date: "mm"}}
             p MINUTE
-          div.number
-            span 58
-            p SECOND
+        hr.margin-bottom
         //- div.row.text-center.segmented-control
         //-   div.col.on(ng-click='onClick("info")')
         //-     | {{'intro'|translate}}
