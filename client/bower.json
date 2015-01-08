@@ -8,6 +8,7 @@
     "purl": "~2.3.1",
     "restangular": "~1.4.0",
     "angular-messages": "1.3.6",
-    "requirejs": "~2.1.15"
+    "requirejs": "~2.1.15",
+    "thenjs": "~1.4.6"
   }
 }

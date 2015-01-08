@@ -7,6 +7,7 @@
 define([
     'cordova',
     // 'purl',
+    // 'thenjs',
     'restangular',
     'angular-messages',
     'angular-translate',
@@ -21,7 +22,7 @@ define([
     ])
 
   starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope,PushProcessingService, Restangular) {
-      console.log(10);
+      console.log('starter run');
       if(localStorage.getItem('apnToken') != null){
           PushProcessingService.initialize();
        }
@@ -39,17 +40,21 @@ define([
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (ionic.Platform.platform() !== 'macintel'){
-        LiveUpdate.update();
-      }
-      if (navigator.splashscreen){
-        navigator.splashscreen.hide();
+        LiveUpdate.update().then(function(){
+          if (navigator.splashscreen){
+            var versionData = JSON.parse(localStorage.getItem('version'));
+            window.location = versionData.currentUrl;
+          }
+        },function(){
+          navigator.splashscreen.hide();
+        });
       }
 
       // 检查是否被调用
-      console.log(localStorage.getItem('openUrl'));
+      console.debug(localStorage.getItem('openUrl'));
       var openUrl = localStorage.getItem('openUrl');
       localStorage.removeItem('openUrl');
-      console.log(localStorage.getItem('openUrl'));
+      console.debug(localStorage.getItem('openUrl'));
       if (openUrl !== null){
         var parsedUrl = purl(openUrl);
         Auth.ssoAuth(parsedUrl.param());
