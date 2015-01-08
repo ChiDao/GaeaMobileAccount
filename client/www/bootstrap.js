@@ -26,6 +26,7 @@ require.config({
         'controllers.StartCtrl': 'js/controllers.StartCtrl',
         'controllers.GamesCtrl': 'js/controllers.GamesCtrl',
         'controllers.GameCtrl': 'js/controllers.GameCtrl',
+        'controllers.ArticleCtrl': 'js/controllers.ArticleCtrl',
         'controllers.UserInfoCtrl': 'js/controllers.UserInfoCtrl',
         'controllers.AppCtrl': 'js/controllers.AppCtrl',
         'services.Games': 'js/services.Games',
@@ -53,6 +54,7 @@ require.config({
                 'controllers.StartCtrl',
                 'controllers.GamesCtrl',
                 'controllers.GameCtrl',
+                'controllers.ArticleCtrl',
                 'controllers.UserInfoCtrl',
                 'controllers.AppCtrl',
                 'services.Games'

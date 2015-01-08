@@ -138,10 +138,11 @@ define(['app'], function(app){
     })  
 
     .state('app.article', {
-      url: "/article",
+      url: "/article/:articleId/:articleTitle",
       views: {
         'menuContent': {
-          templateUrl: "templates/article.html"
+          templateUrl: "templates/article.html",
+          controller: "ArticleCtrl"
         }
       },
       data: {
