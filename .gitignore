@@ -1,6 +1,7 @@
 
 # 忽略...
 
+**/.DS_Store
 client/www/templates/
 
 # Created by https://www.gitignore.io
