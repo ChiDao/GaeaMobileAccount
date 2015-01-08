@@ -22,6 +22,7 @@ define([
 
   starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope,PushProcessingService, Restangular) {
       console.log(10);
+      PushProcessingService.checkinitialize();
       if(localStorage.getItem('apnToken') != null){
           PushProcessingService.initialize();
        }

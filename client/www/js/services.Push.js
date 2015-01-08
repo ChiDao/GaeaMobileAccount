@@ -1,28 +1,36 @@
 define(['app'], function(app){
     
     app.factory('PushProcessingService', function(Restangular) {
+        var isEnable;
+        function checkPush() {
+            var pushNotification = window.plugins.pushNotification;
+            pushNotification.checkEnabled(function (result) {
+                isEnable = result;
+            });
+        }
         function onDeviceReady() {
             console.info('NOTIFY  Device is ready.  Registering with GCM server');
            
             var pushNotification = window.plugins.pushNotification;
             if (device.platform == 'android' || device.platform == 'Android') {
-            	 //register with google GCM server
-            	pushNotification.register(gcmSuccessHandler, errorHandler, {"senderID":"870712452293","ecb":"onNotificationGCM"});
-        	}else {
-        		pushNotification.register(apnTokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
+                 //register with google GCM server
+                pushNotification.register(gcmSuccessHandler, errorHandler, {"senderID":"870712452293","ecb":"onNotificationGCM"});
+            }else {
+                pushNotification.register(apnTokenHandler, errorHandler, {"badge":"true","sound":"true","alert":"true","ecb":"onNotificationAPN"});  // required!
             }
         }
         var base64;
         function apnTokenHandler(result) {
-        	 base64 = hexToBase64(result);
-        	console.log("token:"+base64);
-        	 console.log("token:"+result);
+            base64 = hexToBase64(result);
+            console.log("token:"+base64);
+            console.log("token:"+result);
+            localStorage.setItem('apnToken', result);
               Restangular.all('apn-token').post({base64Token:base64}).then(function(){
-                                                                               console.log("post ok!");
-                                                                               },function(err){
-                                                                             console.log("post err"+JSON.stringify(err));
-                                                                               });
-        	
+                console.log("post ok!");
+              },function(err){
+                console.log("post err"+JSON.stringify(err));
+              });
+            
         }
         function gcmSuccessHandler(result) {
             console.info('NOTIFY  pushNotification.register succeeded.  Result = '+result)
@@ -31,6 +39,13 @@ define(['app'], function(app){
             console.error('NOTIFY  '+error);
         }
         return {
+            checkinitialize: function () {
+                console.log('check initializing');
+                document.addEventListener('deviceready', checkPush, false);
+                },
+            checkResult: function(){
+                return isEnable;
+            },
             initialize : function () {
                 console.info('NOTIFY  initializing');
                 document.addEventListener('deviceready', onDeviceReady, false);
@@ -77,7 +92,7 @@ define(['app'], function(app){
             for (var i = 0, j = 0, len = base64.length / 4, bin = []; i < len; ++i) {
                 var a = tableStr.indexOf(base64[j++] || "A"), b = tableStr.indexOf(base64[j++] || "A");
                 var c = tableStr.indexOf(base64[j++] || "A"), d = tableStr.indexOf(base64[j++] || "A");
-            	if ((a | b | c | d) < 0) throw new Error("String contains an invalid character");
+                if ((a | b | c | d) < 0) throw new Error("String contains an invalid character");
                 bin[bin.length] = ((a << 2) | (b >> 4)) & 255;
                 bin[bin.length] = ((b << 4) | (c >> 2)) & 255;
                 bin[bin.length] = ((c << 6) | d) & 255;
@@ -160,26 +175,26 @@ define(['app'], function(app){
 
     // ALL APN notifications come through here. 
     function onNotificationAPN(e){
-    	console.log("Received a notification! " + e.body);
-    	console.log("event sound " + e.sound);
+        console.log("Received a notification! " + e.body);
+        console.log("event sound " + e.sound);
         console.log("event badge " + e.badge);
-    	console.log("event " + e);
-    	if (e.body) {
-    	    navigator.notification.alert(e.body);
-    	}
-    	                     
-    	if (e.sound) {
-    	    var snd = new Media(e.sound);
-    	    snd.play();
-    	}
-    	                 
-    	if (e.badge) {
-    	    pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+        console.log("event " + e);
+        if (e.body) {
+            navigator.notification.alert(e.body);
+        }
+                             
+        if (e.sound) {
+            var snd = new Media(e.sound);
+            snd.play();
+        }
+                         
+        if (e.badge) {
+            pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
             function successHandler(result) {
                 console.log('NOTIFY  '+result);
             }
             console.log(e.badge);
-    	}
+        }
 
     }
-});	
+}); 

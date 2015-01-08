@@ -18,7 +18,6 @@ var pluginlist = [
     "technology.kulak.cordova.appopen",
     "https://github.com/ohh2ahh/AppAvailability.git",
     "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeago",
-    "https://github.com/phonegap-build/PushPlugin.git",
 ];
 
 // no need to configure below

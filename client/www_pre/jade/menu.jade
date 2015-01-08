@@ -10,7 +10,7 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
       h1.title GOYA
     ion-content.dark
       ion-list
-        ion-item(nav-clear='', menu-close='', href='#/app/')
+        ion-item(nav-clear='', ng-show='!Auth.isLoggedIn()',menu-close='', href='#/app/')
           | {{"preregister"|translate}}
         //- ion-item(nav-clear='', menu-close='', href='#/app/message')
         //-   | 信息
