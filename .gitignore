@@ -3,6 +3,7 @@
 
 **/.DS_Store
 client/www/templates/
+client/plugins/
 
 # Created by https://www.gitignore.io
 
