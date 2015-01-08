@@ -1,6 +1,7 @@
 define(['app', 'services.Modal', 'services.Push'], function(app)
 {
-    app.factory('Auth', function($rootScope, $ionicHistory, $timeout, $state, $http, $ionicModal, Restangular, Modal,PushProcessingService) {
+    app.factory('Auth', function($rootScope, $ionicHistory, $timeout, $state, 
+      $http, $ionicModal, Restangular, Modal,PushProcessingService) {
       //Todo: 把定义从app.config移到这里
       var accessLevels = app.routingConfig.accessLevels,
           userRoles = app.routingConfig.userRoles,
@@ -171,7 +172,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
                 if(checkPush != "Yes"){
                   allowNotificationModal();
                 }else{
-                  $ionicViewService.nextViewOptions({
+                  $ionicHistory.nextViewOptions({
                     disableAnimate: true,
                     disableBack: true
                   });
