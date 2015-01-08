@@ -163,6 +163,8 @@ gulp.task('build-scripts', function(cb){
     // 'www/**/angular-translate-handler-log.js',
     // 'www/**/angular-translate-handler-log.js',
     'www/**/js/controllers.StartCtrl.js',
+    'www/**/js/controllers.GamesCtrl.js',
+    'www/**/js/controllers.GameCtrl.js',
     // '!platforms/**/*.js'
     ])
   .pipe(uglify())
