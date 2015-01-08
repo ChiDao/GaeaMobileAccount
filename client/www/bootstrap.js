@@ -3,6 +3,7 @@ require.config({
   		'cordova': 'cordova',
         // 'purl': 'lib/purl/purl',
         'lodash': 'lib/lodash/dist/lodash',
+        // 'thenjs': 'lib/thenjs/then',
         'restangular': 'lib/restangular/dist/restangular',
         'angular-messages': 'lib/angular-messages/angular-messages',
         'angular-translate': 'lib/angular-translate/angular-translate',
@@ -39,6 +40,9 @@ require.config({
 		},
         // 'purl': {
         //     exports: 'purl'
+        // },
+        // 'thenjs': {
+        //     exports: 'Thenjs'
         // },
         'lodash': {
             exports: '_'
