@@ -13,7 +13,7 @@ ion-view#index(view-title='{{"wait_service"|translate}}')
               b Soul Clash
               p Gaea Mobile
             .col.text-right.no-padding
-              button.mini-button.watting {{"wait_service"|translate}}
+              button.mini-button {{"wait_service"|translate}}
           hr
         
         .article-list
@@ -52,7 +52,7 @@ ion-view#index(view-title='{{"wait_service"|translate}}')
           //-   .col.unit-p.no-padding
           //-     p
           //-       a(href="#/app/article") 聖誕跨年歡慶限定7-11四部曲
-          //- button.button.a-button.button-block.nol-button.right-arrows {{'raider_articles'|translate}}
+          a.button.a-button.button-block.nol-button.right-arrows(href="#/app/l-article-list") {{'raider_articles'|translate}}
           hr.margin-top
         div.row.text-center
           div.col
@@ -71,14 +71,15 @@ ion-view#index(view-title='{{"wait_service"|translate}}')
 
         div.timer.margin-top.margin-bottom
           div.number
-            span 8
-            p DAYS
+            span#day {{cd | date: "dd"}}
+            p DAY
           div.number
-            span 32
+            span#minute {{cd | date: "hh"}}
+            p HOUR
+          div.number
+            span#second {{cd | date: "mm"}}
             p MINUTE
-          div.number
-            span 58
-            p SECOND
+        hr.margin-bottom
         //- div.row.text-center.segmented-control
         //-   div.col.on(ng-click='onClick("info")')
         //-     | {{'intro'|translate}}
@@ -97,4 +98,3 @@ ion-view#index(view-title='{{"wait_service"|translate}}')
         hr.margin-bottom
         //- button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'share'|translate}}
         a.button.a-button.button-block.nol-button.right-arrows(href="#/app/s-game") 查看遊戲
-        button.button.a-button.button-block.nol-button.right-arrows(ng-click="UI.openURL('http://www.gaeamobile.net')") {{'official_web'|translate}}

@@ -1,6 +1,8 @@
 define(['app'], function(app)
 {
-	app.controller('GamesCtrl', function($scope, Games) {
-	  $scope.games = Games.all();
-	});
+	app.controller('GamesCtrl', ['$scope', 'Games',
+		function($scope, Games) {
+		  $scope.games = Games.all();
+		}
+	]);
 });

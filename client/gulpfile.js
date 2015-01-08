@@ -30,6 +30,9 @@ var paths = {
     '**/www/bootstrap.js',
     '**/www/loader.bootstrap.js',
     '**/www/loader.html',
+    '**/www/lib/ionic/css/*',
+    '**/www/lib/ionic/fonts/*',
+    '**/www/lib/ionic/css/*',
     'bower.json',
     'config.xml',
     'gulpfile.js',
@@ -47,6 +50,7 @@ var paths = {
     'www/**/angular.js', 
     'www/**/ionic.bundle.js.js',
     'www/**/purl.js', 
+    'www/**/then.js',
     'www/**/lodash.js', 
     'www/**/dist/restangular.js', 
     'www/**/loader.app.js', 
@@ -137,8 +141,33 @@ gulp.task('git-check', function(done) {
 gulp.task('build', ['build-scripts', 'build-copy']);
 
 gulp.task('build-scripts', function(cb){
-  gulp.src(paths.buildScripts)
-  // .pipe(uglify())
+  // gulp.src(paths.buildScripts)
+  // // .pipe(uglify())
+  // .pipe(gulp.dest('../built_client/www'));
+  gulp.src([
+    // 'www/**/require.js',
+    // 'www/**/angular.js', 
+    // 'www/**/ionic.bundle.js.js',
+    // 'www/**/purl.js', 
+    // 'www/**/then.js',
+    // 'www/**/lodash.js', 
+    // 'www/**/dist/restangular.js', 
+    // 'www/**/loader.app.js', 
+    // 'www/**/services.LiveUpdate.js',
+    // 'www/**/angular-messages.js', 
+    // 'www/**/angular-translate.js', 
+    // 'www/**/angular-translate-handler-log.js',
+    // 'www/**/angular-cookies.js', 
+    // 'www/**/angular-translate-storage-cookie.js', 
+    // 'www/**/angular-translate-storage-local.js',
+    // 'www/**/angular-translate-handler-log.js',
+    // 'www/**/angular-translate-handler-log.js',
+    'www/**/js/controllers.StartCtrl.js',
+    'www/**/js/controllers.GamesCtrl.js',
+    'www/**/js/controllers.GameCtrl.js',
+    // '!platforms/**/*.js'
+    ])
+  .pipe(uglify())
   .pipe(gulp.dest('../built_client/www'))
 });
 

@@ -75,19 +75,6 @@ define(['app'], function(app){
         }
       })
 
-
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/search.html"
-        }
-      },
-      data: {
-        access: access.public
-      }
-    })
-
     .state('app.s-game', {
       url: "/s-game",
       views: {
@@ -160,6 +147,18 @@ define(['app'], function(app){
       data: {
         access: access.public
       }
+    })
+
+    .state('app.l-article-list', {
+      url: "/l-article-list",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/l-article-list.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
     })    
 
     .state('app.about', {
@@ -167,31 +166,6 @@ define(['app'], function(app){
       views: {
         'menuContent': {
           templateUrl: "templates/about.html"
-        }
-      },
-      data: {
-        access: access.public
-      }
-    })
-
-    .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/browse.html"
-        }
-      },
-      data: {
-        access: access.user
-      }
-    })
-
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
         }
       },
       data: {
@@ -214,19 +188,6 @@ define(['app'], function(app){
     })
 
     // <<<tmp end
-
-    .state('app.single', {
-      url: "/playlists/:playlistId",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
-        }
-      },
-      data: {
-        access: access.public
-      }
-    });
 
 
     // if none of the above states are matched, use this as the fallback

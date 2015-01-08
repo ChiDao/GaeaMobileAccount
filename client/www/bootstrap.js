@@ -3,6 +3,7 @@ require.config({
   		'cordova': 'cordova',
         // 'purl': 'lib/purl/purl',
         'lodash': 'lib/lodash/dist/lodash',
+        // 'thenjs': 'lib/thenjs/then',
         'restangular': 'lib/restangular/dist/restangular',
         'angular-messages': 'lib/angular-messages/angular-messages',
         'angular-translate': 'lib/angular-translate/angular-translate',
@@ -25,9 +26,6 @@ require.config({
         'controllers.StartCtrl': 'js/controllers.StartCtrl',
         'controllers.GamesCtrl': 'js/controllers.GamesCtrl',
         'controllers.GameCtrl': 'js/controllers.GameCtrl',
-        'controllers.PlaylistsCtrl': 'js/controllers.PlaylistsCtrl',
-        'controllers.PlaylistCtrl': 'js/controllers.PlaylistCtrl',
-        'controllers.LoginCtrl': 'js/controllers.LoginCtrl',
         'controllers.UserInfoCtrl': 'js/controllers.UserInfoCtrl',
         'controllers.AppCtrl': 'js/controllers.AppCtrl',
         'services.Games': 'js/services.Games',
@@ -39,6 +37,9 @@ require.config({
 		},
         // 'purl': {
         //     exports: 'purl'
+        // },
+        // 'thenjs': {
+        //     exports: 'Thenjs'
         // },
         'lodash': {
             exports: '_'
@@ -52,9 +53,6 @@ require.config({
                 'controllers.StartCtrl',
                 'controllers.GamesCtrl',
                 'controllers.GameCtrl',
-                'controllers.PlaylistCtrl',
-                'controllers.PlaylistsCtrl',
-                'controllers.LoginCtrl',
                 'controllers.UserInfoCtrl',
                 'controllers.AppCtrl',
                 'services.Games'

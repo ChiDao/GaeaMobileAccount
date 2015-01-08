@@ -5,6 +5,9 @@ define(['app'], function(app)
     return {
       openURL: function(URL){
         window.open(URL, '_system');
+      },
+      clockDown: function(d,m,s) {
+      	
       }
 
     }
