@@ -63,6 +63,22 @@ PushNotification.prototype.setApplicationIconBadgeNumber = function(successCallb
 
     cordova.exec(successCallback, errorCallback, "PushPlugin", "setApplicationIconBadgeNumber", [{badge: badge}]);
 };
+// Call this to check if push notifications are turn on
+PushNotification.prototype.checkEnabled = function(successCallback, errorCallback, options) {
+     if (errorCallback == null) { errorCallback = function() {}}
+
+    if (typeof errorCallback != "function")  {
+        console.log("PushNotification.unregister failure: failure parameter not a function");
+        return
+    }
+
+    if (typeof successCallback != "function") {
+        console.log("PushNotification.unregister failure: success callback parameter must be a function");
+        return
+    }          
+    cordova.exec(successCallback, errorCallback, "PushPlugin", "checkEnabled", [options]);
+};
+
 
 //-------------------------------------------------------------------
 

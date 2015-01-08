@@ -75,11 +75,12 @@ define(['app'], function(app){
         }
       })
 
-    .state('app.s-game', {
-      url: "/s-game",
+    .state('app.wait-open', {
+      url: "/wait-open",
       views: {
         'menuContent': {
-          templateUrl: "templates/s-game.html"
+          templateUrl: "templates/wait-open.html",
+          controller: "WaitOpenCtrl"
         }
       },
       data: {
