@@ -147,6 +147,18 @@ define(['app'], function(app){
       data: {
         access: access.public
       }
+    })
+
+    .state('app.l-article-list', {
+      url: "/l-article-list",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/l-article-list.html"
+        }
+      },
+      data: {
+        access: access.public
+      }
     })    
 
     .state('app.about', {
