@@ -15,7 +15,7 @@ ion-view#index(view-title='{{"preregister"|translate}}')
               b {{start.game_name}}
               p {{start.game_corp}}
             .col.text-right.no-padding
-              button.mini-button(ng-click='Auth.login()') {{'preregister'|translate}}
+              button.mini-button.watting(ng-click='Auth.login()') {{'preregister'|translate}}
         div.big-photo.margin-bottom
           img.full-width(src="{{start.big_img}}",srcset="{{start.big_img_2x}} 2x")
         div.row.text-center
@@ -38,13 +38,8 @@ ion-view#index(view-title='{{"preregister"|translate}}')
         //-   div.col(ng-click='onClick("gift")')
         //-     | {{'gift'|translate}}
         div.t-indent.margin-bottom
-          #info.sc-div
             {{start.game_content|translate}}
-          #screen.sc-div
-            
-          #gift.sc-div
 
         hr.margin-bottom
         button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'preregister2'|translate}}
         a.button.a-button.button-block.nol-button.right-arrows(href="#/app/s-game") 查看遊戲
-        button.button.a-button.button-block.nol-button.right-arrows(ng-click="UI.openURL('http://www.gaeamobile.net')") {{'official_web'|translate}}
