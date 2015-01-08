@@ -17,13 +17,13 @@ ion-view#index(view-title='{{"wait_service"|translate}}')
           hr
         
         .article-list
-          .row.unit.no-padding.right-arrows.row-center
+          .row.unit.no-padding.right-arrows.row-center(ng-repeat="article in articles")
             .col-10.no-padding
               div.icon.no-margin
                 span.i-flag
             .col.unit-p
               p
-                a(href="#/app/article") {{'promotion'|translate}} 玩家遊戲操作與儲值注意需知！
+                a(href="#/app/article/{{article._id}}/{{article.title}}") {{'promotion'|translate}} {{article.title}}
           //- .row.unit.no-padding.right-arrows.row-center
           //-   .col-10.no-padding
           //-     div.icon.no-margin

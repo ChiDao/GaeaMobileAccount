@@ -18,10 +18,10 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
           | 关于 GOYA
         //- ion-item(nav-clear='', menu-close='', href='#/app/modal-sso-auth')
         //-   | 第三方授權
-        //- ion-item(nav-clear='', menu-close='', href='#/app/games/xxx')
-        //-   | game
-        //- ion-item(nav-clear='', menu-close='', href='#/app/article')
-        //-   | article
+        ion-item(nav-clear='', menu-close='', href='#/app/games/xxx')
+          | game
+        ion-item(nav-clear='', menu-close='', href='#/app/article')
+          | article
         //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
         //-   | Login
         //- //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
