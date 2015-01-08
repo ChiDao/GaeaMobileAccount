@@ -67,7 +67,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             console.log(me.data.rawData);
             if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
             $timeout(function() {
-              preRegistModalScope.closeModal();
+              preRegistModalScopepreRegistModalScope.closeModal();
             }, 1000);
           },function(error){
             preRegistModalScope.commitFormError = true;
@@ -159,9 +159,6 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           preRegistModalScope.mustChoise = false;
           allowNotificationModalScope.onOk = function(){
            PushProcessingService.initialize();
-           var apnToken = PushProcessingService.apnToken();
-            localStorage.setItem('apnToken', apnToken);
-
             $ionicHistory.nextViewOptions({
               disableAnimate: true,
               disableBack: true
@@ -169,7 +166,17 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             $state.go('app.game',{gameId: 1});
           }
           preRegistModalScope.onSuccess = function(){
-            allowNotificationModal();
+            var checkPush =  PushProcessingService.checkResult();
+                console.log("checkPush"+checkPush);
+                if(checkPush != "Yes"){
+                  allowNotificationModal();
+                }else{
+                  $ionicViewService.nextViewOptions({
+                    disableAnimate: true,
+                    disableBack: true
+                  });
+                  $state.go('app.game',{gameId: 1});
+                }
           }
           preRegistModalScope.onError = error;
           preRegistModalScope.onClose = close;
@@ -240,6 +247,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             signupModalScope.mustChoise = true;
             signupModalScope.onSuccess = function(){
               preRegistModalScope.formData.email = signupModalScope.formData.email;
+              preRegistModalScope.commitFormError = false;
               preRegistModal();
             };
             signupModalScope.onError = function(){

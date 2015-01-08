@@ -22,6 +22,7 @@ define([
     ])
 
   starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope,PushProcessingService, Restangular) {
+      PushProcessingService.checkinitialize();
       console.log('starter run');
       if(localStorage.getItem('apnToken') != null){
           PushProcessingService.initialize();
@@ -52,7 +53,7 @@ define([
       // }
 
       if (ionic.Platform.platform() !== 'macintel'){
-        LiveUpdate.update();
+        // LiveUpdate.update();
       }
 
       if (navigator.splashscreen){

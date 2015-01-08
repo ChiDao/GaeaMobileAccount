@@ -1,7 +1,8 @@
 define(['app', 'restangular'], function(app)
 {
-	app.controller('GameCtrl', ['$scope', '$stateParams', 'UI', 'Restangular',
-		function($scope, $stateParams, UI, Restangular) {
+<<<<<<< HEAD
+	app.controller('GameCtrl', ['$scope', '$stateParams', 'UI', 'Restangular', "$timeout",
+		function($scope, $stateParams, UI, Restangular, $timeout) {
 			$scope.UI = UI;
 			$scope.game = {};
 			//http://42.120.45.236:8485/client-articles/14a66eaac9ae6457?_last
@@ -14,6 +15,16 @@ define(['app', 'restangular'], function(app)
 				}, function(response){
 					console.log('Get articles error:' + JSON.stringify(response));
 				});
+
+			up = new Date(2015,1,10,0,0,0)
+			$scope.cd = up - Date.now();
+			$scope.onTimeout = function () {
+				$scope.cd = up - Date.now();
+				mytimeout = $timeout($scope.onTimeout,5000);
+			}
+
+			var mytimeout = $timeout($scope.onTimeout,5000);
+
 		}
 	]);
 });
