@@ -1,0 +1,26 @@
+ion-modal-view#AllowNoti.Pages
+  ion-header-bar.bar
+    .title.color-w 如何打開通知
+  form(name='signUpForm', novalidate="", ng-submit='commitForm(loginForm)')
+    ion-content.color-w.dark
+      .game-bg.screenHeight
+        div.top
+          img(src="img/data/soul-clash/logo.png",srcset="img/data/soul-clash/logo@2x.png 2x")
+        .black.text-center
+          | 教程在這裡
+    .page-footer.page-padding
+        .row
+          .col
+            button#buttonOk.a-button.button.main-button.right-arrows(ng-click='ok()')  完成
+
+
+
+
+//- ion-modal-view
+//-   ion-header-bar
+//-     h1.title 开启消息推送
+//-   ion-content
+//-     h1 请开通消息通知，以便游戏开服后第一时间能通知您
+//-     div.list
+//-       label.item
+//-         button#buttonOk.button.button-block.button-positive(ng-click='ok()') 下一步
