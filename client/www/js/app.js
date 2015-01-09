@@ -52,8 +52,6 @@ define([
       //   });
       // }
 
-      console.debug();
-
       if (ionic.Platform.isWebView()){
         LiveUpdate.update();
       }
@@ -63,10 +61,8 @@ define([
       }
 
       // 检查是否被调用
-      console.debug(localStorage.getItem('openUrl'));
       var openUrl = localStorage.getItem('openUrl');
       localStorage.removeItem('openUrl');
-      console.debug(localStorage.getItem('openUrl'));
       if (openUrl !== null){
         var parsedUrl = purl(openUrl);
         Auth.ssoAuth(parsedUrl.param());
