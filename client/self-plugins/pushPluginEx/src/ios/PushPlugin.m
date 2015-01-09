@@ -138,7 +138,9 @@
 {
     self.callbackId = command.callbackId;
 
-    if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone)      
+if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8)
+{
+    if ([[UIApplication sharedApplication] currentUserNotificationSettings].types == UIUserNotificationTypeNone)
     {
         NSLog(@"未开启");
         [self successWithMessage:@"No"];
@@ -146,8 +148,19 @@
         NSLog(@"开启");
         [self successWithMessage:@"Yes"];
     }
-
+}else
+{
+    if ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] == UIRemoteNotificationTypeNone)
+    {
+        NSLog(@"未开启");
+        [self successWithMessage:@"No"];
+    }else{
+        NSLog(@"开启");
+        [self successWithMessage:@"Yes"];
+    }
 }
+}
+
 
 /*
 - (void)isEnabled:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options {
