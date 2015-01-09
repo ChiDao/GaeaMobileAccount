@@ -99,7 +99,7 @@ define(['app'], function(app)
   })
 
   .run(function(RestRoute){
-    RestRoute.createRoute();
+    // RestRoute.createRoute();
   });
 });
 

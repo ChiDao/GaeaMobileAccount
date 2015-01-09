@@ -233,6 +233,8 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
               console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
               ssoModalScope.gameClientTitle = data.data.rawData.description;
               ssoModalScope.authCode = data.data.rawData.code;
+              ssoModalScope.publisher = data.data.rawData.publisher;
+              ssoModalScope.gameClientLogo = data.data.rawData.gameClientLogo;
               ssoAuthModal();
             }, function(error){
               ssoCallBack('-3', 'sso fail');

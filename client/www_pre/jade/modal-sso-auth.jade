@@ -11,9 +11,10 @@ ion-modal-view
         h5.color-w 該應用正在請求你的授權允許
         .list
           a.item.item-avatar(href='#')
-            img(src="img/app/app-icon.png",srcset="img/app/app-icon@2x.png 2x")
+            img(src="{{gameClientLogo}}",srcset="{{gameClientLogo}} 2x")
             h2.color-w {{gameClientTitle}}
-            p.color-w 莉莉絲遊戲
+            p.color-w {{publisher}}
+        hr.margin-bottom
         hr.margin-bottom
         button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='ok()') 允許授權
         button.button.a-button.button-block.nol-button.right-arrows(ng-click='cancel()') 取消授權
