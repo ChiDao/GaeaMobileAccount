@@ -52,7 +52,9 @@ define([
       //   });
       // }
 
-      if (ionic.Platform.platform() !== 'macintel'){
+      console.debug();
+
+      if (ionic.Platform.isWebView()){
         LiveUpdate.update();
       }
 
