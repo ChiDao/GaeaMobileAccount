@@ -47,6 +47,9 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
       //定义登陆对话框
       var preRegistModalScope = $rootScope.$new();
       preRegistModalScope.formData = {password: ''};
+      preRegistModalScope.resetcommitFormError = function(ev){
+          preRegistModalScope.commitFormError = false;
+      }
       preRegistModalScope.commitForm = function(commitForm){
         if (commitForm.$invalid) return;
         preRegistModalScope.commitFormError = false;

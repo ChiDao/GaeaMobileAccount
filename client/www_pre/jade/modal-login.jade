@@ -13,7 +13,7 @@ ion-modal-view.Pages.pass-code
             .col.no-padding
 
               .input(ng-class="{'has-error': loginForm.password.$invalid}")
-                input.right-arrows(name='password',placeholder="驗證碼" type='number', ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
+                input.right-arrows(name='password',placeholder="驗證碼" type='number', ng-keyup="resetcommitFormError($event)",ng-model='formData.password',ng-minlength='4', ng-maxlength='4', required)
                 //- .timer 
                 //-   input.number(type="tel", placeholder="")
                 //-   input.number(type="tel", placeholder="")
