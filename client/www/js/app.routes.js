@@ -194,7 +194,7 @@ define(['app'], function(app){
 
     // if none of the above states are matched, use this as the fallback
     if (localStorage.getItem('user') !== null){
-      $urlRouterProvider.otherwise('/app/games/1');
+      $urlRouterProvider.otherwise('/app/wait-open');
     }else{
       $urlRouterProvider.otherwise('/app/start');
     }

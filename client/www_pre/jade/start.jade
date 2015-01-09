@@ -9,7 +9,7 @@ ion-view#index(view-title='{{"preregister"|translate}}')
         div.store
           .row.row-center.no-padding
             .col.no-padding
-              a(href="#/app/s-game")
+              a(href="#/app/games/1")
                 img(src="{{start.game_icon}}",srcset="{{start.game_icon_2x}} 2x")
             .col.text-title
               b {{start.game_name}}
@@ -42,4 +42,4 @@ ion-view#index(view-title='{{"preregister"|translate}}')
 
         hr.margin-bottom
         button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'preregister2'|translate}}
-        a.button.a-button.button-block.nol-button.right-arrows(href="#/app/s-game") 查看遊戲
+        a.button.a-button.button-block.nol-button.right-arrows(href="#/app/games/1") 查看遊戲

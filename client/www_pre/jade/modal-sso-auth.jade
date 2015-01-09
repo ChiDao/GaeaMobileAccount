@@ -2,7 +2,7 @@ ion-modal-view
   ion-header-bar.bar
     h1.title.color-w 請求授權
     .buttons
-      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'complete'|translate}}
+      button.color-bule.button.button-clear(ng-click='cancel()') {{'cancel'|translate}}
   ion-content.color-w.dark
     .game-bg.screenHeight
       div.top
@@ -12,7 +12,7 @@ ion-modal-view
         .list
           a.item.item-avatar(href='#')
             img(src="img/app/app-icon.png",srcset="img/app/app-icon@2x.png 2x")
-            h2.color-w {gameClientTitle}}
+            h2.color-w {{gameClientTitle}}
             p.color-w 莉莉絲遊戲
         hr.margin-bottom
         button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='ok()') 允許授權

@@ -7,15 +7,17 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
     ion-nav-view(name='menuContent')
   ion-side-menu(side='left')
     ion-header-bar.bar-stable
-      h1.title GOYA
+      h1.title Gamo
     ion-content.dark
       ion-list
-        ion-item(nav-clear='', menu-close='', href='#/app/')
+        ion-item(nav-clear='', ng-show='!Auth.isLoggedIn()', menu-close='', href='#/app/')
+          | 首页
+        ion-item(nav-clear='', ng-show='Auth.isLoggedIn()', menu-close='', href='#/app/wait-open')
           | 首页
         //- ion-item(nav-clear='', menu-close='', href='#/app/message')
         //-   | 信息
         ion-item(nav-clear='', menu-close='', href='#/app/about')
-          | 关于 GOYA
+          | 关于 Gamo
         //- ion-item(nav-clear='', menu-close='', href='#/app/modal-sso-auth')
         //-   | 第三方授權
         ion-item(nav-clear='', menu-close='', ng-if="false", href='#/app/games/xxx')

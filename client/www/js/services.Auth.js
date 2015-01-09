@@ -68,7 +68,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             console.log(me.data.rawData);
             if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
             $timeout(function() {
-              preRegistModalScopepreRegistModalScope.closeModal();
+              preRegistModalScope.closeModal();
             }, 1000);
           },function(error){
             preRegistModalScope.commitFormError = true;
@@ -164,7 +164,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
               disableAnimate: true,
               disableBack: true
             });
-            $state.go('app.game',{gameId: 1});
+            $state.go('app.wait-open');
           }
           preRegistModalScope.onSuccess = function(){
             var checkPush =  PushProcessingService.checkResult();
@@ -176,7 +176,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
                     disableAnimate: true,
                     disableBack: true
                   });
-                  $state.go('app.game',{gameId: 1});
+                  $state.go('app.wait-open');
                 }
           }
           preRegistModalScope.onError = error;
@@ -221,7 +221,11 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             }
           };
           var confirmSso = function(){
-            $state.go('app.game',{gameId: 1});
+            $ionicHistory.nextViewOptions({
+              disableAnimate: true,
+              disableBack: true
+            });
+            $state.go('app.wait-open');
             Restangular.oneUrl('user-client-authorize/' + ssoData.appId + '/' + ssoData.url).get().then(function(data){
               console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
               ssoModalScope.gameClientTitle = data.data.rawData.description;
