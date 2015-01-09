@@ -1,9 +1,3 @@
-
-# 忽略...
-
-**/.DS_Store
-client/www/templates/
-
 # Created by https://www.gitignore.io
 
 ### SublimeText ###
@@ -38,3 +32,7 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.xcuserstate
+
+# 忽略...
+**/.DS_Store
+client/www/templates/
