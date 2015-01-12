@@ -3,38 +3,53 @@ ion-modal-view#Tutorial.Pages
     .title.color-w 如何打開通知
     .buttons
       button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
-  ion-slide-box
+  ion-content.center.z-top
+    .message-box.animated.fadeOutDown
+      .checkbox-ani
+        input#cb(type='checkbox', name='cb')
+        label(for='cb')
+      .p2
+        h1 Gamo 已經檢測到你開啟了通知
+        p 現在加載主界面
+  ion-slide-box.blur
     ion-slide
       .row.how-title.row-center
-        .col.text-center
-          h4 打開你的手提電話的<b>設定</b>程式，<br>并找到<b>通知</b>。
+        .col
+          p.small 請跟隨教程打開程式通知功能。
+          h3 1.
+          p 從你的移動電話中，打開<b>設定</b> 》 進入<b>通知</b>。
       .how-image
           img(src="img/app/Tutorial-1.png",srcset="img/app/Tutorial-1@2x.png 2x")
+      .page-footer.page-padding.color-w.text-center
+        .row
+          .col
+            p 向左滑查看下一步
     ion-slide
       .row.how-title.row-center
-        .col.text-center
-          h4 在此列表下，找到<b>Gamo!</b>的程式。
+        .col
+          h3 2.
+          p 在列表中，找到<b>Gamo</b>并點擊。
       .how-image
           img(src="img/app/Tutorial-2.png",srcset="img/app/Tutorial-2@2x.png 2x")
     ion-slide
       .row.how-title.row-center
-        .col.text-center
-          h4 打開允許通知的<b>開關</b>。
+        .col
+          h3 3.
+          p 將允許通知的開關切換為<b>打開</b>狀態
       .how-image
           img(src="img/app/Tutorial-3.png",srcset="img/app/Tutorial-3@2x.png 2x")
     ion-slide
       .row.how-title.row-center
-        .col.text-center
-          h4 你可以使用我們的程式了。
+        .col
+          h3 4.
+          p 就是這樣了，操作完畢後請記得返回<b>Gamo</b>哦！
       .how-image
           img(src="img/app/Tutorial-4.png",srcset="img/app/Tutorial-4@2x.png 2x")
-      .page-footer.page-padding
+      .page-footer.page-padding.color-w.text-center
         .row
           .col
-            a.button.a-button.button-block.main-button.right-arrows(href="#/app/games/1") 進入程序
-
-
-
+            p 請現在按下 Home 返回桌面開始操作吧
+            img.animated.bounce.forever.slow(src="img/app/click-home.png",srcset="img/app/click-home@2x.png 2x")
 
 
 
