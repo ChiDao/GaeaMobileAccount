@@ -4,6 +4,9 @@ define(['app', 'services.RestRoute'], function(app)
 		function ($scope, RestRoute, Restangular, Auth, UI) {
 			console.log('startCtrl');
 			$scope.UI = UI;
+			$scope.RestRoute = RestRoute;
+			RestRoute.getData($scope).then(function(){console.log($scope.apiData)});
+			console.log(RestRoute.getLinkData('http://42.120.45.236:8485/game/14a092378763812c'));
 			$scope.start = {
 				top_img:"img/data/soul-clash/logo.png",
 				top_img_2x:"img/data/soul-clash/logo@2x.png",
