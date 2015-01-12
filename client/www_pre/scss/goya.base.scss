@@ -18,6 +18,23 @@ $background-padding:		16px;
 
 
 // 
+
+/*
+	重寫
+*/
+
+.button:hover {
+	color: #999;
+}
+
+.button.active, .button.activated {
+	color: #FFF;
+	background-color: #262626;
+	box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24);
+}
+
+// <<< END 重寫
+
 /* webkit专用 */
 input::-webkit-input-placeholder {
 	opacity: 0.4;
@@ -42,6 +59,9 @@ input::-webkit-input-placeholder {
   ) !important;
 }
 
+@mixin shadow {
+	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
+}
 
 
 @mixin t-indent {
@@ -72,6 +92,19 @@ input::-webkit-input-placeholder {
 /*
 	組件
 */
+
+h1,h2,h3,h4 {
+	font-size: $f-big;
+	font-weight: 800;
+}
+
+h4 {
+	font-weight: 500;
+	b {
+		color: $height-color;
+		margin: 0 0.2em;
+	}
+}
 
 h5 {
 	padding-top: 1.4em;
@@ -450,6 +483,11 @@ hr {
 .main-button {
 	background-color: $height-color;
 	box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.36), inset 0px 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+.main-button.active, .main-button.activated {
+	background-color: #e57078 !important;
+	box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24) !important;
 }
 
 .nol-button {

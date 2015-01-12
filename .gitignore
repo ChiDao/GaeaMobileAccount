@@ -36,3 +36,4 @@ DerivedData
 # 忽略...
 **/.DS_Store
 client/www/templates/
+client/plugins/

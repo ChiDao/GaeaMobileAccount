@@ -1,13 +1,58 @@
-ion-modal-view.Pages
+ion-modal-view#Tutorial.Pages
   ion-header-bar.bar
     .title.color-w 如何打開通知
-    ion-content.color-w.dark
-      .game-bg.screenHeight
-        div.top
-          img(src="img/data/soul-clash/logo.png",srcset="img/data/soul-clash/logo@2x.png 2x")
-        .black.text-center
-          | 教程在這裡
-    .page-footer.page-padding
+    .buttons
+      button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
+  ion-slide-box
+    ion-slide
+      .row.how-title.row-center
+        .col.text-center
+          h4 打開你的手提電話的<b>設定</b>程式，<br>并找到<b>通知</b>。
+      .how-image
+          img(src="img/app/Tutorial-1.png",srcset="img/app/Tutorial-1@2x.png 2x")
+    ion-slide
+      .row.how-title.row-center
+        .col.text-center
+          h4 在此列表下，找到<b>Gamo!</b>的程式。
+      .how-image
+          img(src="img/app/Tutorial-2.png",srcset="img/app/Tutorial-2@2x.png 2x")
+    ion-slide
+      .row.how-title.row-center
+        .col.text-center
+          h4 打開允許通知的<b>開關</b>。
+      .how-image
+          img(src="img/app/Tutorial-3.png",srcset="img/app/Tutorial-3@2x.png 2x")
+    ion-slide
+      .row.how-title.row-center
+        .col.text-center
+          h4 你可以使用我們的程式了。
+      .how-image
+          img(src="img/app/Tutorial-4.png",srcset="img/app/Tutorial-4@2x.png 2x")
+      .page-footer.page-padding
         .row
           .col
-            button#buttonOk.a-button.button.main-button.right-arrows(ng-click='ok()')  完成
+            a.button.a-button.button-block.main-button.right-arrows(href="#/app/games/1") 進入程序
+
+
+
+
+
+
+
+  //-   .row
+  //-     .col
+  //-       h5.color-w 進入 OS 的設定界面
+  //-       img.full-width(src="img/app/P1.png")
+  //-   .row
+  //-     .col
+  //-       h5.color-w 進入 OS 的設定界面
+  //-       img.full-width(src="img/app/P1.png")
+  //-   .row
+  //-     .col
+  //-       h5.color-w 進入 OS 的設定界面
+  //-       img.full-width(src="img/app/P1.png")
+  //-   .row
+  //-     .col
+  //-       h5.color-w 進入 OS 的設定界面
+  //-       img.full-width(src="img/app/P1.png")
+  //- .page-footer.page-padding

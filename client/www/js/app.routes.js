@@ -126,11 +126,11 @@ define(['app'], function(app){
     })
     // <<< about end
 
-    .state('app.modal-allow-notification', {
-      url: "/modal-allow-notification",
+    .state('app.modal-how-to-notification', {
+      url: "/modal-how-to-notification",
       views: {
         'menuContent': {
-          templateUrl: "templates/modal-allow-notification.html"
+          templateUrl: "templates/modal-how-to-notification.html"
         }
       },
       data: {

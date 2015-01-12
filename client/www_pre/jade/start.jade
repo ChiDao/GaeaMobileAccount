@@ -38,8 +38,7 @@ ion-view#index(view-title='{{"preregister"|translate}}')
         //-   div.col(ng-click='onClick("gift")')
         //-     | {{'gift'|translate}}
         div.t-indent.margin-bottom
-            {{start.game_content|translate}}
-
+          | {{start.game_content|translate}}
         hr.margin-bottom
         button#buttonOk.a-button.button.button-block.main-button.right-arrows(ng-click='Auth.login()') {{'preregister2'|translate}}
         a.button.a-button.button-block.nol-button.right-arrows(href="#/app/games/1") 查看遊戲
