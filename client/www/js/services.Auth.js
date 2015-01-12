@@ -115,6 +115,16 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           });
       };
 
+      //定义如何开启消息通知对话框
+      var howToNotificationModalScope = $rootScope.$new();
+      var howToNotificationModal = function(){
+        Modal
+        .init('templates/modal-how-to-notification.html', howToNotificationModalScope)
+        .then(function(modal){
+          modal.show();
+        });
+      };
+
 
       //定义SSO单点登录对话框
       var ssoModalScope = $rootScope.$new();
@@ -162,12 +172,34 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           signupModalScope.onClose = close;
           preRegistModalScope.mustChoise = false;
           allowNotificationModalScope.onOk = function(){
-           PushProcessingService.initialize();
-            $ionicHistory.nextViewOptions({
-              disableAnimate: true,
-              disableBack: true
-            });
-            $state.go('app.wait-open');
+            PushProcessingService.initialize();
+
+            howToNotificationModalScope.push = false;
+            howToNotificationModal();
+            function recheck(){
+              $timeout(function() {
+                         PushProcessingService.checkinitialize();                         
+                         var checkPush =  PushProcessingService.checkResult();                        
+                         console.log("checkPush is "+checkPush);                        
+                         if(checkPush != "Yes"){                         
+                         console.log("循环检查");                         
+                         recheck();                         
+                         }else{
+                         howToNotificationModalScope.push =true;                         
+                         $timeout(function() {                                  
+                                  howToNotificationModalScope.modal.hide();                                  
+                                  },5000)                         
+                         $ionicHistory.nextViewOptions({                                                       
+                                                       disableAnimate: true,                                                       
+                                                       disableBack: true                                                       
+                                                       });                         
+                         $state.go('app.wait-open');                         
+                         }
+                         
+                         }, 1000);
+                
+                }
+                recheck();
           }
           preRegistModalScope.onSuccess = function(){
             var checkPush =  PushProcessingService.checkResult();

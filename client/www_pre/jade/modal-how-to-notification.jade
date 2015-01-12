@@ -3,16 +3,16 @@ ion-modal-view#Tutorial.Pages
     .title.color-w 如何打開通知
     .buttons
       button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
-  ion-content.center.z-top
+  ion-content.center.z-top(ng-if="push")
     //- css close: .delay.animated.fadeOutDown
-    .message-box.delay.animated.fadeOutDown
-      .checkbox-ani
+    .message-box.delay-4.animated.fadeOutDown 
+      .checkbox-ani.delay
         input#cb(type='checkbox', name='cb')
         label(for='cb')
       .p2
         h1 Gamo 已經檢測到你開啟了通知
         p 現在加載主界面
-  ion-slide-box.blur
+  ion-slide-box(ng-class="{'blur': push}")
     ion-slide
       .row.how-title.row-center
         .col
