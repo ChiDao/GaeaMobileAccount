@@ -15,8 +15,9 @@ define(['app'], function(app)
       },
       {
         name: 'game',
-        api: 'game/:gameId',
-        apiRegExp: /\/game\/\w+/,
+        apiRegExp: /\/game\/(\w+)/,
+        apiRegExpMap: ['gameId'],
+        api: 'game/<%= gameId %>',
         apiType: 'detail',
         state: 'app.game',
 
@@ -46,17 +47,24 @@ define(['app'], function(app)
             });
           }
         },
-        getLinkData: function(apiLink){
+        getLinkData: function(apiLink, $scope, scopeDataField){
+          var params;
+          //匹配路由并获得参数
           var apiConfig = _.find(apiConfigs, function(apiConfig) {
-            return apiConfig.apiRegExp.test(apiLink);
+            var matches = apiConfig.apiRegExp.exec(apiLink);
+            if (matches){
+              matches.shift();
+              params = _.zipObject(apiConfig.apiRegExpMap, matches);
+            }
+            return matches;
           });
           if (apiConfig.apiType === 'list'){
-            return Restangular.allUrl(apiConfig.api).getList().then(function(response){
+            return Restangular.allUrl(_.template(apiConfig.api, params)).getList().then(function(response){
               $scope[scopeDataField] = response.data;
             });
           }
           else if (apiConfig.apiType === 'detail'){
-            return Restangular.oneUrl(apiConfig.api).get().then(function(response){
+            return Restangular.oneUrl(_.template(apiConfig.api, params)).get().then(function(response){
               $scope[scopeDataField] = response.data.rawData;
             });
           }
