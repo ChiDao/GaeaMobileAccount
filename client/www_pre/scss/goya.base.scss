@@ -236,6 +236,11 @@ h5 {
 	z-index: 500;
 }
 
+.delay {
+    -webkit-animation-delay: 2s; /* Chrome, Safari, Opera */
+    animation-delay: 2s;
+}
+
 .center{
 	display: -webkit-box;
 	display: -moz-box;

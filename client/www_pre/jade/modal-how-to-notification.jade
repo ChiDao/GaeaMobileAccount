@@ -4,7 +4,8 @@ ion-modal-view#Tutorial.Pages
     .buttons
       button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
   ion-content.center.z-top
-    .message-box.animated.fadeOutDown
+    //- css close: .delay.animated.fadeOutDown
+    .message-box.delay.animated.fadeOutDown
       .checkbox-ani
         input#cb(type='checkbox', name='cb')
         label(for='cb')
