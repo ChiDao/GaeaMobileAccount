@@ -7003,6 +7003,17 @@ a.button {
 	var
 	變量
 */
+/*
+	重寫
+*/
+.button:hover {
+  color: #999; }
+
+.button.active, .button.activated {
+  color: #FFF;
+  background-color: #262626;
+  box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24); }
+
 /* webkit专用 */
 input::-webkit-input-placeholder {
   opacity: 0.4;
@@ -7014,6 +7025,16 @@ input::-webkit-input-placeholder {
 /*
 	組件
 */
+h1, h2, h3, h4 {
+  font-size: 16px;
+  font-weight: 800; }
+
+h4 {
+  font-weight: 500; }
+  h4 b {
+    color: #ff7e86;
+    margin: 0 0.2em; }
+
 h5 {
   padding-top: 1.4em;
   font-weight: 800; }
@@ -7324,6 +7345,10 @@ hr {
   background-color: #ff7e86;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.36), inset 0px 1px 1px 0px rgba(255, 255, 255, 0.5); }
 
+.main-button.active, .main-button.activated {
+  background-color: #e57078 !important;
+  box-shadow: inset 0px 2px 4px 0px rgba(0, 0, 0, 0.24) !important; }
+
 .nol-button {
   background-color: #4c4c4c; }
 
@@ -7340,6 +7365,25 @@ hr {
 .item-content {
   background: none !important;
   border-bottom: 1px solid #555555 !important; }
+
+.how-title {
+  display: block;
+  padding: 40px 0;
+  height: 130px; }
+
+.slider {
+  color: #fff !important;
+  padding-top: 44px;
+  height: 100%; }
+  .slider .col {
+    padding: 0 16px; }
+  .slider h1, .slider h2, .slider h3, .slider h4, .slider h5 {
+    color: #fff !important; }
+  .slider .icon {
+    color: #fff; }
+
+.slider-slide {
+  overflow: hidden; }
 
 .store {
   padding: 16px 0; }
@@ -7417,3 +7461,8 @@ article {
 #AllowNoti .note {
   padding-top: 38px;
   margin-bottom: 30px; }
+
+#Tutorial .page-footer {
+  padding-top: 6px;
+  padding-bottom: 12px;
+  background-color: rgba(0, 0, 0, 0.65); }

@@ -8,6 +8,39 @@
 	border-bottom: 1px solid #555555 !important;
 }
 
+.how-title {
+	display: block;
+	padding: 40px 0;
+	height: 130px;
+	// background-color: #f00;
+}
+
+.how-image {
+	img {
+		// @include shadow();
+	}
+}
+
+.slider {
+	color: #fff !important;
+	padding-top: 44px;
+	.col {
+		padding: 0 $background-padding;
+	}
+	height: 100%;
+	h1,h2,h3,h4,h5 {
+		color: #fff !important;
+	}
+
+	.icon {
+		color: #fff;
+	}
+}
+
+.slider-slide {
+	overflow: hidden;
+}
+
 .store {
 	padding: 16px 0;
 	.app-icon {
@@ -119,5 +152,13 @@ article {
 	.note {
 		padding-top: 38px;
 		margin-bottom: 30px;
+	}
+}
+
+#Tutorial {
+	.page-footer {
+		padding-top: 6px;
+		padding-bottom: 12px;
+		background-color: rgba(0,0,0,0.65);
 	}
 }
