@@ -13,6 +13,17 @@ ion-modal-view#Tutorial.Pages
         h1 Gamo 已經檢測到你開啟了通知
         p 現在加載主界面
   ion-slide-box(ng-class="{'blur': push}")
+  //- ion-content.center.z-top
+  //-   //- css close: .delay.animated.fadeOutDown
+  //-   .message-box
+  //-     .checkbox-ani
+  //-       input#cb(type='checkbox', name='cb')
+  //-       label(for='cb')
+  //-     .p2
+  //-       h1 Gamo 已經檢測到你開啟了通知
+  //-       p 現在加載主界面
+  //- div.blur
+  ion-slide-box.blur-bg
     ion-slide
       .row.how-title.row-center
         .col
@@ -50,7 +61,7 @@ ion-modal-view#Tutorial.Pages
         .row
           .col
             p 請現在按下 Home 返回桌面開始操作吧
-            img.animated.bounce.forever.slow(src="img/app/click-home.png",srcset="img/app/click-home@2x.png 2x")
+            img.bounce.forever.animated(src="img/app/click-home.png",srcset="img/app/click-home@2x.png 2x")
 
 
 

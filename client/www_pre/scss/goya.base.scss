@@ -228,8 +228,16 @@ h5 {
 }
 
 .blur {
-	-webkit-filter: blur(4px);
-	opacity: 0.50;
+	margin-top:44px;
+	padding:0 1rem;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	-webkit-filter:blur(6px);
+	filter:url(#blur-effect);
+	opacity:.75;
+   z-index: 1;
 }
 
 .z-top {
