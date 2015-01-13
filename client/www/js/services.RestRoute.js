@@ -20,10 +20,13 @@ define(['app'], function(app)
         api: 'game/<%= gameId %>',
         apiType: 'detail',
         state: 'app.game',
-
-        // stateUrl: '/get-password',
-        // templateUrl: 'templates/get-password.html',
-        // controller: 'StartCtrl'
+      },
+      {
+        name: 'game-clients',
+        apiRegExp: /\/game-clients\/(\w+)/,
+        apiRegExpMap: ['gameId'],
+        api: 'game-clients/<%= gameId %>',
+        apiType: 'detail',
       },
     ];
 
@@ -33,6 +36,7 @@ define(['app'], function(app)
         //获取当前路由对应的api数据
         getData: function($scope, scopeDataField){
           scopeDataField = scopeDataField || 'apiData';
+          $scope.apiDataField = scopeDataField;
           var apiConfig = _.find(apiConfigs, function(apiConfig) {
             return apiConfig.state == $state.current.name;
           });
@@ -45,6 +49,11 @@ define(['app'], function(app)
             return Restangular.oneUrl(_.template(apiConfig.api,$stateParams)).get().then(function(response){
               $scope[scopeDataField] = response.data.rawData;
             });
+          }
+        },
+        getAttrData: function(attr, $scope, scopeDataField){
+          if (_.has($scope, 'apiDataField') && _.has($scope[$scope.apiDataField], attr)){
+            return this.getLinkData($scope[$scope.apiDataField][attr], $scope, scopeDataField);
           }
         },
         getLinkData: function(apiLink, $scope, scopeDataField){
