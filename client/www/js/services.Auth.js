@@ -171,8 +171,6 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           }
         },
         login: function(success, error, close){      
-          // preRegistModal();
-          // allowNotificationModal();
           signupModalScope.mustChoise = false;
           signupModalScope.onSuccess = function(){
             preRegistModalScope.formData.email = signupModalScope.formData.email;
@@ -183,8 +181,8 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           preRegistModalScope.mustChoise = false;
           allowNotificationModalScope.onOk = function(){      
             PushProcessingService.initialize();                                                
-            howToNotificationModalScope.push = false;                
-            howToNotificationModal();                
+            howToNotificationModalScope.push = false;
+            howToNotificationModal();
             //循环检查                
             recheck();
           }
@@ -227,6 +225,10 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             .then(function(modal){
               modal.show();
             });
+        },
+        testNoti: function (argument) {
+          howToNotificationModalScope.push = true;
+          howToNotificationModal();
         },
 
         ssoAuth: function(ssoData){
@@ -309,7 +311,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         accessLevels: accessLevels,
         userRoles: userRoles
       };
-      function recheck(){                
+      function recheck(){
         $timeout(function() {                         
           PushProcessingService.checkinitialize(); 
           $timeout(function() {                        

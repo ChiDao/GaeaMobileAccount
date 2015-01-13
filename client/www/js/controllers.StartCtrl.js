@@ -4,6 +4,10 @@ define(['app', 'services.RestRoute'], function(app)
 		function ($scope, RestRoute, Restangular, Auth, UI) {
 			console.log('startCtrl');
 			$scope.UI = UI;
+
+			// Auth.testModal("modal-how-to-notification");
+			// Auth.login();
+
 			$scope.RestRoute = RestRoute;
 			// RestRoute.getData($scope).then(function(){console.log($scope.apiData)});
 			// RestRoute.getLinkData('http://42.120.45.236:8485/game/14a092378763812c', $scope, 'game').then(function(){console.log($scope.game)});

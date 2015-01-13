@@ -21,9 +21,9 @@ http://codepen.io/timseverien/pen/yvJkm
 
 // Create animation called 'check'
 @include keyframes(check) {
-  0% { height: 0; width: 0; }
-  25% { height: 0; width: 10px; }
-  50% { height: 20px; width: 10px; }
+  0% { height: 0; width: 0; opacity: 1;}
+  25% { height: 0; width: 10px; opacity: 1;}
+  50% { height: 20px; width: 10px; opacity: 1;}
 }
 
 // Create the backgrounds for the checkboxes
@@ -76,8 +76,11 @@ http://codepen.io/timseverien/pen/yvJkm
   
   // When the input is checked (by clicking the label), I wan't the animation to run and the colour to change.
   input + label:after {
-  	@include animation(check 1.2s);  
+  	@include animation(check 1.2s ease);
+    opacity: 0.3;
     border-color: #ff7e86;
+    -webkit-animation-delay: 2s; /* Chrome, Safari, Opera */
+    animation-delay: 2s;
   }
   
   // Options for the alternative checkbox

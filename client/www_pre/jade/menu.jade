@@ -24,6 +24,9 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
         //-   | game
         ion-item(nav-clear='', menu-close='', ng-click='Auth.testModal("modal-how-to-notification")',href='#')
           | modal-how-to-notification
+        ion-item(nav-clear='', menu-close='', ng-click='Auth.testNoti("modal-how-to-notification")',href='#')
+          | modal-how-to-notification
+          
         //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
         //-   | Login
         //- //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
