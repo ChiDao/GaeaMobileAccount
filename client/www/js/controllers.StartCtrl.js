@@ -5,8 +5,9 @@ define(['app', 'services.RestRoute'], function(app)
 			console.log('startCtrl');
 			$scope.UI = UI;
 			$scope.RestRoute = RestRoute;
-			RestRoute.getData($scope).then(function(){console.log($scope.apiData)});
-			RestRoute.getLinkData('http://42.120.45.236:8485/game/14a092378763812c', $scope, 'game').then(function(){console.log($scope.game)});
+			// RestRoute.getData($scope).then(function(){console.log($scope.apiData)});
+			// RestRoute.getLinkData('http://42.120.45.236:8485/game/14a092378763812c', $scope, 'game').then(function(){console.log($scope.game)});
+			RestRoute.jumpToLink('http://42.120.45.236:8485/game/14a092378763812c');
 			$scope.start = {
 				top_img:"img/data/soul-clash/logo.png",
 				top_img_2x:"img/data/soul-clash/logo@2x.png",

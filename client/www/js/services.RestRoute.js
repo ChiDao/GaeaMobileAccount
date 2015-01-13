@@ -71,18 +71,19 @@ define(['app'], function(app)
         },
         //根据api跳转到对应的state
         jumpToLink: function(apiLink){
-          var state = this.getStateFromApiLink(apiLink);
-          if (state){
-            $state.go(state);
-          }
-        },
-        //从api链接找到对应的state
-        getStateFromApiLink: function(apiLink){
+          var params;
+          //匹配路由并获得参数
           var apiConfig = _.find(apiConfigs, function(apiConfig) {
-            return apiConfig.apiRegExp.test(apiLink);
+            var matches = apiConfig.apiRegExp.exec(apiLink);
+            if (matches){
+              matches.shift();
+              params = _.zipObject(apiConfig.apiRegExpMap, matches);
+            }
+            return matches;
           });
-          console.log(apiConfig);
-          return apiConfig === undefined? undefined:apiConfig.state;
+          if (apiConfig){
+            $state.go(apiConfig.state, params);
+          }
         },
 
 
@@ -118,6 +119,15 @@ define(['app'], function(app)
               });
             }
           });
+        },
+        
+        //从api链接找到对应的state
+        getStateFromApiLink: function(apiLink){
+          var apiConfig = _.find(apiConfigs, function(apiConfig) {
+            return apiConfig.apiRegExp.test(apiLink);
+          });
+          console.log(apiConfig);
+          return apiConfig === undefined? undefined:apiConfig.state;
         },
       }
     };
