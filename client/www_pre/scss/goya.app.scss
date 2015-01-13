@@ -10,8 +10,8 @@
 
 .how-title {
 	display: block;
-	padding: 30px 0;
-	height: 120px;
+	padding: 10px 0;
+	height: 100px;
 	.small {
 		margin: 0 !important;
 		padding: 0 !important;
@@ -35,7 +35,7 @@
 
 .slider {
 	color: #fff !important;
-	padding-top: 44px;
+	margin-top: 44px;
 	.col {
 		padding: 0 $background-padding;
 	}
@@ -168,13 +168,15 @@ article {
 }
 
 #Tutorial {
+	.slider-pager {
+		bottom: 85px;
+	}
 	.page-footer {
 		padding-top: 6px;
 		padding-bottom: 28px;
 		background-color: rgba(0,0,0,0.65);
 	}
 }
-
 
 
 /*

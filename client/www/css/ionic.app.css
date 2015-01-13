@@ -10110,54 +10110,66 @@ http://codepen.io/timseverien/pen/yvJkm
 @-webkit-keyframes check {
   0% {
     height: 0;
-    width: 0; }
+    width: 0;
+    opacity: 1; }
 
   25% {
     height: 0;
-    width: 10px; }
+    width: 10px;
+    opacity: 1; }
 
   50% {
     height: 20px;
-    width: 10px; } }
+    width: 10px;
+    opacity: 1; } }
 
 @-moz-keyframes check {
   0% {
     height: 0;
-    width: 0; }
+    width: 0;
+    opacity: 1; }
 
   25% {
     height: 0;
-    width: 10px; }
+    width: 10px;
+    opacity: 1; }
 
   50% {
     height: 20px;
-    width: 10px; } }
+    width: 10px;
+    opacity: 1; } }
 
 @-ms-keyframes check {
   0% {
     height: 0;
-    width: 0; }
+    width: 0;
+    opacity: 1; }
 
   25% {
     height: 0;
-    width: 10px; }
+    width: 10px;
+    opacity: 1; }
 
   50% {
     height: 20px;
-    width: 10px; } }
+    width: 10px;
+    opacity: 1; } }
 
 @keyframes check {
   0% {
     height: 0;
-    width: 0; }
+    width: 0;
+    opacity: 1; }
 
   25% {
     height: 0;
-    width: 10px; }
+    width: 10px;
+    opacity: 1; }
 
   50% {
     height: 20px;
-    width: 10px; } }
+    width: 10px;
+    opacity: 1; } }
 
 .checkbox-ani, .checkbox-alt {
   background-color: #fff;
@@ -10195,11 +10207,15 @@ http://codepen.io/timseverien/pen/yvJkm
   .checkbox-ani input, .checkbox-alt input {
     display: none; }
   .checkbox-ani input + label:after, .checkbox-alt input + label:after {
-    -webkit-animation: check 1.2s;
-    -moz-animation: check 1.2s;
-    -o-animation: check 1.2s;
-    animation: check 1.2s;
-    border-color: #ff7e86; }
+    -webkit-animation: check 1.2s ease;
+    -moz-animation: check 1.2s ease;
+    -o-animation: check 1.2s ease;
+    animation: check 1.2s ease;
+    opacity: 0.3;
+    border-color: #ff7e86;
+    -webkit-animation-delay: 2s;
+    /* Chrome, Safari, Opera */
+    animation-delay: 2s; }
   .checkbox-ani.checkbox-alt label:hover:after, .checkbox-alt.checkbox-alt label:hover:after {
     -webkit-animation: check 0.8s ease infinite;
     -moz-animation: check 0.8s ease infinite;
@@ -10337,8 +10353,8 @@ h5 {
   padding-top: 50px; }
 
 .blur {
-  -webkit-filter: blur(4px);
-  opacity: 0.5; }
+  -webkit-filter: blur(6px);
+  opacity: 0.75; }
 
 .z-top {
   z-index: 500; }
@@ -10649,8 +10665,8 @@ hr {
 
 .how-title {
   display: block;
-  padding: 30px 0;
-  height: 120px; }
+  padding: 10px 0;
+  height: 100px; }
   .how-title .small {
     margin: 0 !important;
     padding: 0 !important; }
@@ -10662,7 +10678,7 @@ hr {
 
 .slider {
   color: #fff !important;
-  padding-top: 44px;
+  margin-top: 44px;
   height: 100%; }
   .slider .col {
     padding: 0 16px; }
@@ -10751,6 +10767,8 @@ article {
   padding-top: 38px;
   margin-bottom: 30px; }
 
+#Tutorial .slider-pager {
+  bottom: 85px; }
 #Tutorial .page-footer {
   padding-top: 6px;
   padding-bottom: 28px;
