@@ -6,7 +6,7 @@
 // the identifier, the filesystem location 
 // or the URL
 var pluginlist = [
-    "org.apache.cordova.device",
+    "self-plugins/org.apache.cordova.deviceEx",
     "org.apache.cordova.console",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.splashscreen",
