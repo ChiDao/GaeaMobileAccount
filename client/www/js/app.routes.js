@@ -177,11 +177,11 @@ define(['app'], function(app){
 
     // >>>臨時路由 tmp-routes
 
-    .state('app.sso', {
-      url: "/modal-sso-auth",
+    .state('app.modal-allow-notification', {
+      url: "/modal-allow-notification",
       views: {
         'menuContent': {
-          templateUrl: "templates/modal-sso-auth.html"
+          templateUrl: "templates/modal-allow-notification.html"
         }
       },
       data: {
