@@ -45,8 +45,54 @@ define(['app'], function(app)
 	    return promise;
 	  };
 
+	  var okCancelModal = function(template, options, events){
+	  	options = options || {};
+	  	var scope = $rootScope.$new();
+	  	events.init? (function(){
+	  		  		console.debug('OkCancleModal init');
+	  		  		events.init(scope)
+	  		  	})(): undefined;
+	  	options.scope = scope;
+	  	return Thenjs(function(defer){
+	  		$ionicModal.fromTemplateUrl(template, options).then(function(modal) {
+	  			scope.modal = modal;
+			  	scope.ok = function(form){
+			  		console.debug('OkCancleModal ok');
+			  		if (_.isFunction(events.onOk)){
+			  			events.onOk(form, scope);
+			  		}else{
+			  			modal.hide();
+			  		}
+
+			  	}
+			  	scope.hideModal = function(){
+			  		modal.hide();
+			  	}
+			  	scope.closeModal = function(){
+			  		console.debug('OkCancleModal closeModal');
+			  		if (_.isFunction(events.onClose)){
+			  			events.onClose(scope);
+			  		}else{
+			  			modal.hide();
+			  		}
+			  	}
+			  	scope.cancelModal = function(){
+			  		console.debug('OkCancleModal cancelModal');
+			  		if (_.isFunction(events.onCancel)){
+			  			events.onCancel(scope);
+			  		}else{
+			  			modal.hide();
+			  		}
+			  	}
+	  			modal.show();
+	  			defer(undefined);
+	  		});
+	  	});
+	  }
+
 	  return {
-	    init: init
+	    init: init,
+	    okCancelModal: okCancelModal,
 	  };
   });
 });

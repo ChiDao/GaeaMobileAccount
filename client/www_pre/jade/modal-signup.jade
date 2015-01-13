@@ -3,7 +3,7 @@ ion-modal-view.Pages
     .title.color-w {{'email'|translate}}
     .buttons
       button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
-  form(name='signUpForm', novalidate="", ng-submit='commitForm(signUpForm)')
+  form(name='signUpForm', novalidate="", ng-submit='ok(signUpForm)')
     ion-content.color-w.dark
       .game-bg.screenHeight
         div.top

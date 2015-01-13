@@ -220,6 +220,22 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           localStorage.removeItem('user', null);
           success();
         },
+        newLogin: function(){
+          Modal.okCancelModal('templates/modal-signup.html', {}, {
+            init: function($scope){
+              // $scope.mustChoise = true;
+            },
+            onOk: function(form, $scope){
+              $scope.hideModal();
+            },
+            onCancel: function($scope){
+              $scope.hideModal();
+            },
+            onClose: function($scope){
+              $scope.hideModal();
+            }
+          }).then(function(){console.log(11111111)});
+        },
 
         ssoAuth: function(ssoData){
           //Todo: 返回授权结果给第三方应用

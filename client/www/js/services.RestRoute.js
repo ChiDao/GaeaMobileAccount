@@ -162,13 +162,11 @@ define(['app'], function(app)
                   })
                 }, function(error){
                   if (error){
-                    console.log('yyyyy')
                     defer(error);
                     return;
                   }
                   // solvedAttrs = _.union(solvedAttrs, tmpAttrData);
                   console.log(solvedAttrs);
-                  console.log('xxxxx')
 
                   // 还有未处理的属性
                   if (solvedAttrs.length != apiConfig['getAttrData'].length + 1){
