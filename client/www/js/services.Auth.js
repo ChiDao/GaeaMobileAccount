@@ -160,6 +160,16 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         register: function(registerData, success, error){
           //Todo
         },
+        disallow: function(){
+          allowNotificationModal();
+          allowNotificationModalScope.onOk = function(){      
+            PushProcessingService.initialize();                                                
+            howToNotificationModalScope.push = false;                
+            howToNotificationModal();                
+            //循环检查                
+            recheck();
+          }
+        },
         login: function(success, error, close){      
           // preRegistModal();
           // allowNotificationModal();
@@ -171,35 +181,12 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           signupModalScope.onError = error;
           signupModalScope.onClose = close;
           preRegistModalScope.mustChoise = false;
-          allowNotificationModalScope.onOk = function(){
-            PushProcessingService.initialize();
-
-            howToNotificationModalScope.push = false;
-            howToNotificationModal();
-            function recheck(){
-              $timeout(function() {
-                         PushProcessingService.checkinitialize();                         
-                         var checkPush =  PushProcessingService.checkResult();                        
-                         console.log("checkPush is "+checkPush);                        
-                         if(checkPush != "Yes"){                         
-                         console.log("循环检查");                         
-                         recheck();                         
-                         }else{
-                         howToNotificationModalScope.push =true;                         
-                         $timeout(function() {                                  
-                                  howToNotificationModalScope.modal.hide();                                  
-                                  },5000)                         
-                         $ionicHistory.nextViewOptions({                                                       
-                                                       disableAnimate: true,                                                       
-                                                       disableBack: true                                                       
-                                                       });                         
-                         $state.go('app.wait-open');                         
-                         }
-                         
-                         }, 1000);
-                
-                }
-                recheck();
+          allowNotificationModalScope.onOk = function(){      
+            PushProcessingService.initialize();                                                
+            howToNotificationModalScope.push = false;                
+            howToNotificationModal();                
+            //循环检查                
+            recheck();
           }
           preRegistModalScope.onSuccess = function(){
             var checkPush =  PushProcessingService.checkResult();
@@ -314,6 +301,29 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
         accessLevels: accessLevels,
         userRoles: userRoles
       };
+      function recheck(){                
+        $timeout(function() {                         
+          PushProcessingService.checkinitialize(); 
+          $timeout(function() {                        
+            var checkPush =  PushProcessingService.checkResult();                         
+            console.log("checkPush is "+checkPush);                         
+            if(checkPush != "Yes"){                        
+              console.log("循环检查");                         
+              recheck();                         
+            }else{
+              howToNotificationModalScope.push =true;
+              $timeout(function() {
+                howToNotificationModalScope.modal.hide();
+              },5000)
+              $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+              });
+              $state.go('app.wait-open');
+            }
+          },1);
+        }, 1000);              
+      }
     })
 
   .run(['$rootScope', '$state', '$location', '$ionicNavBarDelegate', 'Auth', function ($rootScope, $state, $location, $ionicNavBarDelegate, Auth) {

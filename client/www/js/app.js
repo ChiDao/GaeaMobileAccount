@@ -21,7 +21,7 @@ define([
     'restangular'
     ])
 
-  starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope,PushProcessingService, Restangular) {
+  starter.run(function($ionicPlatform, Auth, LiveUpdate, $rootScope,PushProcessingService, Restangular,$timeout) {
       PushProcessingService.checkinitialize();
       console.log('starter run');
       if(localStorage.getItem('apnToken') != null){
@@ -51,14 +51,22 @@ define([
       //     }
       //   });
       // }
+      $timeout(function() {
+        console.log("开启否？"+PushProcessingService.checkResult());
+        if (localStorage.getItem('user') !== null && PushProcessingService.checkResult() == "No"){
+          Auth.disallow();
+        }
 
-      if (ionic.Platform.isWebView()){
-        LiveUpdate.update();
-      }
+        if (ionic.Platform.isWebView()){
+          LiveUpdate.update();
+        }
 
-      if (navigator.splashscreen){
-        navigator.splashscreen.hide();
-      }
+        if (navigator.splashscreen){
+          navigator.splashscreen.hide();
+        }
+      },1);
+
+      
 
       // 检查是否被调用
       var openUrl = localStorage.getItem('openUrl');
