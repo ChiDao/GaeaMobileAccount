@@ -220,6 +220,14 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           localStorage.removeItem('user', null);
           success();
         },
+        testModal: function(modelName) {
+          console.log(modelName);
+          Modal
+            .init('templates/' + modelName + '.html', ssoModalScope)
+            .then(function(modal){
+              modal.show();
+            });
+        },
 
         ssoAuth: function(ssoData){
           //Todo: 返回授权结果给第三方应用

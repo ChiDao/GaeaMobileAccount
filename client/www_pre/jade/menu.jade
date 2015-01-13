@@ -22,7 +22,7 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
           | modal-allow-notification
         //- ion-item(nav-clear='', menu-close='', ng-if="false", href='#/app/games/xxx')
         //-   | game
-        ion-item(nav-clear='', menu-close='', href='#/app/modal-how-to-notification')
+        ion-item(nav-clear='', menu-close='', ng-click='Auth.testModal("modal-how-to-notification")',href='#')
           | modal-how-to-notification
         //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
         //-   | Login
