@@ -10337,8 +10337,8 @@ h5 {
   padding-top: 50px; }
 
 .blur {
-  -webkit-filter: blur(4px);
-  opacity: 0.5; }
+  -webkit-filter: blur(6px);
+  opacity: 0.75; }
 
 .z-top {
   z-index: 500; }
