@@ -19,7 +19,7 @@ define(['app', 'restangular'], function(app){
       // add a response intereceptor
       RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
         var extractedData;      // .. to look for getList operations
-        console.log('data:' + JSON.stringify(data));
+        // console.debug('data:' + JSON.stringify(data));
         if (operation === "getList") {
           // .. and handle the data and meta data
           extractedData = data.slice;
