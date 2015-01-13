@@ -27,7 +27,7 @@ define(['app'], function(app)
       },
     ];
 
-    this.$get = function(Restangular, Auth, $state){
+    this.$get = function(Restangular, Auth, $state, $stateParams){
       Restangular.setBaseUrl(serverAddress);
       return {
         //获取当前路由对应的api数据
@@ -37,12 +37,12 @@ define(['app'], function(app)
             return apiConfig.state == $state.current.name;
           });
           if (apiConfig.apiType === 'list'){
-            return Restangular.allUrl(apiConfig.api).getList().then(function(response){
+            return Restangular.allUrl(_.template(apiConfig.api,$stateParams)).getList().then(function(response){
               $scope[scopeDataField] = response.data;
             });
           }
           else if (apiConfig.apiType === 'detail'){
-            return Restangular.oneUrl(apiConfig.api).get().then(function(response){
+            return Restangular.oneUrl(_.template(apiConfig.api,$stateParams)).get().then(function(response){
               $scope[scopeDataField] = response.data.rawData;
             });
           }
@@ -120,7 +120,7 @@ define(['app'], function(app)
             }
           });
         },
-        
+
         //从api链接找到对应的state
         getStateFromApiLink: function(apiLink){
           var apiConfig = _.find(apiConfigs, function(apiConfig) {

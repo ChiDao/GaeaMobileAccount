@@ -1,7 +1,8 @@
-define(['app', 'restangular'], function(app)
+define(['app', 'services.RestRoute'], function(app)
 {
-	app.controller('GameCtrl', ['$scope', '$stateParams', 'UI', 'Restangular', "$timeout",
-		function($scope, $stateParams, UI, Restangular, $timeout) {
+	app.controller('GameCtrl', ['$scope', '$stateParams', 'UI', 'RestRoute', "$timeout",
+		function($scope, $stateParams, UI, RestRoute, $timeout) {
+			RestRoute.getData($scope);
 		}
 	]);
 });
