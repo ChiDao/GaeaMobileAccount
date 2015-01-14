@@ -65,7 +65,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           //填写邮箱signup对话框
           (function(preRegistModal){
             RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
-              onSuccess: function(signupScope){
+              onSuccess: function(form, signupScope){
                 signupScope.hideModal();
                 preRegistModal(signupScope.formData.email);
               }
@@ -85,7 +85,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                 onOk: function(form, scope){
                   scope.commitFormError = false;
                 },
-                onSuccess: function(scope){
+                onSuccess: function(form, scope){
                   var Me = Restangular.one("me");
                   Me.get().then(function(me){
                     console.log(me);
@@ -116,11 +116,10 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                     console.log('login fail, get data: ' + JSON.stringify(error));
                   })
                 },
-                onError: function (error){
-                  preRegistModalScope.commitFormError = true;
-                  preRegistModalScope.commitFormErrorMsg = error.data.alertMsg;
+                onError: function (error, form, scope){
+                  scope.commitFormError = true;
+                  scope.commitFormErrorMsg = error.data.alertMsg;
                   console.log('login fail, get data: ' + JSON.stringify(error));
-                  if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
                 }
               });//End of postModal
             };//End of function to be passed

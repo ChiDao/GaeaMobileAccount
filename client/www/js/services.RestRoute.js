@@ -307,7 +307,7 @@ define(['app', 'services.Modal'], function(app)
               console.log('Commit success, get data:', data.data.rawData);
               //提交成功
               if (_.isFunction(eventHandles.onSuccess)){
-                eventHandles.onSuccess($scope);
+                eventHandles.onSuccess(form, $scope);
               }
               //提交失败
               else{
@@ -316,7 +316,7 @@ define(['app', 'services.Modal'], function(app)
             }, function(error){
               console.log('Commit form error:' + JSON.stringify(error));
               if (_.isFunction(eventHandles.onError)){
-                eventHandles.onError(error);
+                eventHandles.onError(error, form, $scope);
               }
             })
           }
