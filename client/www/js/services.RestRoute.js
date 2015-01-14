@@ -1,4 +1,4 @@
-define(['app'], function(app)
+define(['app', 'services.Modal'], function(app)
 {
     app.provider('RestRoute', function($stateProvider) {
     // Might use a resource here that returns a JSON array
@@ -92,9 +92,37 @@ define(['app'], function(app)
         api: 'client-articles/<%= clentId %>',
         apiType: 'detail',
       },
+
+      //---------
+      //  POST
+      //---------
+      // {
+      //   name: 'login-queue',
+      //   apiRegExp: /\/signup/,
+      //   api: 'signup',
+      //   apiType: 'modalQueue',
+
+      // },
+      {
+        name: 'signup',
+        apiRegExp: /\/signup/,
+        api: 'signup',
+        apiType: 'postModal',
+        modalFormData: {email: ''}, 
+        modalTemplate: 'templates/modal-signup.html',
+      },
+      {
+        name: 'pre-register',
+        apiRegExp: /\/pre-register/,
+        api: 'pre-register',
+        apiType: 'postModal',
+        modalFormData: {password: ''}, 
+        modalFormDataMap: {email: 'email'},
+        modalTemplate: 'templates/modal-login.html',
+      }
     ];
 
-    this.$get = function(Restangular, Auth, $state, $stateParams){
+    this.$get = function(Restangular, Modal, $state, $stateParams){
       Restangular.setBaseUrl(serverAddress);
       return {
         getData: function($scope, scopeDataField){
@@ -165,7 +193,6 @@ define(['app'], function(app)
                     defer(error);
                     return;
                   }
-                  // solvedAttrs = _.union(solvedAttrs, tmpAttrData);
                   console.log(solvedAttrs);
 
                   // 还有未处理的属性
@@ -248,22 +275,55 @@ define(['app'], function(app)
             $state.go(apiConfig.state, params);
           }
         },
-
-
-
-        initController: function($scope){
-          $scope.jumpApiAttr = function(attr){
-            console.log(attr);
-            // var apiLink = $scope.restData['attr'];
-            // $state.go(this.getStateFromApiLink(apiLink));
+        postModal: function(apiLink, options, eventHandles){
+          var options = options || {};
+          var eventHandles = eventHandles || {};
+          var params;
+          //匹配路由并获得参数
+          var apiConfig = _.find(apiConfigs, function(apiConfig) {
+            var matches = apiConfig.apiRegExp.exec(apiLink);
+            if (matches){
+              matches.shift();
+              params = _.zipObject(apiConfig.apiRegExpMap, matches);
+              console.debug('get link data params: ' + JSON.stringify(params));
+              console.log(apiConfig.apiRegExp);
+            }
+            return matches;
+          });
+          //初始化表单数据
+          var tmpInitFunc = _.isFunction(eventHandles.init)? _.clone(eventHandles.init):function(){};
+          eventHandles.init = function($scope){
+            $scope.formData = apiConfig.modalFormData;
+            tmpInitFunc($scope);
           }
+          var tmpOkFunc = _.isFunction(eventHandles.onOk)?eventHandles.onOk:function(){};
+          eventHandles.onOk = function(form, $scope){
+            //校验表单是否正确
+            if (form.$invalid) return;
+            //回调传入的onOk函数
+            tmpOkFunc(form, $scope);
+            console.log('Commit form data:' + JSON.stringify($scope.formData));
+            Restangular.all(apiConfig.api).post($scope.formData).then(function(data){
+              console.log('Commit success, get data:', data.data.rawData);
+              //提交成功
+              if (_.isFunction(eventHandles.onSuccess)){
+                eventHandles.onSuccess($scope);
+              }
+              //提交失败
+              else{
+                $scope.hideModal();
+              }
+            }, function(error){
+              console.log('Commit form error:' + JSON.stringify(error));
+              if (_.isFunction(eventHandles.onError)){
+                eventHandles.onError();
+              }
+            })
+          }
+          Modal.okCancelModal(apiConfig.modalTemplate, options, eventHandles)
+            .then(function(){console.log(11111111)});
         },
-        jumpFirstApiLink: function(restData){
-          var firstLink = restData.rawData[_.findKey(restData.rawData, function(value) {
-            return /^(http|https)\:\/\//.test(value);
-          })];
-          $state.go(this.getStateFromApiLink(firstLink));
-        },
+
         createRoute: function(){
           // console.log(JSON.stringify(this.allApiStates()['tab.games'].views));
           _.forEach(apiConfigs, function(apiConfig){
@@ -277,21 +337,13 @@ define(['app'], function(app)
                   }
                 },
                 data: {
-                  access: Auth.accessLevels.public
+                  // access: Auth.accessLevels.public
                 }
               });
             }
           });
-        },
+        },//End of createRoute
 
-        //从api链接找到对应的state
-        getStateFromApiLink: function(apiLink){
-          var apiConfig = _.find(apiConfigs, function(apiConfig) {
-            return apiConfig.apiRegExp.test(apiLink);
-          });
-          console.log(apiConfig);
-          return apiConfig === undefined? undefined:apiConfig.state;
-        },
       }
     };
 

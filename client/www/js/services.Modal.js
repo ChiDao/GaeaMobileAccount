@@ -45,12 +45,12 @@ define(['app'], function(app)
 	    return promise;
 	  };
 
-	  var okCancelModal = function(template, options, events){
+	  var okCancelModal = function(template, options, eventHandles){
 	  	options = options || {};
 	  	var scope = $rootScope.$new();
-	  	events.init? (function(){
+	  	eventHandles.init? (function(){
 	  		  		console.debug('OkCancleModal init');
-	  		  		events.init(scope)
+	  		  		eventHandles.init(scope)
 	  		  	})(): undefined;
 	  	options.scope = scope;
 	  	return Thenjs(function(defer){
@@ -58,8 +58,8 @@ define(['app'], function(app)
 	  			scope.modal = modal;
 			  	scope.ok = function(form){
 			  		console.debug('OkCancleModal ok');
-			  		if (_.isFunction(events.onOk)){
-			  			events.onOk(form, scope);
+			  		if (_.isFunction(eventHandles.onOk)){
+			  			eventHandles.onOk(form, scope);
 			  		}else{
 			  			modal.hide();
 			  		}
@@ -70,22 +70,22 @@ define(['app'], function(app)
 			  	}
 			  	scope.closeModal = function(){
 			  		console.debug('OkCancleModal closeModal');
-			  		if (_.isFunction(events.onClose)){
-			  			events.onClose(scope);
+			  		if (_.isFunction(eventHandles.onClose)){
+			  			eventHandles.onClose(scope);
 			  		}else{
 			  			modal.hide();
 			  		}
 			  	}
 			  	scope.cancelModal = function(){
 			  		console.debug('OkCancleModal cancelModal');
-			  		if (_.isFunction(events.onCancel)){
-			  			events.onCancel(scope);
+			  		if (_.isFunction(eventHandles.onCancel)){
+			  			eventHandles.onCancel(scope);
 			  		}else{
 			  			modal.hide();
 			  		}
 			  	}
 	  			modal.show();
-	  			defer(undefined);
+	  			defer(undefined, scope, modal);
 	  		});
 	  	});
 	  }

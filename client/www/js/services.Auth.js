@@ -1,7 +1,7 @@
-define(['app', 'services.Modal', 'services.Push'], function(app)
+define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], function(app)
 {
     app.factory('Auth', function($rootScope, $ionicHistory, $timeout, $state, 
-      $http, $ionicModal, Restangular, Modal,PushProcessingService) {
+      $http, $ionicModal, Restangular, Modal, RestRoute, PushProcessingService) {
       //Todo: 把定义从app.config移到这里
       var accessLevels = app.routingConfig.accessLevels,
           userRoles = app.routingConfig.userRoles,
@@ -16,41 +16,13 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
                          )
       // var currentUser = { userName: '', role: routingConfig.userRoles.public, userData: {} }
 
-      //定义输入邮箱对话框
-      var signupModalScope = $rootScope.$new();
-      signupModalScope.formData = {email:''};
-      signupModalScope.commitForm = function(commitForm){
-        if (commitForm.$invalid) return;
-        console.log(signupModalScope.formData.email.$in);
-        console.log('Doing signUp:' + JSON.stringify(signupModalScope.formData));
-        var Signup = Restangular.all('signup');
-        Signup.post(signupModalScope.formData).then(function(data){
-        console.log('Signup success, get data:' + JSON.stringify(data));
-          signupModalScope.modal.hide();
-          if (_.isFunction(signupModalScope.onSuccess)) signupModalScope.onSuccess();
-        }, function(error){
-          console.log('Signup error, get data:' + JSON.stringify(error));
-          if (_.isFunction(signupModalScope.onError)) signupModalScope.onError();
-        })
-      }
-      var signupModal = function(){
-        if (signupModalScope.modal){
-          signupModalScope.modal.remove();
-        }
-        Modal
-          .init('templates/modal-signup.html', signupModalScope)
-          .then(function(modal){
-            modal.show();
-          });
-      };
-
       //定义登陆对话框
       var preRegistModalScope = $rootScope.$new();
       preRegistModalScope.formData = {password: ''};
       preRegistModalScope.resetcommitFormError = function(ev){
           preRegistModalScope.commitFormError = false;
       }
-      preRegistModalScope.commitForm = function(commitForm){
+      preRegistModalScope.ok = function(commitForm){
         if (commitForm.$invalid) return;
         preRegistModalScope.commitFormError = false;
 
@@ -170,14 +142,7 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
             recheck();
           }
         },
-        login: function(success, error, close){      
-          signupModalScope.mustChoise = false;
-          signupModalScope.onSuccess = function(){
-            preRegistModalScope.formData.email = signupModalScope.formData.email;
-            preRegistModal();
-          };
-          signupModalScope.onError = error;
-          signupModalScope.onClose = close;
+        login: function(success, error, close){  
           preRegistModalScope.mustChoise = false;
           allowNotificationModalScope.onOk = function(){      
             PushProcessingService.initialize();                                                
@@ -201,7 +166,13 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           }
           preRegistModalScope.onError = error;
           preRegistModalScope.onClose = close;
-          signupModal();
+          RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
+            onSuccess: function(signupScope){
+              signupScope.hideModal();
+              preRegistModalScope.formData.email = signupScope.formData.email
+              preRegistModal();
+            }
+          });
         },
         isLoggedIn: function(){
           return currentUser.role == userRoles.user;
@@ -218,22 +189,18 @@ define(['app', 'services.Modal', 'services.Push'], function(app)
           localStorage.removeItem('user', null);
           success();
         },
-        newLogin: function(){
-          Modal.okCancelModal('templates/modal-signup.html', {}, {
-            init: function($scope){
-              // $scope.mustChoise = true;
-            },
-            onOk: function(form, $scope){
-              $scope.hideModal();
-            },
-            onCancel: function($scope){
-              $scope.hideModal();
-            },
-            onClose: function($scope){
-              $scope.hideModal();
-            }
-          }).then(function(){console.log(11111111)});
-        },
+        // newLogin: function(){
+        //   RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
+        //     onSuccess: function(signupScope){
+        //       signupScope.hideModal();
+        //       RestRoute.postModal('http://42.120.45.236:8485/pre-register',{},{
+        //         init: function(preRegisterScope){
+        //           preRegisterScope.formData.email = signupScope.formData.email;
+        //         }
+        //       })
+        //     }
+        //   });
+        // },
         testModal: function(modelName) {
           console.log(modelName);
           Modal

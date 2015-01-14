@@ -3,7 +3,7 @@ ion-modal-view.Pages.pass-code
     .title.color-w {{'captcha'|translate}}
     .buttons
       button.color-bule.button.button-clear(ng-click='mustChoise?cancelModal():closeModal()') {{'cancel'|translate}}
-  form(name='loginForm', novalidate="", ng-submit='commitForm(loginForm)')
+  form(name='loginForm', novalidate="", ng-submit='ok(loginForm)')
     ion-content.color-w.dark
       .game-bg.screenHeight
         div.top
