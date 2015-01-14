@@ -14,14 +14,10 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
           | 首页
         ion-item(nav-clear='', ng-show='Auth.isLoggedIn()', menu-close='', href='#/app/wait-open')
           | 首页
-        //- ion-item(nav-clear='', menu-close='', href='#/app/message')
-        //-   | 信息
         ion-item(nav-clear='', menu-close='', href='#/app/about')
           | 关于 Gamo
         ion-item(nav-clear='', menu-close='', href='#/app/modal-allow-notification')
           | modal-allow-notification
-        //- ion-item(nav-clear='', menu-close='', ng-if="false", href='#/app/games/xxx')
-        //-   | game
         ion-item(nav-clear='', menu-close='', ng-click='Auth.testModal("modal-how-to-notification")',href='#')
           | modal-how-to-notification
         ion-item(nav-clear='', menu-close='', ng-click="Auth.login()")

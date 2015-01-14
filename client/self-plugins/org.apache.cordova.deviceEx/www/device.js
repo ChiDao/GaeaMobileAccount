@@ -41,6 +41,8 @@ function Device() {
     this.uuid = null;
     this.cordova = null;
     this.model = null;
+    this.boundsHeight = null;
+    this.boundsWidth = null;
 
     var me = this;
 
@@ -55,6 +57,8 @@ function Device() {
             me.uuid = info.uuid;
             me.cordova = buildLabel;
             me.model = info.model;
+            me.boundsHeight = info.boundsHeight;
+            me.boundsWidth = info.boundsWidth;
             channel.onCordovaInfoReady.fire();
         },function(e) {
             me.available = false;
