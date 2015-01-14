@@ -69,23 +69,23 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           });
       };
 
-      //定义开通消息通知对话框
-      var allowNotificationModalScope = $rootScope.$new();
-      allowNotificationModalScope.ok = function(){
-        allowNotificationModalScope.modal.hide();
-        if (_.isFunction(allowNotificationModalScope.onOk)) allowNotificationModalScope.onOk();
-      }
-      allowNotificationModalScope.cancel = function(){
-        allowNotificationModalScope.modal.hide();
-        if (_.isFunction(allowNotificationModalScope.onCancel)) allowNotificationModalScope.onCancel();
-      }
-      var allowNotificationModal = function(){
-        Modal
-          .init('templates/modal-allow-notification.html', allowNotificationModalScope)
-          .then(function(modal){
-            modal.show();
-          });
-      };
+      // //定义开通消息通知对话框
+      // var allowNotificationModalScope = $rootScope.$new();
+      // allowNotificationModalScope.ok = function(){
+      //   allowNotificationModalScope.modal.hide();
+      //   if (_.isFunction(allowNotificationModalScope.onOk)) allowNotificationModalScope.onOk();
+      // }
+      // allowNotificationModalScope.cancel = function(){
+      //   allowNotificationModalScope.modal.hide();
+      //   if (_.isFunction(allowNotificationModalScope.onCancel)) allowNotificationModalScope.onCancel();
+      // }
+      // var allowNotificationModal = function(){
+      //   Modal
+      //     .init('templates/modal-allow-notification.html', allowNotificationModalScope)
+      //     .then(function(modal){
+      //       modal.show();
+      //     });
+      // };
 
       //定义如何开启消息通知对话框
       var howToNotificationModalScope = $rootScope.$new();
@@ -144,18 +144,19 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
         },
         login: function(success, error, close){  
           preRegistModalScope.mustChoise = false;
-          allowNotificationModalScope.onOk = function(){      
-            PushProcessingService.initialize();                                                
-            howToNotificationModalScope.push = false;
-            howToNotificationModal();
-            //循环检查                
-            recheck();
-          }
           preRegistModalScope.onSuccess = function(){
             var checkPush =  PushProcessingService.checkResult();
                 console.log("checkPush"+checkPush);
                 if(checkPush != "Yes"){
-                  allowNotificationModal();
+                  Modal.okCancelModal('templates/modal-allow-notification.html', {}, {
+                    onOk: function(form, scope){     
+                      PushProcessingService.initialize();                                                
+                      howToNotificationModalScope.push = false;
+                      howToNotificationModal();
+                      //循环检查                
+                      recheck();
+                    }
+                  });
                 }else{
                   $ionicHistory.nextViewOptions({
                     disableAnimate: true,
@@ -189,18 +190,6 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           localStorage.removeItem('user', null);
           success();
         },
-        // newLogin: function(){
-        //   RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
-        //     onSuccess: function(signupScope){
-        //       signupScope.hideModal();
-        //       RestRoute.postModal('http://42.120.45.236:8485/pre-register',{},{
-        //         init: function(preRegisterScope){
-        //           preRegisterScope.formData.email = signupScope.formData.email;
-        //         }
-        //       })
-        //     }
-        //   });
-        // },
         testModal: function(modelName) {
           console.log(modelName);
           Modal
