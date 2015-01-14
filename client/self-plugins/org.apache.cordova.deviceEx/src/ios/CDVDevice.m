@@ -79,6 +79,28 @@
     return deviceModel;
 }
 
+- (NSDictionary*)screenSize
+{
+    UIScreen *currentScreen = [UIScreen mainScreen];
+    
+    NSString* height =[NSString stringWithFormat:@"%f",currentScreen.bounds.size.height];
+    NSString* width =[NSString stringWithFormat:@"%f",currentScreen.bounds.size.width];
+    
+    int newHeight = [height intValue];
+    int newWidth = [width intValue];
+    
+    NSString* boundsHeight = [NSString stringWithFormat:@"%d",newHeight];
+    NSString* boundsWidth = [NSString stringWithFormat:@"%d",newWidth];
+    
+    NSMutableDictionary* screenSize = [NSMutableDictionary dictionaryWithCapacity:2];
+    [screenSize setObject:boundsHeight forKey:@"boundsHeight"];
+    [screenSize setObject:boundsWidth forKey:@"boundsWidth"];
+    
+    NSDictionary* screenReturn = [NSDictionary dictionaryWithDictionary:screenSize];
+
+    return screenReturn;
+}
+
 @end
 
 @interface CDVDevice () {}
@@ -104,6 +126,9 @@
     [devProps setObject:[device systemVersion] forKey:@"version"];
     [devProps setObject:[device uniqueAppInstanceIdentifier] forKey:@"uuid"];
     [devProps setObject:[[self class] cordovaVersion] forKey:@"cordova"];
+    [devProps setObject:[[device screenSize] objectForKey:@"boundsHeight"] forKey:@"boundsHeight"];
+    [devProps setObject:[[device screenSize] objectForKey:@"boundsWidth"] forKey:@"boundsWidth"];
+
 
     NSDictionary* devReturn = [NSDictionary dictionaryWithDictionary:devProps];
     return devReturn;
