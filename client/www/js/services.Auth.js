@@ -32,10 +32,14 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           Modal.okCancelModal('templates/modal-allow-notification.html', {}, {
             onOk: function(form, scope){     
               PushProcessingService.initialize();                                                
-              howToNotificationModalScope.push = false;
-              howToNotificationModal();
-              //循环检查                
-              recheck();
+              scope.push = false;
+              Modal.okCancelModal('templates/modal-how-to-notification.html', {}, {
+                init: function(scope){
+                  scope.push = false;
+                  //循环检查
+                  recheck();
+                }
+              })
             }
           });
         },
