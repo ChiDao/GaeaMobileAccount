@@ -16,88 +16,6 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                          )
       // var currentUser = { userName: '', role: routingConfig.userRoles.public, userData: {} }
 
-      //定义登陆对话框
-      var preRegistModalScope = $rootScope.$new();
-      preRegistModalScope.formData = {password: ''};
-      preRegistModalScope.resetcommitFormError = function(ev){
-          preRegistModalScope.commitFormError = false;
-      }
-      preRegistModalScope.ok = function(commitForm){
-        if (commitForm.$invalid) return;
-        preRegistModalScope.commitFormError = false;
-
-        console.log('Doing login:' + JSON.stringify(preRegistModalScope.formData));
-        //校验用户名、密码
-        //Todo: 访问服务器进行登陆
-        var PreRegist = Restangular.all("pre-register");
-        PreRegist.post(preRegistModalScope.formData).then(function(data){
-          console.log('login success.get data:' + JSON.stringify(data));
-          //Todo: 请求用户信息
-          var Me = Restangular.one("me");
-          Me.get().then(function(me){
-            console.log(me);
-            currentUser.userName = preRegistModalScope.formData.email;
-            currentUser.role = userRoles.user;
-            //存储用户信息到localStorage
-            localStorage.setItem('user', JSON.stringify(me.data.rawData));
-            console.log(me.data.rawData);
-            if (_.isFunction(preRegistModalScope.onSuccess)) preRegistModalScope.onSuccess();
-            $timeout(function() {
-              preRegistModalScope.closeModal();
-            }, 1000);
-          },function(error){
-            preRegistModalScope.commitFormError = true;
-            preRegistModalScope.commitFormErrorMsg = error.data.alertMsg;
-            console.log('login fail, get data: ' + JSON.stringify(error));
-          })
-        }, function(error){
-          preRegistModalScope.commitFormError = true;
-          preRegistModalScope.commitFormErrorMsg = error.data.alertMsg;
-          console.log('login fail, get data: ' + JSON.stringify(error));
-          if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
-        })
-        
-      };
-      var preRegistModal = function(){
-        if (preRegistModal.modal){
-          preRegistModal.modal.remove();
-        }
-        Modal
-          .init('templates/modal-login.html', preRegistModalScope)
-          .then(function(modal){
-            modal.show();
-          });
-      };
-
-      //定义开通消息通知对话框
-      var allowNotificationModalScope = $rootScope.$new();
-      allowNotificationModalScope.ok = function(){
-        allowNotificationModalScope.modal.hide();
-        if (_.isFunction(allowNotificationModalScope.onOk)) allowNotificationModalScope.onOk();
-      }
-      allowNotificationModalScope.cancel = function(){
-        allowNotificationModalScope.modal.hide();
-        if (_.isFunction(allowNotificationModalScope.onCancel)) allowNotificationModalScope.onCancel();
-      }
-      var allowNotificationModal = function(){
-        Modal
-          .init('templates/modal-allow-notification.html', allowNotificationModalScope)
-          .then(function(modal){
-            modal.show();
-          });
-      };
-
-      //定义如何开启消息通知对话框
-      var howToNotificationModalScope = $rootScope.$new();
-      var howToNotificationModal = function(){
-        Modal
-        .init('templates/modal-how-to-notification.html', howToNotificationModalScope)
-        .then(function(modal){
-          modal.show();
-        });
-      };
-
-
       //定义SSO单点登录对话框
       var ssoModalScope = $rootScope.$new();
       ssoModalScope.ok = function(){
@@ -133,46 +51,103 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           //Todo
         },
         disallow: function(){
-          allowNotificationModal();
-          allowNotificationModalScope.onOk = function(){      
-            PushProcessingService.initialize();                                                
-            howToNotificationModalScope.push = false;                
-            howToNotificationModal();                
-            //循环检查                
-            recheck();
-          }
-        },
-        login: function(success, error, close){  
-          preRegistModalScope.mustChoise = false;
-          allowNotificationModalScope.onOk = function(){      
-            PushProcessingService.initialize();                                                
-            howToNotificationModalScope.push = false;
-            howToNotificationModal();
-            //循环检查                
-            recheck();
-          }
-          preRegistModalScope.onSuccess = function(){
-            var checkPush =  PushProcessingService.checkResult();
-                console.log("checkPush"+checkPush);
-                if(checkPush != "Yes"){
-                  allowNotificationModal();
-                }else{
-                  $ionicHistory.nextViewOptions({
-                    disableAnimate: true,
-                    disableBack: true
-                  });
-                  $state.go('app.wait-open');
-                }
-          }
-          preRegistModalScope.onError = error;
-          preRegistModalScope.onClose = close;
-          RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
-            onSuccess: function(signupScope){
-              signupScope.hideModal();
-              preRegistModalScope.formData.email = signupScope.formData.email
-              preRegistModal();
+          Modal.okCancelModal('templates/modal-allow-notification.html', {}, {
+            onOk: function(form, scope){     
+              PushProcessingService.initialize();                                                
+              howToNotificationModalScope.push = false;
+              howToNotificationModal();
+              //循环检查                
+              recheck();
             }
           });
+        },
+        login: function(success, error, close){ 
+          //填写邮箱signup对话框
+          (function(preRegistModal){
+            RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
+              onSuccess: function(signupScope){
+                signupScope.hideModal();
+                preRegistModal(signupScope.formData.email);
+              }
+            });
+          })
+          //填写验证码pre-register对话框
+          ((function(allowNotification){
+            return function(email){
+              RestRoute.postModal('http://42.120.45.236:8485/pre-register', {}, {
+                init: function(scope){
+                  scope.formData.email = email
+                  scope.mustChoise = false;
+                  scope.resetcommitFormError = function(ev){
+                    scope.commitFormError = false;
+                  }
+                },
+                onOk: function(form, scope){
+                  scope.commitFormError = false;
+                },
+                onSuccess: function(scope){
+                  var Me = Restangular.one("me");
+                  Me.get().then(function(me){
+                    console.log(me);
+                    currentUser.userName = me.data.rawData.email;
+                    currentUser.role = userRoles.user;
+                    //存储用户信息到localStorage
+                    localStorage.setItem('user', JSON.stringify(me.data.rawData));
+                    console.log(me.data.rawData);
+                    
+                    var checkPush =  PushProcessingService.checkResult();
+                    console.log("checkPush"+checkPush);
+                    if(checkPush != "Yes"){
+                      allowNotification();
+                    }else{
+                      $ionicHistory.nextViewOptions({
+                        disableAnimate: true,
+                        disableBack: true
+                      });
+                      $state.go('app.wait-open');
+                    }
+
+                    $timeout(function() {
+                      scope.closeModal();
+                    }, 1000);
+                  },function(error){
+                    scope.commitFormError = true;
+                    scope.commitFormErrorMsg = error.data.alertMsg;
+                    console.log('login fail, get data: ' + JSON.stringify(error));
+                  })
+                },
+                onError: function (error){
+                  preRegistModalScope.commitFormError = true;
+                  preRegistModalScope.commitFormErrorMsg = error.data.alertMsg;
+                  console.log('login fail, get data: ' + JSON.stringify(error));
+                  if (_.isFunction(preRegistModalScope.onError)) preRegistModalScope.onError();
+                }
+              });//End of postModal
+            };//End of function to be passed
+          })
+          //开通推送对黄框
+          ((function(howToNotificationModal){
+            return function(){
+              Modal.okCancelModal('templates/modal-allow-notification.html', {}, {
+                onOk: function(form, scope){
+                  howToNotificationModal();
+                  scope.hideModal();
+                }
+              });
+            };
+          })
+          //
+          (function(){
+            PushProcessingService.initialize(); 
+            Modal.okCancelModal('templates/modal-how-to-notification.html', {}, {
+              init: function(scope){                            
+                scope.push = false;               
+                //循环检查                
+                recheck();
+              }
+            });//End of okCancelModal
+          })
+          ));//End of pass function as param
         },
         isLoggedIn: function(){
           return currentUser.role == userRoles.user;
@@ -189,18 +164,6 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           localStorage.removeItem('user', null);
           success();
         },
-        // newLogin: function(){
-        //   RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
-        //     onSuccess: function(signupScope){
-        //       signupScope.hideModal();
-        //       RestRoute.postModal('http://42.120.45.236:8485/pre-register',{},{
-        //         init: function(preRegisterScope){
-        //           preRegisterScope.formData.email = signupScope.formData.email;
-        //         }
-        //       })
-        //     }
-        //   });
-        // },
         testModal: function(modelName) {
           console.log(modelName);
           Modal

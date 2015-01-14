@@ -316,7 +316,7 @@ define(['app', 'services.Modal'], function(app)
             }, function(error){
               console.log('Commit form error:' + JSON.stringify(error));
               if (_.isFunction(eventHandles.onError)){
-                eventHandles.onError();
+                eventHandles.onError(error);
               }
             })
           }
