@@ -10679,6 +10679,7 @@ hr {
 .slider {
   color: #fff !important;
   margin-top: 44px;
+  padding-top: 10px;
   height: 100%; }
   .slider .col {
     padding: 0 16px; }

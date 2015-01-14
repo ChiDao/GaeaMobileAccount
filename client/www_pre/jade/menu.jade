@@ -14,31 +14,11 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
           | 首页
         ion-item(nav-clear='', ng-show='Auth.isLoggedIn()', menu-close='', href='#/app/wait-open')
           | 首页
-        //- ion-item(nav-clear='', menu-close='', href='#/app/message')
-        //-   | 信息
         ion-item(nav-clear='', menu-close='', href='#/app/about')
           | 关于 Gamo
         ion-item(nav-clear='', menu-close='', href='#/app/modal-allow-notification')
           | modal-allow-notification
-        //- ion-item(nav-clear='', menu-close='', ng-if="false", href='#/app/games/xxx')
-        //-   | game
         ion-item(nav-clear='', menu-close='', ng-click='Auth.testModal("modal-how-to-notification")',href='#')
           | modal-how-to-notification
         ion-item(nav-clear='', menu-close='', ng-click="Auth.login()")
           | Login
-        ion-item(nav-clear='', menu-close='', ng-click='Auth.testNoti("modal-how-to-notification")',href='#')
-          | modal-how-to-notification
-        //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
-        //-   | Login
-        //- //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
-        //- //-   | {{Auth.currentUser().userName}}
-        //- //- ion-item(nav-clear='', menu-close='', href='#/app/search')
-        //- //-   | Search
-        //- ion-item(nav-clear='', menu-close='', href='#/app/browse')
-        //-   | Browse
-        //- ion-item(nav-clear='', menu-close='', href='#/app/playlists')
-        //-   | Playlists
-        //- ion-item(nav-clear='', menu-close='', href='#/app/about')
-        //-   | 关于 GOYA
-        //- ion-item(nav-clear='', menu-close='', ng-click='Auth.ssoAuth({appId:"ga14a66eaac9ae6457", url: "wb1121741102" })')
-        //-   | SSO
