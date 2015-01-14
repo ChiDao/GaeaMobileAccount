@@ -16,28 +16,6 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                          )
       // var currentUser = { userName: '', role: routingConfig.userRoles.public, userData: {} }
 
-      //定义SSO单点登录对话框
-      var ssoModalScope = $rootScope.$new();
-      ssoModalScope.ok = function(){
-        ssoModalScope.modal.hide();
-        if (_.isFunction(ssoModalScope.onOk)) ssoModalScope.onOk();
-      }
-      ssoModalScope.cancel = function(){
-        ssoModalScope.modal.hide();
-        if (_.isFunction(ssoModalScope.onCancel)) ssoModalScope.onCancel();
-      }
-      var ssoAuthModal = function(){
-        if (ssoAuthModal.modal){
-          ssoAuthModal.modal.remove();
-        }
-        Modal
-          .init('templates/modal-sso-auth.html', ssoModalScope)
-          .then(function(modal){
-            modal.show();
-          });
-      };
-
-
 
       // Public API here
       return {
@@ -95,7 +73,15 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                     localStorage.setItem('user', JSON.stringify(me.data.rawData));
                     console.log(me.data.rawData);
                     
-                    var checkPush =  PushProcessingService.checkResult();
+                    scope.closeModal();
+                  },function(error){
+                    scope.commitFormError = true;
+                    scope.commitFormErrorMsg = error.data.alertMsg;
+                    console.log('login fail, get data: ' + JSON.stringify(error));
+                  })
+                  //如果没有开启推送，显示提醒开启推送
+                  .then(function(){
+                    var checkPush = PushProcessingService.checkResult();
                     console.log("checkPush"+checkPush);
                     if(checkPush != "Yes"){
                       allowNotification();
@@ -106,14 +92,6 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                       });
                       $state.go('app.wait-open');
                     }
-
-                    $timeout(function() {
-                      scope.closeModal();
-                    }, 1000);
-                  },function(error){
-                    scope.commitFormError = true;
-                    scope.commitFormErrorMsg = error.data.alertMsg;
-                    console.log('login fail, get data: ' + JSON.stringify(error));
                   })
                 },
                 onError: function (error, form, scope){
@@ -124,7 +102,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
               });//End of postModal
             };//End of function to be passed
           })
-          //开通推送对黄框
+          //开通推送对话框
           ((function(howToNotificationModal){
             return function(){
               Modal.okCancelModal('templates/modal-allow-notification.html', {}, {
@@ -178,25 +156,20 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
 
         ssoAuth: function(ssoData){
           //Todo: 返回授权结果给第三方应用
-          var ssoCallBack = function(status, info){
-            signupModalScope.onSuccess = undefined;
-            signupModalScope.onError = undefined;
-            signupModalScope.onCancel = undefined;
-            preRegistModalScope.onSuccess = undefined;
-            preRegistModalScope.onError = undefined;
-            preRegistModalScope.onError = undefined;
+          var ssoCallBack = function(status, info, authCode){
             if (ionic.Platform.platform() === 'macintel'){
-              console.log(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''));
+              console.log(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + authCode:''));
             }
             if(ionic.Platform.isIOS()){
               console.log("ios loginByClient");
-              window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''), '_system');
+              window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + authCode:''), '_system');
             }
             if (ionic.Platform.isAndroid()){
               console.log("android loginByClient");
-              window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + ssoModalScope.authCode:''), '_system');
+              window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + authCode:''), '_system');
             }
           };
+
           var confirmSso = function(){
             $ionicHistory.nextViewOptions({
               disableAnimate: true,
@@ -204,12 +177,24 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
             });
             $state.go('app.wait-open');
             Restangular.oneUrl('user-client-authorize/' + ssoData.appId + '/' + ssoData.url).get().then(function(data){
-              console.log('Get client authorize Success, Get data:' + JSON.stringify(data));
-              ssoModalScope.gameClientTitle = data.data.rawData.description;
-              ssoModalScope.authCode = data.data.rawData.code;
-              ssoModalScope.publisher = data.data.rawData.publisher;
-              ssoModalScope.gameClientLogo = data.data.rawData.gameClientLogo;
-              ssoAuthModal();
+              console.log('Get client authorize Success, Get data:' + JSON.stringify(data));;
+              Modal.okCancelModal('templates/modal-sso-auth.html', {}, {
+                init: function(scope){
+                  scope.gameClientTitle = data.data.rawData.description;
+                  scope.authCode = data.data.rawData.code;
+                  scope.publisher = data.data.rawData.publisher;
+                  scope.gameClientLogo = data.data.rawData.logo;
+                  console.log(JSON.stringify(scope.gameClientLogo));
+                },
+                onOk: function(form, scope){
+                  ssoCallBack('0', 'sso ok', data.data.rawData.code);
+                  scope.hideModal();
+                },
+                onCancel: function(scope){
+                  ssoCallBack('-2', 'sso cancel');
+                  scope.hideModal();
+                }
+              });
             }, function(error){
               ssoCallBack('-3', 'sso fail');
               console.log('Get client authorize Error:' + JSON.stringify(error));
@@ -217,40 +202,76 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
             //Todo: 如果曾经授权，不需再授权
           };
 
-          //请求授权确认按钮
-          ssoModalScope.onOk = function(){
-            ssoCallBack('0', 'sso ok');
-          };
-          //请求授权取消按钮
-          ssoModalScope.onCancel = function(){
-            ssoCallBack('-2', 'sso cancel');
-          };
-          
-          
+          //没有登录
           if (!this.isLoggedIn()){
-            signupModalScope.mustChoise = true;
-            signupModalScope.onSuccess = function(){
-              preRegistModalScope.formData.email = signupModalScope.formData.email;
-              preRegistModalScope.commitFormError = false;
-              preRegistModal();
-            };
-            signupModalScope.onError = function(){
-            };
-            signupModalScope.onCancel = function(){
-              ssoCallBack('-1', 'logined cancel');
-            };
-            preRegistModalScope.mustChoise = true;
-            preRegistModalScope.onSuccess = confirmSso;
-            preRegistModalScope.onError = function(){
-              //登录错误不做任何处理
-            };
-            preRegistModalScope.onCancel = function(){ 
-              ssoCallBack('-1', 'logined cancel');
-            };
-            signupModal();
+            //填写邮箱signup对话框
+            (function(preRegistModal){
+              RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
+                init: function(scope){
+                  scope.mustChoise = true;
+                },
+                onSuccess: function(form, signupScope){
+                  signupScope.hideModal();
+                  preRegistModal(signupScope.formData.email);
+                },
+                onCancel: function(){
+                  ssoCallBack('-1', 'logined cancel');
+                },
+              });
+            })
+            //填写验证码pre-register对话框
+            ((function(ssoAuth){
+              return function(email){
+                RestRoute.postModal('http://42.120.45.236:8485/pre-register', {}, {
+                  init: function(scope){
+                    scope.formData.email = email
+                    scope.mustChoise = true;
+                    scope.resetcommitFormError = function(ev){
+                      scope.commitFormError = false;
+                    }
+                  },
+                  onOk: function(form, scope){
+                    scope.commitFormError = false;
+                  },
+                  onSuccess: function(form, scope){
+                    var Me = Restangular.one("me");
+                    Me.get().then(function(me){
+                      console.log(me);
+                      currentUser.userName = me.data.rawData.email;
+                      currentUser.role = userRoles.user;
+                      //存储用户信息到localStorage
+                      localStorage.setItem('user', JSON.stringify(me.data.rawData));
+                      console.log(me.data.rawData);
+                      
+                      scope.closeModal();
+                    },function(error){
+                      scope.commitFormError = true;
+                      scope.commitFormErrorMsg = error.data.alertMsg;
+                      console.log('login fail, get data: ' + JSON.stringify(error));
+                    })
+                    .then(function(){
+                      ssoAuth();
+                    })
+                  },
+                  onCancel: function(form, scope){
+                    ssoCallBack('-1', 'logined cancel');
+                  },
+                  onError: function (error, form, scope){
+                    scope.commitFormError = true;
+                    scope.commitFormErrorMsg = error.data.alertMsg;
+                    console.log('login fail, get data: ' + JSON.stringify(error));
+                  }
+                });//End of postModal
+              };//End of function to be passed
+            })
+            //开通推送对话框
+            (function(scope){
+              confirmSso();
+            }));
           }else{
             confirmSso();
           }
+
         },
 
         accessLevels: accessLevels,
