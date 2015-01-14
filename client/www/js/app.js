@@ -64,7 +64,7 @@ define([
         if (navigator.splashscreen){
           navigator.splashscreen.hide();
         }
-      },1);
+      },500);
 
       
 
