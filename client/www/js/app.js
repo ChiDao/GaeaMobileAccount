@@ -61,7 +61,6 @@ define([
           LiveUpdate.update();
         }
 
-      console.log('after update');
         if (navigator.splashscreen){
           navigator.splashscreen.hide();
         }
@@ -94,7 +93,8 @@ define([
     })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
   starter.controller("MainCtrl", function($scope, Auth) {
-    if(typeof(device) != 'undefined'){
+    $scope.height = 0;
+    if(ionic.Platform.isWebView()){
       $scope.height = device.boundsHeight;
     } else{
       $scope.height = window.innerHeight;
