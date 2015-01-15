@@ -14,7 +14,7 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script type="text/javascript" src="lib/requirejs/require.js" data-main="bootstrap.js"></script>
   </head>
-  <body ng-controller="MainCtrl" class="">
+  <body ng-controller="MainCtrl" ng-class="{'h480':height=='480','h568':height=='568'}" class="">
     <ion-nav-view></ion-nav-view>
 
     <script id="templates/form-errors.html" type="text/ng-template">

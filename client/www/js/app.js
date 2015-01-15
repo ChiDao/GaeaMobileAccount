@@ -94,6 +94,7 @@ define([
     })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
   starter.controller("MainCtrl", function($scope, Auth) {
+    $scope.height = device.boundsHeight;
     $scope.requestAuth = function(url) {
       var parsedUrl = purl(url);  
       console.log(JSON.stringify(parsedUrl.param()));
