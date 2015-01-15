@@ -37,7 +37,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                 init: function(scope){
                   scope.push = false;
                   //循环检查
-                  recheck();
+                  recheck(scope);
                 }
               })
             }
@@ -124,7 +124,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
               init: function(scope){                            
                 scope.push = false;               
                 //循环检查                
-                recheck();
+                recheck(scope);
               }
             });//End of okCancelModal
           })
@@ -281,7 +281,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
         accessLevels: accessLevels,
         userRoles: userRoles
       };
-      function recheck(){
+      function recheck(scope){
         $timeout(function() {                         
           PushProcessingService.checkinitialize(); 
           $timeout(function() {                        
@@ -289,7 +289,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
             console.log("checkPush is "+checkPush);                         
             if(checkPush != "Yes"){                        
               console.log("循环检查");                         
-              recheck();                         
+              recheck(scope);                         
             }else{
               howToNotificationModalScope.push =true;
               $timeout(function() {
