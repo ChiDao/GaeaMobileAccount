@@ -33,6 +33,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
             onOk: function(form, scope){     
               PushProcessingService.initialize();                                                
               scope.push = false;
+              scope.hideModal();
               Modal.okCancelModal('templates/modal-how-to-notification.html', {}, {
                 init: function(scope){
                   scope.push = false;
