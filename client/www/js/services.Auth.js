@@ -299,9 +299,9 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
               console.log("循环检查");                         
               recheck(scope);                         
             }else{
-              howToNotificationModalScope.push =true;
+              scope.push =true;
               $timeout(function() {
-                howToNotificationModalScope.modal.hide();
+                scope.hideModal();
               },5000)
               $ionicHistory.nextViewOptions({
                 disableAnimate: true,
