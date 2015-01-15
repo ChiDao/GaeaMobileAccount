@@ -22,19 +22,5 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
           | modal-how-to-notification
         ion-item(nav-clear='', menu-close='', ng-click="Auth.login()")
           | Login
-        ion-item(nav-clear='', menu-close='', ng-click='Auth.testNoti("modal-how-to-notification")',href='#')
-          | modal-how-to-notification
-        //- ion-item(nav-clear='', menu-close='', ng-if='!Auth.isLoggedIn()', ng-click='Auth.login()')
-        //-   | Login
-        //- //- ion-item(nav-clear='', menu-close='', ng-if='Auth.isLoggedIn()', href='#/app/user_info')
-        //- //-   | {{Auth.currentUser().userName}}
-        //- //- ion-item(nav-clear='', menu-close='', href='#/app/search')
-        //- //-   | Search
-        //- ion-item(nav-clear='', menu-close='', href='#/app/browse')
-        //-   | Browse
-        //- ion-item(nav-clear='', menu-close='', href='#/app/playlists')
-        //-   | Playlists
-        //- ion-item(nav-clear='', menu-close='', href='#/app/about')
-        //-   | 关于 GOYA
         ion-item(nav-clear='', menu-close='', ng-click='Auth.ssoAuth({appId:"ga14a66eaac9ae6457", url: "SoulClash" })')
           | SSO

@@ -5,9 +5,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Libs
 @import "www/lib/ionic/scss/ionic";
-@import "www_pre/scss/animate.scss";
-@import "www_pre/scss/ani-check.scss";
+@import "www_pre/scss/lib.animate.scss";
 
-//
+// App
 @import "www_pre/scss/goya.base.scss";
 @import "www_pre/scss/goya.app.scss";
+@import "www_pre/scss/goya.screen.scss";
+@import "www_pre/scss/goya.animate.check.scss";

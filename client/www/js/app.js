@@ -61,12 +61,12 @@ define([
           LiveUpdate.update();
         }
 
+      console.log('after update');
         if (navigator.splashscreen){
           navigator.splashscreen.hide();
         }
       },500);
 
-      
 
       // 检查是否被调用
       var openUrl = localStorage.getItem('openUrl');
@@ -94,7 +94,12 @@ define([
     })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
   starter.controller("MainCtrl", function($scope, Auth) {
-    $scope.height = device.boundsHeight;
+    if(typeof(device) != 'undefined'){
+      $scope.height = device.boundsHeight;
+    } else{
+      $scope.height = window.innerHeight;
+    }
+    
     $scope.requestAuth = function(url) {
       var parsedUrl = purl(url);  
       console.log(JSON.stringify(parsedUrl.param()));

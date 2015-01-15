@@ -10,7 +10,6 @@ define(['app'], function(app){
         }
         function onDeviceReady() {
             console.info('NOTIFY  Device is ready.  Registering with GCM server');
-           
             var pushNotification = window.plugins.pushNotification;
             if (device.platform == 'android' || device.platform == 'Android') {
                  //register with google GCM server

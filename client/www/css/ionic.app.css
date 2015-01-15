@@ -10104,130 +10104,6 @@ body {
   -ms-animation-iteration-duration: 8s !important; }
 
 /*
-See the explanation of the animation here:
-http://codepen.io/timseverien/pen/yvJkm
-*/
-@-webkit-keyframes check {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 1; }
-
-  25% {
-    height: 0;
-    width: 10px;
-    opacity: 1; }
-
-  50% {
-    height: 20px;
-    width: 10px;
-    opacity: 1; } }
-
-@-moz-keyframes check {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 1; }
-
-  25% {
-    height: 0;
-    width: 10px;
-    opacity: 1; }
-
-  50% {
-    height: 20px;
-    width: 10px;
-    opacity: 1; } }
-
-@-ms-keyframes check {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 1; }
-
-  25% {
-    height: 0;
-    width: 10px;
-    opacity: 1; }
-
-  50% {
-    height: 20px;
-    width: 10px;
-    opacity: 1; } }
-
-@keyframes check {
-  0% {
-    height: 0;
-    width: 0;
-    opacity: 1; }
-
-  25% {
-    height: 0;
-    width: 10px;
-    opacity: 1; }
-
-  50% {
-    height: 20px;
-    width: 10px;
-    opacity: 1; } }
-
-.checkbox-ani, .checkbox-alt {
-  background-color: #fff;
-  display: inline-block;
-  height: 50px;
-  margin: 0 0.25em;
-  width: 50px; }
-  .checkbox-ani label, .checkbox-alt label {
-    display: block;
-    height: 50px;
-    position: relative;
-    width: 50px; }
-    .checkbox-ani label:after, .checkbox-alt label:after {
-      /*
-      This element has a border on the right, and top. By rotating it looks like a check symbol, but the wrong way. That's why I'm flipping it with scaleX(-1)
-      */
-      -webkit-transform: scaleX(-1) rotate(135deg);
-      transform: scaleX(-1) rotate(135deg);
-      /*
-      I want to position the symbol using the left top, because when increasing the width and height of an object, it expands from the top left corner as well. That is what makes it looks like it's being drawn.
-      */
-      -webkit-transform-origin: left top;
-      transform-origin: left top;
-      border-right: 4px solid #cee;
-      border-top: 4px solid #cee;
-      content: '';
-      display: block;
-      height: 20px;
-      left: 14px;
-      position: absolute;
-      top: 26px;
-      width: 10px; }
-    .checkbox-ani label:hover:after, .checkbox-alt label:hover:after {
-      border-color: #bdd; }
-  .checkbox-ani input, .checkbox-alt input {
-    display: none; }
-  .checkbox-ani input + label:after, .checkbox-alt input + label:after {
-    -webkit-animation: check 1.2s ease;
-    -moz-animation: check 1.2s ease;
-    -o-animation: check 1.2s ease;
-    animation: check 1.2s ease;
-    opacity: 0.3;
-    border-color: #ff7e86;
-    -webkit-animation-delay: 2s;
-    /* Chrome, Safari, Opera */
-    animation-delay: 2s; }
-  .checkbox-ani.checkbox-alt label:hover:after, .checkbox-alt.checkbox-alt label:hover:after {
-    -webkit-animation: check 0.8s ease infinite;
-    -moz-animation: check 0.8s ease infinite;
-    -o-animation: check 0.8s ease infinite;
-    animation: check 0.8s ease infinite; }
-  .checkbox-ani.checkbox-alt input:checked + label:after, .checkbox-alt.checkbox-alt input:checked + label:after {
-    -webkit-animation: none;
-    -moz-animation: none;
-    -o-animation: none;
-    animation: none; }
-
-/*
 	var
 	變量
 */
@@ -10769,10 +10645,10 @@ article {
   margin-bottom: 30px; }
 
 #Tutorial .slider-pager {
-  bottom: 105px; }
+  bottom: 60px; }
 #Tutorial .page-footer {
   padding-top: 6px;
-  padding-bottom: 48px;
+  padding-bottom: 68px;
   background-color: rgba(0, 0, 0, 0.65); }
 
 /*
@@ -10782,3 +10658,136 @@ article {
   #AllowNoti .note {
     padding-top: 10px;
     margin-bottom: 4px; } }
+
+/*
+  Screen
+*/
+.h568 .slider {
+  height: 568px; }
+
+.h480 .slider {
+  height: 480px; }
+
+/*
+See the explanation of the animation here:
+http://codepen.io/timseverien/pen/yvJkm
+*/
+@-webkit-keyframes check {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1; }
+
+  25% {
+    height: 0;
+    width: 10px;
+    opacity: 1; }
+
+  50% {
+    height: 20px;
+    width: 10px;
+    opacity: 1; } }
+
+@-moz-keyframes check {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1; }
+
+  25% {
+    height: 0;
+    width: 10px;
+    opacity: 1; }
+
+  50% {
+    height: 20px;
+    width: 10px;
+    opacity: 1; } }
+
+@-ms-keyframes check {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1; }
+
+  25% {
+    height: 0;
+    width: 10px;
+    opacity: 1; }
+
+  50% {
+    height: 20px;
+    width: 10px;
+    opacity: 1; } }
+
+@keyframes check {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1; }
+
+  25% {
+    height: 0;
+    width: 10px;
+    opacity: 1; }
+
+  50% {
+    height: 20px;
+    width: 10px;
+    opacity: 1; } }
+
+.checkbox-ani, .checkbox-alt {
+  background-color: #fff;
+  display: inline-block;
+  height: 50px;
+  margin: 0 0.25em;
+  width: 50px; }
+  .checkbox-ani label, .checkbox-alt label {
+    display: block;
+    height: 50px;
+    position: relative;
+    width: 50px; }
+    .checkbox-ani label:after, .checkbox-alt label:after {
+      /*
+      This element has a border on the right, and top. By rotating it looks like a check symbol, but the wrong way. That's why I'm flipping it with scaleX(-1)
+      */
+      -webkit-transform: scaleX(-1) rotate(135deg);
+      transform: scaleX(-1) rotate(135deg);
+      /*
+      I want to position the symbol using the left top, because when increasing the width and height of an object, it expands from the top left corner as well. That is what makes it looks like it's being drawn.
+      */
+      -webkit-transform-origin: left top;
+      transform-origin: left top;
+      border-right: 4px solid #cee;
+      border-top: 4px solid #cee;
+      content: '';
+      display: block;
+      height: 20px;
+      left: 14px;
+      position: absolute;
+      top: 26px;
+      width: 10px; }
+    .checkbox-ani label:hover:after, .checkbox-alt label:hover:after {
+      border-color: #bdd; }
+  .checkbox-ani input, .checkbox-alt input {
+    display: none; }
+  .checkbox-ani input + label:after, .checkbox-alt input + label:after {
+    -webkit-animation: check 1.2s ease;
+    -moz-animation: check 1.2s ease;
+    -o-animation: check 1.2s ease;
+    animation: check 1.2s ease;
+    opacity: 0.3;
+    border-color: #ff7e86;
+    -webkit-animation-delay: 2s;
+    /* Chrome, Safari, Opera */
+    animation-delay: 2s; }
+  .checkbox-ani.checkbox-alt label:hover:after, .checkbox-alt.checkbox-alt label:hover:after {
+    -webkit-animation: check 0.8s ease infinite;
+    -moz-animation: check 0.8s ease infinite;
+    -o-animation: check 0.8s ease infinite;
+    animation: check 0.8s ease infinite; }
+  .checkbox-ani.checkbox-alt input:checked + label:after, .checkbox-alt.checkbox-alt input:checked + label:after {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -o-animation: none;
+    animation: none; }

@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.DisplayMetrics; 
 import android.provider.Settings;
 
 public class Device extends CordovaPlugin {
@@ -73,6 +74,8 @@ public class Device extends CordovaPlugin {
             r.put("version", this.getOSVersion());
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
+            r.put("boundsHeight", this.getBoundsHeight());
+            r.put("boundsWidth", this.getBoundsWidth());
             callbackContext.success(r);
         }
         else {
@@ -118,6 +121,22 @@ public class Device extends CordovaPlugin {
     public String getProductName() {
         String productname = android.os.Build.PRODUCT;
         return productname;
+    }
+
+    public int getBoundsHeight() {
+        DisplayMetrics dm = new DisplayMetrics();
+        this.cordova.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int hpx = dm.heightPixels;
+
+        return hpx;
+    }
+
+    public int getBoundsWidth() {
+        DisplayMetrics dm = new DisplayMetrics();
+        this.cordova.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int wpx = dm.widthPixels;
+
+        return wpx;
     }
 
     /**

@@ -148,15 +148,22 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
         },
         testModal: function(modelName) {
           console.log(modelName);
-          Modal
-            .init('templates/' + modelName + '.html', ssoModalScope)
-            .then(function(modal){
-              modal.show();
-            });
+          Modal.okCancelModal('templates/'+modelName+'.html', {}, {
+            init: function(scope){
+            }
+          });//End of okCancelModal
         },
         testNoti: function (argument) {
-          howToNotificationModalScope.push = true;
-          howToNotificationModal();
+          (function(){
+            PushProcessingService.initialize(); 
+            Modal.okCancelModal('templates/modal-how-to-notification.html', {}, {
+              init: function(scope){                            
+                scope.push = false;               
+                //循环检查                
+                recheck(scope);
+              }
+            });//End of okCancelModal
+          })
         },
 
         ssoAuth: function(ssoData){
@@ -303,7 +310,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
               $state.go('app.wait-open');
             }
           },1);
-        }, 1000);              
+        }, 1000);
       }
     })
 
