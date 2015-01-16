@@ -10660,10 +10660,18 @@ article {
     margin-bottom: 4px; } }
 
 /*
+	Fixs
+*/
+.hide-footer .page-footer {
+  display: none; }
+
+/*
   Screen
 */
 .h568 .slider {
   height: 568px; }
+.h568 .keyboard-open .page-footer {
+  display: block; }
 
 .h480 .slider {
   height: 480px; }
