@@ -44,11 +44,17 @@ input::-webkit-input-placeholder {
 	mixin
 */
 
+@mixin border-box() {
+	box-sizing: border-box; /* Opera/IE 8+ */
+	-webkit-box-sizing: border-box; /* Safari, Chrome et al */
+	-moz-box-sizing: border-box; /* Firefox */
+}
+
 @mixin at2x($path, $ext: "png", $w: auto, $h: auto) {
 	$at1x_path: "#{$path}.#{$ext}";
 	$at2x_path: "#{$path}@2x.#{$ext}";
 
-	background-image: url("#{$at1x_path}");
+	background-image: url("#{$at1x_path}") !important;
 	background-image: -webkit-image-set(
 		url("#{$at1x_path}") 1x,
 		url("#{$at2x_path}") 2x
@@ -74,8 +80,6 @@ input::-webkit-input-placeholder {
 }
 
 @mixin full-width ($mb) {
-	width: 100%;
-	margin-left: -#{$mb};
 	width: calc(100% + (#{$mb} * 2));
 }
 
@@ -87,6 +91,10 @@ input::-webkit-input-placeholder {
 
 @mixin page-padding() {
 	padding: 0 $margin-left;
+}
+
+@mixin page-margin() {
+	margin: 0 $margin-left;
 }
 
 /*
@@ -142,7 +150,12 @@ h5 {
 }
 
 .full-width {
-	@include full-width($margin-left)
+	img {
+		width: 100%;
+	}
+
+	margin: 0 -1 * $margin-left;
+	@include full-width();
 }
 
 .color-w {
@@ -346,13 +359,13 @@ h5 {
 }
 
 .black {
-	width: 100%;
-	display: block;
 	background-repeat: no-repeat;
 	background-size: 100%;
-	@include at2x("../img/app/balck-layer",'png');
-	// background-image: url("../img/app/balck-layer.png") !important;
+	display: block;
 	min-height: 380px;
+	width: 100%;
+	@include at2x("../img/app/balck-layer",'png');
+	@include border-box();
 	@include page-padding();
 }
 

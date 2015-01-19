@@ -10168,9 +10168,9 @@ h5 {
   width: auto; }
 
 .full-width {
-  width: 100%;
-  margin-left: -16px;
-  width: calc(100% + (16px * 2)); }
+  margin: 0 -16px; }
+  .full-width img {
+    width: 100%; }
 
 .color-w {
   color: #fff; }
@@ -10317,12 +10317,12 @@ h5 {
 .game-bg {
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("../img/data/soul-clash/background.png");
+  background-image: url("../img/data/soul-clash/background.png") !important;
   background-image: -webkit-image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x) !important;
   background-image: image-set(url("../img/data/soul-clash/background.png") 1x, url("../img/data/soul-clash/background@2x.png") 2x) !important; }
 
 .top {
-  background-image: url("../img/data/soul-clash/top.png");
+  background-image: url("../img/data/soul-clash/top.png") !important;
   background-image: -webkit-image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x) !important;
   background-image: image-set(url("../img/data/soul-clash/top.png") 1x, url("../img/data/soul-clash/top@2x.png") 2x) !important;
   padding: 0px 2%;
@@ -10335,14 +10335,20 @@ h5 {
   overflow: hidden; }
 
 .black {
-  width: 100%;
-  display: block;
   background-repeat: no-repeat;
   background-size: 100%;
-  background-image: url("../img/app/balck-layer.png");
+  display: block;
+  min-height: 380px;
+  width: 100%;
+  background-image: url("../img/app/balck-layer.png") !important;
   background-image: -webkit-image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x) !important;
   background-image: image-set(url("../img/app/balck-layer.png") 1x, url("../img/app/balck-layer@2x.png") 2x) !important;
-  min-height: 380px;
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+  -webkit-box-sizing: border-box;
+  /* Safari, Chrome et al */
+  -moz-box-sizing: border-box;
+  /* Firefox */
   padding: 0 16px; }
 
 article h1 {
@@ -10439,27 +10445,27 @@ p {
     background-repeat: no-repeat;
     margin-bottom: 8px; }
   .icon .i-user {
-    background-image: url("../img/app/icon-user.png");
+    background-image: url("../img/app/icon-user.png") !important;
     background-image: -webkit-image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x) !important;
     background-image: image-set(url("../img/app/icon-user.png") 1x, url("../img/app/icon-user@2x.png") 2x) !important; }
   .icon .i-calendar {
-    background-image: url("../img/app/icon-calendar.png");
+    background-image: url("../img/app/icon-calendar.png") !important;
     background-image: -webkit-image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x) !important;
     background-image: image-set(url("../img/app/icon-calendar.png") 1x, url("../img/app/icon-calendar@2x.png") 2x) !important; }
   .icon .i-warning {
-    background-image: url("../img/app/icon-warning.png");
+    background-image: url("../img/app/icon-warning.png") !important;
     background-image: -webkit-image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x) !important;
     background-image: image-set(url("../img/app/icon-warning.png") 1x, url("../img/app/icon-warning@2x.png") 2x) !important; }
   .icon .i-flag {
-    background-image: url("../img/app/icon-flag.png");
+    background-image: url("../img/app/icon-flag.png") !important;
     background-image: -webkit-image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x) !important;
     background-image: image-set(url("../img/app/icon-flag.png") 1x, url("../img/app/icon-flag@2x.png") 2x) !important; }
   .icon .i-document {
-    background-image: url("../img/app/icon-document.png");
+    background-image: url("../img/app/icon-document.png") !important;
     background-image: -webkit-image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x) !important;
     background-image: image-set(url("../img/app/icon-document.png") 1x, url("../img/app/icon-document@2x.png") 2x) !important; }
   .icon .i-media {
-    background-image: url("../img/app/icon-media.png");
+    background-image: url("../img/app/icon-media.png") !important;
     background-image: -webkit-image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x) !important;
     background-image: image-set(url("../img/app/icon-media.png") 1x, url("../img/app/icon-media@2x.png") 2x) !important; }
   .icon b {
@@ -10528,7 +10534,7 @@ hr {
 .right-arrows {
   background-repeat: no-repeat !important;
   background-position: 97% 50% !important;
-  background-image: url("../img/app/right-arrows.png");
+  background-image: url("../img/app/right-arrows.png") !important;
   background-image: -webkit-image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x) !important;
   background-image: image-set(url("../img/app/right-arrows.png") 1x, url("../img/app/right-arrows@2x.png") 2x) !important; }
 

@@ -93,20 +93,20 @@ define([
     })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
   starter.controller("MainCtrl", function($scope, Auth) {
+    $scope.height = 0;
+    $scope.width = 0;
+    $scope.footer = "hide-footer"
+
+    $scope.height = window.innerHeight;
+    $scope.width = window.innerWidth;
     
     console.log("Ratio: " + window.devicePixelRatio);
-    $scope.height = 0;
-    if(ionic.Platform.isWebView()){
-      $scope.height = device.boundsHeight;
-    } else{
-      $scope.height = window.innerHeight;
-    }
     console.log("Height: " + $scope.height);
-    $scope.footer = "hide-footer"
+
     if ($scope.height > 600) {
       $scope.footer = "show-footer"
     }
-    
+    // alert("footer:"+$scope.height);
     $scope.requestAuth = function(url) {
       var parsedUrl = purl(url);  
       console.log(JSON.stringify(parsedUrl.param()));
