@@ -179,17 +179,10 @@ article {
 	}
 }
 
-
-/*
-	For 4/4s
-*/
-
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 480px) {
-	#AllowNoti .note {
-		padding-top: 10px;
-		margin-bottom: 4px;
+#Menu {
+	footer {
+		font-size: $f-small;
+		color: black;
+		text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2);
 	}
 }
-

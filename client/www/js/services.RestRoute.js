@@ -321,7 +321,10 @@ define(['app', 'services.Modal'], function(app)
             })
           }
           Modal.okCancelModal(apiConfig.modalTemplate, options, eventHandles)
-            .then(function(){console.log(11111111)});
+            .then(function(){
+              console.log('-okCancelModal')
+              //do okCancelModal
+            });
         },
 
         createRoute: function(){

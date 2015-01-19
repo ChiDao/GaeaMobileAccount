@@ -10168,7 +10168,8 @@ h5 {
   width: auto; }
 
 .full-width {
-  margin: 0 -16px; }
+  margin: 0 -16px;
+  width: calc(100% + (16px * 2)); }
   .full-width img {
     width: 100%; }
 
@@ -10421,8 +10422,6 @@ p {
   padding: 4px 12px; }
 
 .segmented-control {
-  width: 100%;
-  margin-left: -22px;
   width: calc(100% + (22px * 2));
   margin-bottom: 24px;
   color: #ff7e86; }
@@ -10657,18 +10656,15 @@ article {
   padding-bottom: 68px;
   background-color: rgba(0, 0, 0, 0.65); }
 
-/*
-	For 4/4s
-*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  #AllowNoti .note {
-    padding-top: 10px;
-    margin-bottom: 4px; } }
+#Menu footer {
+  font-size: 11px;
+  color: black;
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2); }
 
 /*
 	Fixs
 */
-.hide-footer .page-footer {
+.hide-footer.keyboard-open .page-footer {
   display: none; }
 
 /*

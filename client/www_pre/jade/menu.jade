@@ -24,3 +24,5 @@ ion-side-menus#Menu(enable-menu-with-back-views='false')
         //-   | Login
         //- ion-item(nav-clear='', menu-close='', ng-click='Auth.ssoAuth({appId:"ga14a66eaac9ae6457", url: "SoulClash" })')
         //-   | SSO
+  footer.page-footer.page-padding(ng-show='Auth.isLoggedIn()')
+    | 用戶：{{loginUser}}

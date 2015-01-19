@@ -5,8 +5,8 @@ define(['app', 'services.Auth'], function(app)
 	  $scope.loginData = {};
 	  $scope.isLoggedIn = Auth.isLoggedIn;
 	  $scope.Auth = Auth;
+      var userData = (localStorage.getItem('user') === null?{a:1}:JSON.parse(localStorage.getItem('user')));
+	  $scope.loginUser = userData.email;
 
-	    // Simulate a login delay. Remove this and replace with your login
-	    // code if using a login system
 	});
 });

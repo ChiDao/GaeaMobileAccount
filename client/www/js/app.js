@@ -93,9 +93,10 @@ define([
     })(typeof exports === 'undefined'? starter.routingConfig={}: exports);
 
   starter.controller("MainCtrl", function($scope, Auth) {
+
     $scope.height = 0;
     $scope.width = 0;
-    $scope.footer = "hide-footer"
+    $scope.footer = "show-footer"
 
     $scope.height = window.innerHeight;
     $scope.width = window.innerWidth;
@@ -103,8 +104,8 @@ define([
     console.log("Ratio: " + window.devicePixelRatio);
     console.log("Height: " + $scope.height);
 
-    if ($scope.height > 600) {
-      $scope.footer = "show-footer"
+    if ($scope.height < 550) {
+      $scope.footer = "hide-footer"
     }
     // alert("footer:"+$scope.height);
     $scope.requestAuth = function(url) {

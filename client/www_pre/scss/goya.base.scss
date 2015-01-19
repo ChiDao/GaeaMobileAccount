@@ -153,9 +153,9 @@ h5 {
 	img {
 		width: 100%;
 	}
+	margin: 0 (-1 * $margin-left);
 
-	margin: 0 -1 * $margin-left;
-	@include full-width();
+	@include full-width($margin-left);
 }
 
 .color-w {
