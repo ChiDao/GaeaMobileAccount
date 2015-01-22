@@ -51,10 +51,16 @@ define([
       //     }
       //   });
       // }
+
+      
+    
       $timeout(function() {
-        console.log("开启否？"+PushProcessingService.checkResult());
-        if (localStorage.getItem('user') !== null && PushProcessingService.checkResult() == "No"){
-          Auth.disallow();
+        //ios强制开启推送
+        if(ionic.Platform.isIOS()){
+          console.log("开启否？"+PushProcessingService.checkResult());
+          if (localStorage.getItem('user') !== null && PushProcessingService.checkResult() == "No"){
+            Auth.disallow();
+          }
         }
 
         if (ionic.Platform.isWebView()){
@@ -65,14 +71,22 @@ define([
           navigator.splashscreen.hide();
         }
       },500);
+    
 
 
       // 检查是否被调用
+      //ios
       var openUrl = localStorage.getItem('openUrl');
       localStorage.removeItem('openUrl');
       if (openUrl !== null){
         var parsedUrl = purl(openUrl);
         Auth.ssoAuth(parsedUrl.param());
+      }
+      //android
+      var intent = localStorage.getItem('intent');
+      localStorage.removeItem('intent');
+      if (intent !== null){
+        Auth.ssoAuth(JSON.parse(intent));
       }
 
     });
@@ -112,6 +126,10 @@ define([
       var parsedUrl = purl(url);  
       console.log(JSON.stringify(parsedUrl.param()));
       Auth.ssoAuth(parsedUrl.param());
+    }
+    $scope.requestAuthAd = function(intent) {
+      console.log(intent);
+      Auth.ssoAuth(JSON.parse(intent));
     };
   });
 
@@ -123,4 +141,9 @@ function handleOpenURL(url) {
     var body = document.getElementsByTagName("body")[0];
     var mainController = angular.element(body).scope();
     mainController.requestAuth(url);
+}
+function getIntentExtras(intent) {
+    var body = document.getElementsByTagName("body")[0];
+    var mainController = angular.element(body).scope();
+    mainController.requestAuthAd(intent);
 }

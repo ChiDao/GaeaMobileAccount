@@ -6,6 +6,15 @@
     <title></title>
 
     <script type="text/javascript">
+    
+    function getIntentExtras(intent) {
+        console.log("intent: " + intent);
+        localStorage.setItem('intent', intent);
+    }
+
+    function getIntentFailure(err) {
+        console.log("err: " + err);
+    }
 
 		function handleOpenURL(openUrl) {
 			console.log(openUrl);

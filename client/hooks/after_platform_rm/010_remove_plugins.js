@@ -19,6 +19,7 @@ var pluginlist = [
     "com.ohh2ahh.plugins.appavailability",
     "nl.x-services.plugins.launchmyapp",
     "com.phonegap.plugins.PushPlugin",
+    "com.gaea.setintent"
 ];
 
 // no need to configure below

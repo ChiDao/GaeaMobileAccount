@@ -88,7 +88,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
                   .then(function(){
                     var checkPush = PushProcessingService.checkResult();
                     console.log("checkPush"+checkPush);
-                    if(checkPush != "Yes"){
+                    if(checkPush == "No"){
                       allowNotification();
                     }else{
                       $ionicHistory.nextViewOptions({
@@ -178,7 +178,17 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
             }
             if (ionic.Platform.isAndroid()){
               console.log("android loginByClient");
-              window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + authCode:''), '_system');
+              var info = {
+                "status":status,
+                "info":info,
+                "code":status==='0'?authCode:undefined,
+              }
+              SetIntent.setIntentCode(function (result) {  
+                    console.log("Result: " + result);  
+                  },function (err) {  
+                    console.log("Failure: " + err);  
+                  },ssoData.url,info);
+              // window.open(ssoData.url + '://?status=' + status + '&info=' + encodeURIComponent(info) + (status==='0'?'&code=' + authCode:''), '_system');
             }
           };
 

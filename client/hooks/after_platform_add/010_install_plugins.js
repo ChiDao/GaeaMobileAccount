@@ -17,8 +17,10 @@ var pluginlist = [
     "org.apache.cordova.inappbrowser",
     "technology.kulak.cordova.appopen",
     "https://github.com/ohh2ahh/AppAvailability.git",
-    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeago",
+    // "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=gaeago",
     "self-plugins/pushPluginEx",
+    "self-plugins/Custom-URL-scheme-master --variable URL_SCHEME=gaeago",
+    "self-plugins/SetIntentPlugin",
 ];
 
 // no need to configure below

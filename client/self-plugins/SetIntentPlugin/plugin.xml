@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.gaea.setintent"
+    version="0.0.1">
+    <name>SetIntentPlugin</name>
+    <description>SetIntentPlugin Description</description>
+    <author>heyx</author>
+    <license>Apache 2.0 License</license>
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+    <js-module src="www/setintent.js" name="setintent">
+        <clobbers target="SetIntent" />
+    </js-module>
+    <platform name="android">
+        <source-file src="src/android/SetIntentPlugin.java" target-dir="src/com/gaea/cut" />
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="SetIntentPlugin">
+                <param name="android-package" value="com.gaea.cut.SetIntentPlugin"/>
+            </feature>
+        </config-file>      
+    </platform>
+</plugin>
