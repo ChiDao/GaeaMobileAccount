@@ -9,8 +9,10 @@ var pluginlist = [
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "org.apache.cordova.inappbrowser",
-    "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=soulclash",
+    // "https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git --variable URL_SCHEME=soulclash",
     "com.ionic.keyboard",
+    "self-plugins/Custom-URL-scheme-master --variable URL_SCHEME=soulclash",
+    "self-plugins/SetIntentPlugin",
 ];
 
 // no need to configure below

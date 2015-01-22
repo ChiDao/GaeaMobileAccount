@@ -11,6 +11,7 @@ var pluginlist = [
     "org.apache.cordova.inappbrowser",
     "nl.x-services.plugins.launchmyapp",
     "com.ionic.keyboard",
+    "com.gaea.setintent",
 ];
 
 // no need to configure below

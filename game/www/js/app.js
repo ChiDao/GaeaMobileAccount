@@ -26,7 +26,16 @@ angular.module('starter', ['ionic'])
     }
     if (ionic.Platform.isAndroid()){
       console.log("android loginByClient");
-      window.open('GaeaGo://?appId=ga14a66eaac9ae6457&url=SoulClash', '_system');
+      var info = {
+        "appId":"11111111",
+        "url":"com.gaeamobile.game",
+      }
+      SetIntent.setIntentCode(function (result) {  
+        console.log("Result: " + result);  
+      },function (err) {  
+        console.log("Failure: " + err);  
+      },"com.gaeagame.go",info);
+      // window.open('GaeaGo://?appId=ga14a66eaac9ae6457&url=SoulClash', '_system');
     }
   }
 
@@ -37,8 +46,23 @@ angular.module('starter', ['ionic'])
         alert(JSON.stringify(loginData));
       }, 100);
   }
+  $scope.getLoginDataAd = function(info){
+      setTimeout(function(){
+        alert(info);
+      }, 100);
+  }
 });
 
+
+function getIntentExtras(info) {
+  var body = document.getElementsByTagName("body")[0];
+  var mainController = angular.element(body).scope();
+  mainController.getLoginDataAd(info);
+}
+
+function getIntentFailure(err) {
+  console.log("err: " + err);
+}
 
 function handleOpenURL(url) {
     var body = document.getElementsByTagName("body")[0];
