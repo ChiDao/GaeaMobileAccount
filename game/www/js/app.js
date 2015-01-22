@@ -28,7 +28,7 @@ angular.module('starter', ['ionic'])
       console.log("android loginByClient");
       var info = {
         "appId":"11111111",
-        "url":"com.gaeamobile.game",
+        "url":"sh.lilith.dgame.DK",
       }
       SetIntent.setIntentCode(function (result) {  
         console.log("Result: " + result);  
