@@ -10168,8 +10168,8 @@ h5 {
   width: auto; }
 
 .full-width {
-  margin: 0 -16px;
-  width: calc(100% + (16px * 2)); }
+  margin: 0 -26px;
+  width: calc(100% + (26px * 2)) !important; }
   .full-width img {
     width: 100%; }
 
@@ -10207,7 +10207,7 @@ h5 {
   color: #ff7e86; }
 
 .page-padding {
-  padding: 0 16px; }
+  padding: 0 26px; }
 
 .block-empty {
   display: block;
@@ -10350,7 +10350,7 @@ h5 {
   /* Safari, Chrome et al */
   -moz-box-sizing: border-box;
   /* Firefox */
-  padding: 0 16px; }
+  padding: 0 26px; }
 
 article h1 {
   line-height: 1.4; }
@@ -10422,7 +10422,7 @@ p {
   padding: 4px 12px; }
 
 .segmented-control {
-  width: calc(100% + (22px * 2));
+  width: calc(100% + (22px * 2)) !important;
   margin-bottom: 24px;
   color: #ff7e86; }
   .segmented-control .on {

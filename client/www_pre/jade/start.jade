@@ -29,7 +29,18 @@ ion-view#index(view-title='{{"preregister"|translate}}')
               span.i-calendar.margin-0-auto
               b {{start.online_date}}
               p online
-        hr.margin-bottom
+        hr
+        h5.color-w 最近消息
+        .article-list
+          .row.unit.no-padding.right-arrows.row-center(ng-repeat="article in articles")
+            .col-10.no-padding
+              div.icon.no-margin
+                span.i-flag
+            .col.unit-p
+              p
+                a(href="#/app/article/{{article._id}}/{{article.title}}") {{'promotion'|translate}} {{article.title}}
+          //a.button.a-button.button-block.nol-button.right-arrows(href="#/app/l-article-list") {{'raider_articles'|translate}}
+          hr.margin-top
         div.t-indent.margin-bottom
           | {{start.game_content|translate}}
         hr.margin-bottom

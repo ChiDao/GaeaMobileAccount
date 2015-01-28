@@ -13,7 +13,7 @@ $f-size:					13px;
 $f-small:					11px;
 $f-big:						16px;
 $margin-bottom:				24px;
-$margin-left:				16px;
+$margin-left:				26px;
 $background-padding:		16px;
 
 
@@ -80,7 +80,7 @@ input::-webkit-input-placeholder {
 }
 
 @mixin full-width ($mb) {
-	width: calc(100% + (#{$mb} * 2));
+	width: calc(100% + (#{$mb} * 2)) !important;
 }
 
 @mixin right-arrows () {
