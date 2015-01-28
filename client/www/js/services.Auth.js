@@ -254,69 +254,86 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
           //没有登录
           if (!this.isLoggedIn()){
             //填写邮箱signup对话框
-            (function(preRegistModal){
+            (function(ssoAuth){
               RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
                 init: function(scope){
                   scope.mustChoise = true;
                 },
-                onSuccess: function(form, signupScope){
-                  signupScope.hideModal();
-                  preRegistModal(signupScope.formData.email);
+                onSuccess: function(form, scope){
+                  var Me = Restangular.one("me");
+                  Me.get().then(function(me){
+                    console.log(me);
+                    currentUser.userName = me.data.rawData.email;
+                    currentUser.role = userRoles.user;
+                    //存储用户信息到localStorage
+                    localStorage.setItem('user', JSON.stringify(me.data.rawData));
+                    console.log(me.data.rawData);
+                    
+                    scope.closeModal();
+                  },function(error){
+                    scope.commitFormError = true;
+                    scope.commitFormErrorMsg = error.data.alertMsg;
+                    console.log('login fail, get data: ' + JSON.stringify(error));
+                  })
+                  .then(function(){
+                    ssoAuth();
+                  })
                 },
-                onCancel: function(){
+                onCancel: function(scope){
+                  scope.closeModal();
                   ssoCallBack('-1', 'logined cancel');
                 },
               });
             })
-            //填写验证码pre-register对话框
-            ((function(ssoAuth){
-              return function(email){
-                RestRoute.postModal('http://42.120.45.236:8485/pre-register', {}, {
-                  init: function(scope){
-                    scope.formData.email = email
-                    scope.mustChoise = true;
-                    scope.resetcommitFormError = function(ev){
-                      scope.commitFormError = false;
-                    }
-                  },
-                  onOk: function(form, scope){
-                    scope.commitFormError = false;
-                  },
-                  onSuccess: function(form, scope){
-                    var Me = Restangular.one("me");
-                    Me.get().then(function(me){
-                      console.log(me);
-                      currentUser.userName = me.data.rawData.email;
-                      currentUser.role = userRoles.user;
-                      //存储用户信息到localStorage
-                      localStorage.setItem('user', JSON.stringify(me.data.rawData));
-                      console.log(me.data.rawData);
+            // //填写验证码pre-register对话框
+            // ((function(ssoAuth){
+            //   return function(email){
+            //     RestRoute.postModal('http://42.120.45.236:8485/pre-register', {}, {
+            //       init: function(scope){
+            //         scope.formData.email = email
+            //         scope.mustChoise = true;
+            //         scope.resetcommitFormError = function(ev){
+            //           scope.commitFormError = false;
+            //         }
+            //       },
+            //       onOk: function(form, scope){
+            //         scope.commitFormError = false;
+            //       },
+            //       onSuccess: function(form, scope){
+            //         var Me = Restangular.one("me");
+            //         Me.get().then(function(me){
+            //           console.log(me);
+            //           currentUser.userName = me.data.rawData.email;
+            //           currentUser.role = userRoles.user;
+            //           //存储用户信息到localStorage
+            //           localStorage.setItem('user', JSON.stringify(me.data.rawData));
+            //           console.log(me.data.rawData);
                       
-                      scope.closeModal();
-                    },function(error){
-                      scope.commitFormError = true;
-                      scope.commitFormErrorMsg = error.data.alertMsg;
-                      console.log('login fail, get data: ' + JSON.stringify(error));
-                    })
-                    .then(function(){
-                      ssoAuth();
-                    })
-                  },
-                  onCancel: function(form, scope){
-                    ssoCallBack('-1', 'logined cancel');
-                  },
-                  onError: function (error, form, scope){
-                    scope.commitFormError = true;
-                    scope.commitFormErrorMsg = error.data.alertMsg;
-                    console.log('login fail, get data: ' + JSON.stringify(error));
-                  }
-                });//End of postModal
-              };//End of function to be passed
-            })
+            //           scope.closeModal();
+            //         },function(error){
+            //           scope.commitFormError = true;
+            //           scope.commitFormErrorMsg = error.data.alertMsg;
+            //           console.log('login fail, get data: ' + JSON.stringify(error));
+            //         })
+            //         .then(function(){
+            //           ssoAuth();
+            //         })
+            //       },
+            //       onCancel: function(form, scope){
+            //         ssoCallBack('-1', 'logined cancel');
+            //       },
+            //       onError: function (error, form, scope){
+            //         scope.commitFormError = true;
+            //         scope.commitFormErrorMsg = error.data.alertMsg;
+            //         console.log('login fail, get data: ' + JSON.stringify(error));
+            //       }
+            //     });//End of postModal
+            //   };//End of function to be passed
+            // })
             //开通推送对话框
             (function(scope){
               confirmSso();
-            }));
+            });
           }else{
             confirmSso();
           }

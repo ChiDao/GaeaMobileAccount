@@ -139,11 +139,14 @@
         "com.ohh2ahh.plugins.appavailability": {
             "PACKAGE_NAME": "com.gaeagame.go"
         },
+        "com.phonegap.plugins.PushPlugin": {
+            "PACKAGE_NAME": "com.gaeagame.go"
+        },
         "nl.x-services.plugins.launchmyapp": {
             "URL_SCHEME": "gaeago",
             "PACKAGE_NAME": "com.gaeagame.go"
         },
-        "com.phonegap.plugins.PushPlugin": {
+        "com.gaea.setintent": {
             "PACKAGE_NAME": "com.gaeagame.go"
         }
     },

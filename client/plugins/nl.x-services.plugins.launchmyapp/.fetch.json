@@ -1,1 +1,1 @@
-{"source":{"type":"git","url":"https://github.com/EddyVerbruggen/LaunchMyApp-PhoneGap-Plugin.git","subdir":"."}}
+{"source":{"type":"local","path":"self-plugins/Custom-URL-scheme-master"}}
