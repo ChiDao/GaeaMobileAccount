@@ -46,67 +46,94 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
         },
         login: function(success, error, close){ 
           //填写邮箱signup对话框
-          (function(preRegistModal){
+          (function(allowNotification){
             RestRoute.postModal('http://42.120.45.236:8485/signup', {}, {
-              onSuccess: function(form, signupScope){
-                signupScope.hideModal();
-                preRegistModal(signupScope.formData.email);
+              onSuccess: function(form, scope){
+                var Me = Restangular.one("me");
+                Me.get().then(function(me){
+                  console.log(me);
+                  currentUser.userName = me.data.rawData.email;
+                  currentUser.role = userRoles.user;
+                  //存储用户信息到localStorage
+                  localStorage.setItem('user', JSON.stringify(me.data.rawData));
+                  console.log(me.data.rawData);
+                  
+                  scope.closeModal();
+                },function(error){
+                  scope.commitFormError = true;
+                  scope.commitFormErrorMsg = error.data.alertMsg;
+                  console.log('login fail, get data: ' + JSON.stringify(error));
+                })
+                //如果没有开启推送，显示提醒开启推送
+                .then(function(){
+                  var checkPush = PushProcessingService.checkResult();
+                  console.log("checkPush"+checkPush);
+                  if(checkPush == "No"){
+                    allowNotification();
+                  }else{
+                    $ionicHistory.nextViewOptions({
+                      disableAnimate: true,
+                      disableBack: true
+                    });
+                    $state.go('app.wait-open');
+                  }
+                })
               }
             });
           })
           //填写验证码pre-register对话框
-          ((function(allowNotification){
-            return function(email){
-              RestRoute.postModal('http://42.120.45.236:8485/pre-register', {}, {
-                init: function(scope){
-                  scope.formData.email = email
-                  scope.mustChoise = false;
-                  scope.resetcommitFormError = function(ev){
-                    scope.commitFormError = false;
-                  }
-                },
-                onOk: function(form, scope){
-                  scope.commitFormError = false;
-                },
-                onSuccess: function(form, scope){
-                  var Me = Restangular.one("me");
-                  Me.get().then(function(me){
-                    console.log(me);
-                    currentUser.userName = me.data.rawData.email;
-                    currentUser.role = userRoles.user;
-                    //存储用户信息到localStorage
-                    localStorage.setItem('user', JSON.stringify(me.data.rawData));
-                    console.log(me.data.rawData);
+          // ((function(allowNotification){
+          //   return function(email){
+          //     RestRoute.postModal('http://42.120.45.236:8485/pre-register', {}, {
+          //       init: function(scope){
+          //         scope.formData.email = email
+          //         scope.mustChoise = false;
+          //         scope.resetcommitFormError = function(ev){
+          //           scope.commitFormError = false;
+          //         }
+          //       },
+          //       onOk: function(form, scope){
+          //         scope.commitFormError = false;
+          //       },
+          //       onSuccess: function(form, scope){
+          //         var Me = Restangular.one("me");
+          //         Me.get().then(function(me){
+          //           console.log(me);
+          //           currentUser.userName = me.data.rawData.email;
+          //           currentUser.role = userRoles.user;
+          //           //存储用户信息到localStorage
+          //           localStorage.setItem('user', JSON.stringify(me.data.rawData));
+          //           console.log(me.data.rawData);
                     
-                    scope.closeModal();
-                  },function(error){
-                    scope.commitFormError = true;
-                    scope.commitFormErrorMsg = error.data.alertMsg;
-                    console.log('login fail, get data: ' + JSON.stringify(error));
-                  })
-                  //如果没有开启推送，显示提醒开启推送
-                  .then(function(){
-                    var checkPush = PushProcessingService.checkResult();
-                    console.log("checkPush"+checkPush);
-                    if(checkPush == "No"){
-                      allowNotification();
-                    }else{
-                      $ionicHistory.nextViewOptions({
-                        disableAnimate: true,
-                        disableBack: true
-                      });
-                      $state.go('app.wait-open');
-                    }
-                  })
-                },
-                onError: function (error, form, scope){
-                  scope.commitFormError = true;
-                  scope.commitFormErrorMsg = error.data.alertMsg;
-                  console.log('login fail, get data: ' + JSON.stringify(error));
-                }
-              });//End of postModal
-            };//End of function to be passed
-          })
+          //           scope.closeModal();
+          //         },function(error){
+          //           scope.commitFormError = true;
+          //           scope.commitFormErrorMsg = error.data.alertMsg;
+          //           console.log('login fail, get data: ' + JSON.stringify(error));
+          //         })
+          //         //如果没有开启推送，显示提醒开启推送
+          //         .then(function(){
+          //           var checkPush = PushProcessingService.checkResult();
+          //           console.log("checkPush"+checkPush);
+          //           if(checkPush == "No"){
+          //             allowNotification();
+          //           }else{
+          //             $ionicHistory.nextViewOptions({
+          //               disableAnimate: true,
+          //               disableBack: true
+          //             });
+          //             $state.go('app.wait-open');
+          //           }
+          //         })
+          //       },
+          //       onError: function (error, form, scope){
+          //         scope.commitFormError = true;
+          //         scope.commitFormErrorMsg = error.data.alertMsg;
+          //         console.log('login fail, get data: ' + JSON.stringify(error));
+          //       }
+          //     });//End of postModal
+          //   };//End of function to be passed
+          // })
           //开通推送对话框
           ((function(howToNotificationModal){
             return function(){
@@ -129,7 +156,7 @@ define(['app', 'services.Modal', 'services.RestRoute', 'services.Push'], functio
               }
             });//End of okCancelModal
           })
-          ));//End of pass function as param
+          );//End of pass function as param
         },
         isLoggedIn: function(){
           return currentUser.role == userRoles.user;
